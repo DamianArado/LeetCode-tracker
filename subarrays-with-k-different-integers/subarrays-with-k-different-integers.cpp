@@ -9,10 +9,12 @@ public:
         unordered_map<int, int> count;
         
         for (int j = 0; j < A.size(); ++j) {
-            if (!count[A[j]]++) --K;
+            if (!count[A[j]]++) 
+                --K;
             
             while (K < 0) {
-                if (!--count[A[i]]) ++K;
+                if (!--count[A[i]]) 
+                    ++K;
                 ++i;
             }
             
