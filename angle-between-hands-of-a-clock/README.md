@@ -5,21 +5,21 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2019/12/26/sample_1_1673.png" style="width: 300px; height: 296px;">
-<pre style="position: relative;"><strong>Input:</strong> hour = 12, minutes = 30
+<pre><strong>Input:</strong> hour = 12, minutes = 30
 <strong>Output:</strong> 165
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong>Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2019/12/26/sample_2_1673.png" style="width: 300px; height: 301px;">
-<pre style="position: relative;"><strong>Input:</strong> hour = 3, minutes = 30
+<pre><strong>Input:</strong> hour = 3, minutes = 30
 <strong>Output:</strong> 75
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong>Example 3:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2019/12/26/sample_3_1673.png" style="width: 300px; height: 301px;">
-<pre style="position: relative;"><strong>Input:</strong> hour = 3, minutes = 15
+<pre><strong>Input:</strong> hour = 3, minutes = 15
 <strong>Output:</strong> 7.5
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
