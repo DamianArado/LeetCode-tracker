@@ -5,21 +5,21 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 
-<pre><strong>Input:</strong> nums = [10,2]
+<pre style="position: relative;"><strong>Input:</strong> nums = [10,2]
 <strong>Output:</strong> "210"
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre><strong>Input:</strong> nums = [3,30,34,5,9]
+<pre style="position: relative;"><strong>Input:</strong> nums = [3,30,34,5,9]
 <strong>Output:</strong> "9534330"
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
 <ul data-read-aloud-multi-block="true">
 	<li><code>1 &lt;= nums.length &lt;= 100</code></li>
-	<li><code>0 &lt;= nums[i] &lt;= 10<sup style="">9</sup></code></li>
+	<li><code>0 &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 </div>
