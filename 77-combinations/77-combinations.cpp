@@ -10,7 +10,7 @@ public:
             ++nums[idx];
             // if value at index increases beyond n, decrease index
             if(nums[idx] > n) --idx;
-            // if index is equal to k, add to answer
+            // if we are at the last index, add to answer
             else if (idx == k - 1) ans.emplace_back(nums);
             // otherwise move index to right and make the element equal to its left one
             // this is because the element at right becomes greater than n
