@@ -2,14 +2,14 @@ class Solution {
 public:
     void helper(vector<int> &nums, vector<int> &subs, set<vector<int>> &result, int index) {
     
-        for (int i = index; i < nums.size(); ++i) {
+        for (int i = index; i < nums.size(); ++i) {  // O(N)
             if (subs.size() == 0 || nums[i] >= subs.back()) {
                 subs.emplace_back(nums[i]);
                 helper(nums, subs, result, i + 1);
                 subs.pop_back();
             }
         }
-        if (subs.size() >= 2) result.insert(subs);
+        if (subs.size() >= 2) result.insert(subs); // O(log N)
     }
     vector<vector<int>> findSubsequences(vector<int>& nums) {
         set<vector<int>> res;
