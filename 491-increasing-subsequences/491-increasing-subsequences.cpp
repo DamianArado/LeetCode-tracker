@@ -1,20 +1,27 @@
 class Solution {
-public:
-    void helper(vector<int> &nums, vector<int> &subs, set<vector<int>> &result, int index) {
-    
-        for (int i = index; i < nums.size(); ++i) {  // O(N)
-            if (subs.size() == 0 || nums[i] >= subs.back()) {
-                subs.emplace_back(nums[i]);
-                helper(nums, subs, result, i + 1);
-                subs.pop_back();
-            }
+private:
+    void findSubsequences(vector<int> &nums, vector<int> &subsequence,
+                        set<vector<int> > &result, int size, int index) {
+    if (size >= 2)
+        result.insert(subsequence);
+
+
+    for (int i = index; i < nums.size(); ++i) {
+        if (subsequence.size() == 0 || nums[i] >= subsequence[subsequence.size() - 1]) {
+            subsequence.push_back(nums[i]);
+            findSubsequences(nums, subsequence, result, size + 1, i + 1);
+            subsequence.pop_back();
         }
-        if (subs.size() >= 2) result.insert(subs); // O(log N)
     }
+}
+
+public:
     vector<vector<int>> findSubsequences(vector<int>& nums) {
-        set<vector<int>> res;
-        vector<int> subs;
-        helper(nums, subs, res, 0);
-        return vector<vector<int>>(res.begin(), res.end());
+        set<vector<int>> resultSet;
+        vector<int> subsequence;
+        findSubsequences(nums, subsequence, resultSet, 0, 0);
+
+        vector<vector<int>> result(resultSet.begin(), resultSet.end());
+        return result;
     }
 };
