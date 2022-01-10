@@ -1,31 +1,24 @@
 class Solution {
 public:
 	vector<vector<int>> combine(int n, int k) {
-		vector<vector<int>> result;
-		int i = 0;
-		vector<int> nums(k, 0); // vector of length k, all 0s
-		while (i >= 0) {
-            // Increment element at index i
-			nums[i]++;  
-            // Move index to the left if the element at index i has exceeded n
-			if (nums[i] > n) --i;  
-            
-            /* 
-             * If the index is at the end of the vector c, then (because the other conditions are
-             * obeyed), we know we have a valid combination, so push it to our ans vector<vector<>>
-             */
-			else if (i == k - 1) result.emplace_back(nums);
-            
-            /* 
-             * Move index to the right and set the element at that index equal to the element at the previous index.
-             * Because of the increment at the beginning of this while loop, we ensure that the element at this index will be at least
-             * one more than its neighbor to the left.
-             */
-			else {
-			    ++i;
-			    nums[i] = nums[i - 1];
-			}
+	vector<vector<int>> ans;
+	int idx = 0;
+	// generate a vector of size k containing all zeroes
+	vector<int> nums(k, 0);
+	while(idx >= 0) {
+		// increase element at index
+		++nums[idx];
+		// if value at index increases beyond n, decrease index
+		if(nums[idx] > n) --idx;
+		// if index is equal to k, add to answer
+		else if (idx == k - 1) ans.emplace_back(nums);
+		// otherwise move index to right and make the element equal to its left one
+		// this is because the element at right becomes greater than n
+		else {
+			++idx;
+			nums[idx] = nums[idx - 1];
 		}
-		return result;
 	}
+	return ans;
+}
 };
