@@ -6,7 +6,7 @@ public:
         // generate a vector of size k containing all zeroes
         vector<int> nums(k, 0);
         while(idx >= 0) {
-            // increase element at index
+            // increase element at current index
             ++nums[idx];
             // if value at index increases beyond n, decrease index
             if(nums[idx] > n) --idx;
