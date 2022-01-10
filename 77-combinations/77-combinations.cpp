@@ -1,24 +1,22 @@
 class Solution {
-public:
-	vector<vector<int>> combine(int n, int k) {
-        vector<vector<int>> ans;
-        int idx = 0;
-        // generate a vector of size k containing all zeroes
-        vector<int> nums(k, 0);
-        while(idx >= 0) {
-            // increase element at current index
-            ++nums[idx];
-            // if value at index increases beyond n, decrease index
-            if(nums[idx] > n) --idx;
-            // if we are at the last index, add to answer
-            else if (idx == k - 1) ans.emplace_back(nums);
-            // otherwise move index to right and make the element equal to its left one
-            // this is because the element at right becomes greater than n
-            else {
-                ++idx;
-                nums[idx] = nums[idx - 1];
+private:
+    void backtrack(vector<vector<int>>&ans,vector<int>&curr,int n,int k,int index){
+        if(curr.size()==k){
+            ans.push_back(curr);
+            return;
+        } else {
+            for(int i=index;i<=n;i++){
+                curr.push_back(i);
+                backtrack(ans,curr,n,k,i+1);
+                curr.pop_back();
             }
         }
+    }
+public:
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>>ans;
+        vector<int>curr;
+        backtrack(ans,curr,n,k,1);
         return ans;
     }
 };
