@@ -8,7 +8,7 @@ private:
 
     for (int i = index; i < nums.size(); ++i) {
         if (subsequence.size() == 0 || nums[i] >= subsequence[subsequence.size() - 1]) {
-            subsequence.push_back(nums[i]);
+            subsequence.emplace_back(nums[i]);
             findSubsequences(nums, subsequence, result, size + 1, i + 1);
             subsequence.pop_back();
         }
