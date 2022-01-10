@@ -4,7 +4,7 @@ public:
     
         for (int i = index; i < nums.size(); ++i) {
             if (subs.size() == 0 || nums[i] >= subs.back()) {
-                subs.push_back(nums[i]);
+                subs.emplace_back(nums[i]);
                 helper(nums, subs, result, i + 1);
                 subs.pop_back();
             }
