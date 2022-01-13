@@ -14,6 +14,8 @@ private:
         for(int i = idx; i < s.size(); ++i) {
             if(isPalindrome(s, idx, i)) {
                 path.emplace_back(s.substr(idx, i - idx + 1));
+                // increasing i to get the subsequent checks for palindromes
+                // idx is used just as a pivot
                 solve(i + 1, s, path, res);
                 path.pop_back();
             }
