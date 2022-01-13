@@ -10,6 +10,7 @@ class Solution {
             swap(nums[i], nums[idx]);
             solve(idx + 1, nums, ans);
         }
+        // restore nums to the state before the for-loop inside the recursive call
         for(int j = nums.size() - 1; j > idx; --j) {
             swap(nums[j], nums[idx]);
         }
