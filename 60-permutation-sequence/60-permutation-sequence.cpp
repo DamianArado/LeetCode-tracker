@@ -19,11 +19,11 @@ public:
              * arr: [1,2,3] and k = 3 
              *
              * No. of permutations starting with each of 1, 2 and 3 are 2! (= 2)
-             * So, we do a k/fact (3/2 = 1st), so we chose 2 _ _ 
+             * So, we do a k/fact (3/2 = 1st digit -> nos[1]), so we chose 2: 2 _ _ 
              * Now, k = 1 (3%2), fact = 2/2 = 1 and we erased nos[0+1] which was indeed 2.
              *
              * No. of permutations starting with 1 and 3 are 1 each.
-             * So, we do a k/fact (1/1 = 1st), so we chose 2 3 _
+             * So, we do a k/fact (1/1 = 1st -> nos[1]), so we chose 3:  2 3 _
              * Now, k = 0 (1%1), fact = 1/1 = 1, and we erased nos[0+1] which was indeed 3.
              *
              * Hence, at last we added 1, and our required permutation became: [2,3,1]
