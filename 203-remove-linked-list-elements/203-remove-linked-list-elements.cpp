@@ -11,7 +11,7 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        ListNode* prev=NULL, *temp=head;
+        ListNode* prev = NULL, *temp = head;
         if(head == NULL) return head; // if the linked list is empty
         while(temp) {
             if(temp->val == val) {
