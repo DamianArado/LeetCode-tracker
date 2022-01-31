@@ -20,7 +20,7 @@ public:
         }
         prev->next = slow->next;
         slow->next = NULL;
-        delete slow;
+        delete slow, fast;
         return head;
     }
 };
