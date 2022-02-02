@@ -22,3 +22,17 @@ public:
         return prev;
     }
 };
+
+/*
+Recursive approach -> TC O(n) SC O(n)
+ListNode* reverseList(ListNode* head) {
+        if(head->next` == NULL) return head;
+        ListNode* reversedHead = reverseList(head->next);
+        head->next->next = head;
+        head->next = NULL;
+}
+ListNode* reverseList(ListNode* head) {
+       if(head == NULL) return NULL;
+       return reverse(head);
+}
+*/
