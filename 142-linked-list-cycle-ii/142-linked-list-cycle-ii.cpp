@@ -9,19 +9,19 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-    if (head == NULL || head->next == NULL) return NULL;
-    ListNode *slow  = head, *fast  = head, *entry = head;
-    while (fast->next && fast->next->next) {
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast) {             // there is a cycle
-            while(slow != entry) {      // found the entry location
-                slow  = slow->next;
-                entry = entry->next;
+        if (head == NULL || head->next == NULL) return NULL;
+        ListNode *slow  = head, *fast  = head, *entry = head;
+        while (fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast) {             // there is a cycle
+                while(slow != entry) {      // found the entry location
+                    slow  = slow->next;
+                    entry = entry->next;
+                }
+                return entry;
             }
-            return entry;
         }
+        return NULL;                        // there's no cycle
     }
-    return NULL;                        // there has no cycle
-}
 };
