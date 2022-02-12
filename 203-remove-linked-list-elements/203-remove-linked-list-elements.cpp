@@ -11,8 +11,7 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        // base-case
-        if(head == NULL) return NULL;
+        if(head == NULL) return NULL; // base-case
         ListNode *dummy = new ListNode(-1, head);
         ListNode *tail = dummy;
         while(tail && tail->next) {
@@ -25,3 +24,18 @@ public:
         return dummy->next;
     }
 };
+
+// Recursive implementation : O(n) time and space
+/*
+    ListNode* removeElements(ListNode* head, int val) {
+        if(head == NULL) return NULL; // base-case
+        head->next = removeElements(head->next, val);
+        if(head->val == val) {
+            ListNode *ans = head->next;
+            delete head;
+            return ans;
+        } else {
+            return head;
+        }
+    }
+*/
