@@ -11,28 +11,17 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        ListNode* prev = NULL, *temp = head;
-        if(head == NULL) return head; // if the linked list is empty
-        while(temp) {
-            if(temp->val == val) {
-                if(temp == head) { // if the node to be removed is at the beginning of the linked list
-                    head = temp->next;
-                    temp = temp->next;
-                }
-                else if(temp->next == NULL) { // if the node to be removed is at the end of the linked list
-                    prev->next = NULL;
-                    temp = temp->next;
-                }
-                else { // if the node lies somewhere in between
-                    temp = temp->next;
-                    prev->next = temp;
-                }
-            } else { // if this is not the target node
-                prev = temp;
-                temp = temp->next; 
-            }  
+        // base-case
+        if(head == NULL) return NULL;
+        ListNode *dummy = new ListNode(-1, head);
+        ListNode *tail = dummy;
+        while(tail && tail->next) {
+            if(tail->next->val == val) {
+                ListNode *temp = tail->next;
+                tail->next = temp->next;
+                delete temp;
+            } else tail = tail->next;
         }
-        delete temp;
-        return head;
+        return dummy->next;
     }
 };
