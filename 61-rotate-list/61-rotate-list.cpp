@@ -21,13 +21,8 @@ public:
         if(k % len == 0) return head; // optimization
         int pos = 0;  // will need to move ahead by pos
         
-        if(k < len) {
-            pos = len - k;
-        } else if(k == len) {
-            pos = 0;
-        } else {
-            pos = len - k % len;
-        }
+        if(k < len) pos = len - k;
+        else pos = len - k % len;
         
         if(pos != 0) end->next = head;   // connect the end to current head
         while(pos--) {
