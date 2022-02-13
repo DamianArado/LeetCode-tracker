@@ -14,8 +14,8 @@ public:
         if(k == 0 || head == NULL || head->next == NULL) return head;  // base-cases
         ListNode *end = head, *prev = head;
         int len = 1;  // to store the size of list
-        while(end->next) {
-            end = end->next;  // reach the last node
+        while(end->next) {   // reach the last node
+            end = end->next; 
             len++;
         }
         if(k % len == 0) return head; // optimization
@@ -25,7 +25,7 @@ public:
         else k = len - k % len;
         
         if(k) end->next = head;   // connect the end to current head
-        while(k--) {
+        while(k--) {   // advance the head ahead!
             prev = head;
             head = head->next;
         }
