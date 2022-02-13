@@ -19,6 +19,7 @@ public:
             temp = temp->next;
             len++;
         }
+        if(k % len == 0) return head; // optimization
         int pos = 0;  // will need to move ahead by pos
         
         if(k < len) {
