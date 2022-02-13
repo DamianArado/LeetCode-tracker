@@ -19,17 +19,17 @@ public:
             len++;
         }
         if(k % len == 0) return head; // optimization
-        int pos = 0;  // will need to move ahead by pos
         
-        if(k < len) pos = len - k;
-        else pos = len - k % len;
+        // will need to move ahead by k steps (head)
+        if(k < len) k = len - k;
+        else k = len - k % len;
         
-        if(pos) end->next = head;   // connect the end to current head
-        while(pos--) {
+        if(k) end->next = head;   // connect the end to current head
+        while(k--) {
             prev = head;
             head = head->next;
         }
-        if(pos && prev != head) prev->next = NULL;  // prev becomes the last node of our rotated list
+        if(k && prev != head) prev->next = NULL;  // prev becomes the last node of our rotated list
         return head;  // new head
     }
 };
