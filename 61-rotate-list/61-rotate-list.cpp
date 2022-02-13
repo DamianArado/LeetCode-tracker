@@ -24,12 +24,12 @@ public:
         if(k < len) pos = len - k;
         else pos = len - k % len;
         
-        if(pos != 0) end->next = head;   // connect the end to current head
+        if(pos) end->next = head;   // connect the end to current head
         while(pos--) {
             prev = head;
             head = head->next;
         }
-        if(pos != 0 && prev != head) prev->next = NULL;  // prev becomes the last node of our rotated list
+        if(pos && prev != head) prev->next = NULL;  // prev becomes the last node of our rotated list
         return head;  // new head
     }
 };
