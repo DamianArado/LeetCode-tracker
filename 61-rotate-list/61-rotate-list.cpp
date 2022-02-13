@@ -12,11 +12,10 @@ class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
         if(k == 0 || head == NULL || head->next == NULL) return head;  // base-cases
-        ListNode *temp = head, *end = head, *prev = head;
-        int len = 0;  // to store the size of list
-        while(end->next) end = end->next;  // reach the last node
-        while(temp) {
-            temp = temp->next;
+        ListNode *end = head, *prev = head;
+        int len = 1;  // to store the size of list
+        while(end->next) {
+            end = end->next;  // reach the last node
             len++;
         }
         if(k % len == 0) return head; // optimization
