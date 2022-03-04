@@ -22,7 +22,7 @@ public:
                 s.emplace(curr);  // add all the elements to the left
                 curr = curr->left;
             } else {
-                temp = s.top()->right;
+                temp = s.top()->right;  // no left elements, temp = right one
                 if(!temp) {
                     temp = s.top();
                     s.pop();
