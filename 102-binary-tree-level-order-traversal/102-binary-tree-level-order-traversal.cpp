@@ -10,24 +10,25 @@
  * };
  */
 class Solution {
+// O(n) TC & SC
 public:
     vector<vector<int>> levelOrder(TreeNode *root) {
       vector<vector<int>> result;
       if (!root) return result;
 
       queue<TreeNode *> q;
-      q.push(root);
+      q.emplace(root);
       while (!q.empty()) {
           int n = q.size();
           vector<int> crtLevel;
           for (int i = 0; i < n; i++) {
               TreeNode *p = q.front();
               q.pop();
-              crtLevel.push_back(p->val);
-              if (p->left) q.push(p->left);
-              if (p->right) q.push(p->right);
+              crtLevel.emplace_back(p->val);
+              if (p->left) q.emplace(p->left);
+              if (p->right) q.emplace(p->right);
           }
-          result.push_back(crtLevel);
+          result.emplace_back(crtLevel);
       }
       return result;
     }
