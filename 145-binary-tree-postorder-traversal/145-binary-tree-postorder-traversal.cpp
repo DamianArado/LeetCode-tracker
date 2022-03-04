@@ -11,22 +11,31 @@
  */
 class Solution {
 public:
-    // Using 2 stacks
+    // Using 1 stack - O(2*N) TC & O(N) SC
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> postorder;
         if(!root) return postorder;
-        stack<TreeNode*> s1, s2;
-        s1.emplace(root);  // initial config
-        while(!s1.empty()) { 
-            root = s1.top();  // take the first element of stack 1
-            s1.pop();
-            s2.emplace(root);  // insert in stack 2
-            if(root->left) s1.emplace(root->left);  // insert left and right of that element
-            if(root->right) s1.emplace(root->right);  // in stack 1
-        }
-        while(!s2.empty()) {  // postorder == LIFO of stack 2
-            postorder.emplace_back(s2.top()->val);
-            s2.pop();
+        stack<TreeNode*> s;
+        TreeNode *temp = root, *curr = root;
+        while(curr || !s.empty()) {
+            if(curr) {
+                s.emplace(curr);  // add all the elements to the left
+                curr = curr->left;
+            } else {
+                temp = s.top()->right;
+                if(!temp) {
+                    temp = s.top();
+                    s.pop();
+                    postorder.emplace_back(temp->val);
+                    while(!s.empty() && temp == s.top()->right) {
+                        temp = s.top();
+                        s.pop();
+                        postorder.emplace_back(temp->val);
+                    }
+                } else {
+                    curr = temp;
+                }
+            }
         }
         return postorder;
     }
