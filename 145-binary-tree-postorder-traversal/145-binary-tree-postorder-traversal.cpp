@@ -10,15 +10,24 @@
  * };
  */
 class Solution {
-private:
-    vector<int> ans;
 public:
+    // Using 2 stacks
     vector<int> postorderTraversal(TreeNode* root) {
-        if(root == NULL) return ans;
-        // Left -> Right -> Root
-        postorderTraversal(root->left);
-        postorderTraversal(root->right);
-        ans.emplace_back(root->val);
-        return ans;
+        vector<int> postorder;
+        if(!root) return postorder;
+        stack<TreeNode*> s1, s2;
+        s1.emplace(root);  // initial config
+        while(!s1.empty()) { 
+            root = s1.top();  // take the first element of stack 1
+            s1.pop();
+            s2.emplace(root);  // insert in stack 2
+            if(root->left) s1.emplace(root->left);  // insert left and right of that element
+            if(root->right) s1.emplace(root->right);  // in stack 1
+        }
+        while(!s2.empty()) {  // postorder == LIFO of stack 2
+            postorder.emplace_back(s2.top()->val);
+            s2.pop();
+        }
+        return postorder;
     }
 };
