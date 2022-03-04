@@ -10,15 +10,24 @@
  * };
  */
 class Solution {
-private:
-    vector<int> ans;
 public:
-    // Recursive approach - O(n) TC & SC
+    // Iterative version - O(n) TC & SC
     vector<int> inorderTraversal(TreeNode* root) {
-        if(!root) return ans;
-        inorderTraversal(root->left);
-        ans.emplace_back(root->val);
-        inorderTraversal(root->right);
-        return ans;
+        stack <TreeNode*> s;
+        vector <int> inorder;
+        TreeNode *node = root;
+        while (1) {
+            if (node) {
+                s.emplace(node);
+                node = node->left;
+            } else {
+                if (s.empty()) break;
+                node = s.top();
+                s.pop();
+                inorder.emplace_back(node->val);
+                node = node->right;
+            }
+        }
+        return inorder;
     }
 };
