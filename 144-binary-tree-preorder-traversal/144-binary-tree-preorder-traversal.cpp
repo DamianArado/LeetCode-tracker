@@ -9,18 +9,22 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-// TC -> O(n) SC -> O(n) [Height due to recursion in case of skewed trees] ; n = no. of nodes
 class Solution {
-private:
-    vector<int> ans;
-    
 public:
+    // TC & SC -> O(n) 
     vector<int> preorderTraversal(TreeNode* root) {
-        if(root == NULL) return ans;
+        vector<int> ans;
+        if(!root) return ans;
+        stack<TreeNode*> s;
         // Root -> Left -> Right
-        ans.emplace_back(root->val);  
-        preorderTraversal(root->left);
-        preorderTraversal(root->right);
+        s.emplace(root);
+        while(!s.empty()) {
+            TreeNode *temp = s.top();
+            s.pop();
+            ans.emplace_back(temp->val);
+            if(temp->right) s.emplace(temp->right);
+            if(temp->left) s.emplace(temp->left);
+        }
         return ans;
     }
 };
