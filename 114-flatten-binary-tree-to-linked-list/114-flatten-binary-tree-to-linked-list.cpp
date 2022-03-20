@@ -10,16 +10,21 @@
  * };
  */
 class Solution {
-private: TreeNode *prev = NULL;
 public:
     void flatten(TreeNode* root) {
         if(!root) return;
-        
-        flatten(root->right);
-        flatten(root->left);
-        
-        root->right = prev;
-        root->left = NULL;
-        prev = root;
+        stack<TreeNode*> st;
+        st.push(root);
+        while(!st.empty()) {
+            TreeNode* current = st.top();
+            st.pop();
+            
+            if(current->right) st.push(current->right);
+            if(current->left) st.push(current->left);
+            
+            if(!st.empty()) current->right = st.top();
+            
+            current->left = NULL;
+        }
     }
 };
