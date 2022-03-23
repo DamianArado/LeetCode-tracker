@@ -12,15 +12,13 @@
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
-        // whenever you visit a node, increase the counter ; when counter = k, return that node
-        int count = 0, kthSmallest;
+        // Inorder Morris Traversal: whenever you visit the root node, decrease k and when k == 0, return the current node
+        int kthSmallest;
         TreeNode* current = root;
         while(current) {
             if(!current->left) {
-                count++;
-                if(count == k) {
-                    kthSmallest = current->val;
-                }
+                k -= 1;
+                if(k == 0) kthSmallest = current->val;
                 current = current->right;
             } else {
                 TreeNode* prev = current->left;
@@ -31,10 +29,8 @@ public:
                     current = current->left;
                 } else {
                     prev->right = NULL;
-                    count++;
-                    if(count == k) {
-                        kthSmallest = current->val;
-                    }
+                    k -= 1;
+                    if(k == 0) kthSmallest = current->val;
                     current = current->right;
                 }
             }
