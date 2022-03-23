@@ -9,27 +9,44 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+// Morris Traversal - O(n) time and O(1) space
+/*
+
+Approach - 
+
+Starting the inorder traversal, we know that we have to go to the left node first. Before moving to the
+left of the current node, check whether the left exists or not and if it does not exist that means you are 
+at the root of the current subtree, so print it and move towards the right.
+
+If the left of current node exists, before going towards left mark the current node's left as `prev` and then
+go towards the rightmost node of `prev`. Then, check whether its null or not. If its null take the right 
+pointer of this and point it to the current node (so that you can return back to the root of the current node's
+subtree from the left). 
+
+If its not null, mark it to null and go to the current node and print it.Since, you came back to the root of 
+the current subtree, and you have already printed it, you can move towards the right and continue the inorder traversal.
+
+*/
 class Solution {
 public:
-    // Morris Traversal - O(n) time and O(1) space
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> inorder;
         if(!root) return inorder;
-        TreeNode *curr = root;
-        while(curr) {
-            if(!curr->left) {  // if there is nothing on left it's the leftmost
-                inorder.emplace_back(curr->val);  // print the current root
-                curr = curr->right;  // move right from here
-            } else {  // we have something on left
-                TreeNode *prev = curr->left;  // use prev as marker for the left subtree analysis
-                while(prev->right && prev->right != curr) prev = prev->right; // till we reach the rightmost node of that left subtree
-                if(!prev->right) {  // we reached the rightmost node of the left subtree
-                    prev->right = curr;  // create the thread that joins the rightmost element to the current root
-                    curr = curr->left;  // now move towards left from here
-                } else {  // if the thread already exists
-                    prev->right = NULL;  // cut the thread that exists
-                    inorder.emplace_back(curr->val);  // print the current root
-                    curr = curr->right;  // now move right from here
+        TreeNode *current = root;
+        while(current) {
+            if(!current->left) {
+                inorder.emplace_back(current->val);
+                current = current->right;
+            } else {
+                TreeNode* prev = current->left;
+                while(prev->right && prev->right != current) prev = prev->right;
+                if(!prev->right) {
+                    prev->right = current;
+                    current = current->left;
+                } else {
+                    prev->right = NULL;
+                    inorder.emplace_back(current->val);
+                    current = current->right;
                 }
             }
         }
