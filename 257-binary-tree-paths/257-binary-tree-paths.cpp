@@ -9,8 +9,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
-// TC - O(n) SC - O(n)
+/*
+// Iterative: TC - O(n) SC - O(n)
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
         vector<string> result;
@@ -40,6 +40,25 @@ public:
                 path.push(currentPath + "->" + to_string(current->right->val));
             }
         }
+        return result;
+    }
+};
+*/
+class Solution {
+private:
+    void dfs(TreeNode* root, string path, vector<string> &result) {
+        if(!root->left && !root->right) 
+            result.emplace_back(path);
+        if(root->left) 
+            dfs(root->left, path + "->" + to_string(root->left->val), result);
+        if(root->right)
+            dfs(root->right, path + "->" + to_string(root->right->val), result);
+    }
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string> result;
+        if(!root) return result;
+        dfs(root, to_string(root->val), result);
         return result;
     }
 };
