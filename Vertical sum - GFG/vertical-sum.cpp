@@ -126,7 +126,7 @@ class Solution{
         // Prints the values stored by VerticalSumUtil() 
         for (it = Map.begin(); it != Map.end(); ++it) 
         { 
-            res.push_back (it->second);
+            res.emplace_back (it->second);
         } 
         return res;
     } 
