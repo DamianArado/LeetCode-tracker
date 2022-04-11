@@ -39,7 +39,8 @@ public:
     }
 };*/
 
-class Solution {
+// Morris traversal - modify the tree
+/*class Solution {
 public:
     int rangeSumBST(TreeNode* root, int low, int high) {
         int ans = 0;
@@ -58,6 +59,39 @@ public:
                 if(root->val >= low && root->val <= high) ans += root->val;
                 if(root->val <= high) root = root->right;
                 else break;
+            }
+        }
+        return ans;
+    }
+};*/
+
+// Morris Traversal - without modification
+class Solution {
+public:
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        int ans = 0;
+        while(root) {
+            if(root->left && root->val >= low) {
+                TreeNode* pre = root->left;
+                // find predecessor of root
+                while(pre->right && pre->right != root) 
+                    pre = pre->right;
+                // make root as right child of pre (temporary link)
+                if(!pre->right) {
+                    pre->right = root;
+                    root = root->left;
+                }
+                else {
+                    if(root->val >= low && root->val <= high)
+                        ans += root->val;
+                    pre->right = NULL;
+                    root = root->right;
+                }
+            }
+            else {
+                if(root->val >= low && root->val <= high)
+                    ans += root->val;
+                root = root->right;
             }
         }
         return ans;
