@@ -22,7 +22,7 @@ public:
 };*/
 
 // BST-optimized BFS
-class Solution {
+/*class Solution {
 public:
     int rangeSumBST(TreeNode* root, int low, int high) {
         if(!root) return 0;
@@ -35,6 +35,31 @@ public:
             if(temp->left) q.push(temp->left);
             if(temp->right) q.push(temp->right);
         }    
+        return ans;
+    }
+};*/
+
+class Solution {
+public:
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        int ans = 0;
+        while(root) {
+            if(root->left && root->val >= low) {
+                TreeNode* pre = root->left;
+                // find the predecessor of root
+                while(pre->right && pre->val <= high) pre = pre->right;
+                // linking the right of pre to root (temporarily)
+                pre->right = root;
+                TreeNode* temp = root;
+                root = root->left;
+                temp->left = NULL;
+            }
+            else {
+                if(root->val >= low && root->val <= high) ans += root->val;
+                if(root->val <= high) root = root->right;
+                else break;
+            }
+        }
         return ans;
     }
 };
