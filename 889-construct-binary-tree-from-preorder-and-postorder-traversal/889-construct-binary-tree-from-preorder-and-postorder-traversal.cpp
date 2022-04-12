@@ -17,8 +17,8 @@ public:
         TreeNode* new_head = new TreeNode(pre[preindex++]);
         if(preindex==pre.size())
             return new_head;
-        int i;
-        for(i=start;i<=end;i++)
+        int i=start;
+        for(;i<=end;i++)
         {
             if(pre[preindex]==post[i])
                 break;
