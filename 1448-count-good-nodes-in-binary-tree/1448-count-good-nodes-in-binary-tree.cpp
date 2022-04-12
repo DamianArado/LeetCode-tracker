@@ -11,20 +11,20 @@
  */
 class Solution {
 private:
-    int helper(TreeNode* root, int &gdNodes, int maxTillNow) {
-        if(!root) return gdNodes;
+    int dfsHelper(TreeNode* root, int &goodNodes, int maxTillNow) {
+        if(!root) return goodNodes;
         if(root->val >= maxTillNow) {
             maxTillNow = root->val;
-            gdNodes++;
+            goodNodes++;
         }
-        helper(root->left, gdNodes, maxTillNow);
-        helper(root->right, gdNodes, maxTillNow);
-        return gdNodes;
+        dfsHelper(root->left, goodNodes, maxTillNow);
+        dfsHelper(root->right, goodNodes, maxTillNow);
+        return goodNodes;
     }
 public:
     int goodNodes(TreeNode* root) {
         if(!root) return 0;
-        int gdNodes = 0, maxTillNow = INT_MIN;
-        return helper(root, gdNodes, maxTillNow);
+        int goodGuys = 0;
+        return dfsHelper(root, goodGuys, INT_MIN);
     }
 };
