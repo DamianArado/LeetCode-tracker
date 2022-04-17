@@ -21,7 +21,7 @@
  
  If it needs camera, result++ and we return 1. If its covered, we return 2. Otherwise, we return 0.
  
- 
+ TC - O(n) SC - O(n)
  */
 class Solution {
 private:
