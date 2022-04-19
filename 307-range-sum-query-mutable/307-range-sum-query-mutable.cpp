@@ -1,53 +1,48 @@
-class SegmentTree {
-    SegmentTree *left, *right;
-    int L, R, val; // val is segment tree node's value
-public:
-    SegmentTree(vector<int>& nums, int l, int r): L(l), R(r), left(NULL), right(NULL) {
-        build(nums);
-    }
-    void build(vector<int>& nums) {
-        if(L == R) 
-            val = nums[L];
-        else {
-            int mid = L + (R - L) / 2;
-            left = new SegmentTree(nums, L, mid);
-            right = new SegmentTree(nums, mid + 1, R);
-            val = left -> val + right -> val;
-        }
-    }
-    void update(int i, int new_val) {
-        if(L == R) 
-            val = new_val;
-        else {
-            int mid = L + (R - L) / 2;
-            if(i <= mid) 
-                left -> update(i, new_val);
-            else 
-                right -> update(i, new_val);
-            val = left -> val + right -> val;
-        }
-    }
-    int sum(int l, int r) {
-        if(l > r) 
-            return 0;
-        if(l == L && r == R) 
-            return val;
-        int mid = L + (R - L) / 2;
-        return left -> sum(l, min(mid, r)) + right -> sum(max(l, mid + 1), r);
-    }
-};
+/*
+TC - Initial segment tree construction: O(n), update and sumRange: O(log n)
+SC - O(n)
+*/
+
 class NumArray {
-    SegmentTree *tree;
+private:
+    vector<int> segTree;
+    inline static int n;
+    
+    void buildSegTree(vector<int> &nums, int nodeIdx, int l, int r) {
+        if(l == r) {
+            segTree[nodeIdx] = nums[l];
+            return;
+        } else {
+            int mid = l + (r - l) / 2;
+            buildSegTree(nums, 2 * nodeIdx, l, mid);
+            buildSegTree(nums, 2 * nodeIdx + 1, mid + 1, r);
+            segTree[nodeIdx] = segTree[2 * nodeIdx] + segTree[2 * nodeIdx + 1];
+        }
+    }
 public:
     NumArray(vector<int>& nums) {
-        tree = new SegmentTree(nums, 0, size(nums) - 1);
+        n = nums.size();
+        segTree.resize(4*n, 0);
+        buildSegTree(nums, 1, 0, n - 1);
     }
     
-    void update(int index, int val) {
-        tree -> update(index, val);
+    void update(int index, int val, int nodeIdx = 1, int l = 0, int r = n - 1) {
+        if(l == r) {
+            segTree[nodeIdx] = val;
+        } else {
+            int mid = l + (r - l) / 2;
+            if(index <= mid) update(index, val, 2 * nodeIdx, l, mid);
+            else update(index, val, 2 * nodeIdx + 1, mid + 1, r);
+            segTree[nodeIdx] = segTree[2 * nodeIdx] + segTree[2 * nodeIdx + 1];
+        }
     }
     
-    int sumRange(int left, int right) {
-        return tree -> sum(left, right);
+    int sumRange(int left, int right, int nodeIdx = 1, int l = 0, int r = n - 1) {
+        if(left > right) return 0;
+        if(left == l && right == r) return segTree[nodeIdx];
+        
+        int mid = l + (r - l) / 2;
+        return sumRange(left, min(right, mid), 2 * nodeIdx, l, mid) 
+            + sumRange(max(left, mid + 1), right, 2 * nodeIdx + 1, mid + 1, r);
     }
 };
