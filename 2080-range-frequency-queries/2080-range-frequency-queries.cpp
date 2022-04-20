@@ -15,7 +15,7 @@ Space Complexity : O(N), required for maintaining hashmap
 */
 
 class RangeFreqQuery {
-    map<int, vector<int>> mp;
+    unordered_map<int, vector<int>> mp;
 public:
     RangeFreqQuery(vector<int>& arr) {
         for(int i = 0; i < size(arr); i++) 
