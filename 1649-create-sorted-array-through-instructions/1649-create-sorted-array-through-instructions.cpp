@@ -1,5 +1,16 @@
+/*
+    How Segment Tree is helpful here?
+
+    Segment is used to store the frequency of every element
+    To get the count of elements less than x, we will make query Find sum between 0 to x-1
+    To get the count of elements greater than x, we will make query Find sum between x+1 to 10^5 (As per constraints, it's maximum value)
+    We can make each of these queries in logN time!
+    
+    */
+/*  
+
+Segment Tree based approach
 class Solution {
-//  Segment Tree Array
 int tree[400040];
 public:
     
@@ -64,5 +75,60 @@ public:
         }
         
         return cost; 
+    }
+};
+*/
+// Binary Indeced Tree-based approach
+/*
+
+    Idea
+
+    Use Binary Indexed Tree structure bit to store count of elements in instructions array so far.
+    For each x in instructions:
+    left = bit.getSumRange(0, x - 1) : Get count of all numbers strickly less than x
+    right = bit.getSumRange(x + 1, largest): Get count of all numbers strickly greater than x
+    cost = (cost + min(left, right)) % 1_000_000_007
+    bit.addValue(x, 1): Increase count of number x by one
+
+    Complexity:
+
+    Time: O(MLogM), wherer M is the maximum number in the array.
+    Space: O(M)
+
+*/
+class BIT {
+    vector<int> bit;
+public:
+    BIT(int size) {
+        bit.assign(size + 1, 0);
+    }
+    int getSum(int idx) { // Get sum in range [0..idx], 1-based indexing
+        int sum = 0;
+        for (; idx > 0; idx -= idx & (-idx))
+            sum += bit[idx];
+        return sum;
+    }
+    int getSumRange(int left, int right) { // left, right inclusive, 1-based indexing
+        return getSum(right) - getSum(left - 1);
+    }
+    void addValue(int idx, int val) { // 1-based indexing
+        for (; idx < bit.size(); idx += idx & (-idx))
+            bit[idx] += val;
+    }
+};
+
+class Solution {
+public:
+    int createSortedArray(vector<int>& instructions) {
+        int max = *max_element(instructions.begin(), instructions.end()), MOD = 1000000007;
+        BIT bit(max);
+        int cost = 0;
+        for (int x : instructions) {
+            int left = bit.getSumRange(0, x - 1);  // Get count of all numbers strictly less than x
+            int right = bit.getSumRange(x + 1, max);  // Get count of all numbers strictly greater than x
+            cost = (cost + min(left, right)) % MOD;
+            bit.addValue(x, 1);  // Increase count of number x by one
+        }
+        return cost;
     }
 };
