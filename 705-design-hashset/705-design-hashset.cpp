@@ -1,5 +1,5 @@
 class MyHashSet {
-    vector<int> ans;
+    vector<bool> ans;
 public:
     MyHashSet() {
         ans.resize(1e6 + 1, false);
