@@ -1,29 +1,18 @@
-/*
-
-Solution (Vector of Index & Binary Search)
-
-We just need to maintain a vector of indices for each element in the order they occur.
-Then querying for frequency between a range [L, R] is simply finding highest index and lowest index of that element within the given range and returning number of elements between them in the vector of indices.
-The highest and lowest index can be found using binary search (upper_bound and lower_bound) in O(logN) time.
-
-Time Complexity :
-RangeFreqQuery: O(N), where N is the number of elements in arr.
-query: O(logN)
-
-Space Complexity : O(N), required for maintaining hashmap
-
-*/
-
 class RangeFreqQuery {
-    unordered_map<int, vector<int>> mp;
 public:
+    vector<int> ids[10001] = {};
     RangeFreqQuery(vector<int>& arr) {
-        for(int i = 0; i < size(arr); i++) 
-            mp[arr[i]].push_back(i);
+        for (int i = 0; i < arr.size(); ++i)
+            ids[arr[i]].push_back(i);
     }
-    
-    int query(int L, int R, int V) {
-        return upper_bound(begin(mp[V]), end(mp[V]), R) 
-             - lower_bound(begin(mp[V]), end(mp[V]), L); 
+    int query(int left, int right, int v) {
+        return upper_bound(begin(ids[v]), end(ids[v]), right) - 
+            lower_bound(begin(ids[v]), end(ids[v]), left);
     }
 };
+
+/**
+ * Your RangeFreqQuery object will be instantiated and called as such:
+ * RangeFreqQuery* obj = new RangeFreqQuery(arr);
+ * int param_1 = obj->query(left,right,value);
+ */
