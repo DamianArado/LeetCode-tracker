@@ -1,3 +1,12 @@
+/*
+
+Time complexity = O(32*N) [for inserting all the elements of nums into the trie ; 32-bit and for finding the max XOR for every element of nums]
+
+Space complexity = O(32*N) since we are inserting all the elements of nums into the trie where every element is of size 32-bit but the actual 
+sc will be less than O(32*N) because they might have overlapped.
+
+*/
+
 struct Node {
     Node* linkNext[2];
     
