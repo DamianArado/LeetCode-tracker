@@ -35,7 +35,7 @@ class Solution {
                 // and to get b, we need a ^ c, if a ^ c exisited in our set, then we're good to go
                 int anotherNum = leftPartOfNum ^ greedyTry;
                 if (set.contains(anotherNum)) {
-                    maxResult= greedyTry;
+                    maxResult = greedyTry;
                     break;
                 }
             }
