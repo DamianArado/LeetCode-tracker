@@ -40,6 +40,10 @@ Call getMax(2) which returns 2^4 = 6 as maxXOR       -> ans[2] = 6;
 
 Hence, answer = [7, 7, 6, 2]
 
+TC = O(nums.size() log nums.size() + query.size() log query.size())
+
+SC - O(trie nodes + query.size())
+
 */
 
 struct Node {
@@ -103,23 +107,25 @@ public:
             } else return {-1};
         }
         
-        // sort the nums array
+        // sort the nums array : O(n*log n)
         sort(nums.begin(), nums.end());
         // [m[i], [x[i], query[i]]]
         vector<pair<int, pair<int, int>>> offlineQueries;
         int n = queries.size();
         
+        // O(q)
         for(int i = 0; i < n; i++) {
             offlineQueries.push_back({queries[i][1], {queries[i][0], i}});
         }
         
-        // sort the offline-queries array according to m[i]
+        // sort the offline-queries array according to m[i] : O(q log q)
         sort(offlineQueries.begin(), offlineQueries.end());
         vector<int> ans(n, 0);
         Trie trieObj;
         
         // traversing in offline-queries now
         int index = 0;
+        // O((n + q) * 32)
         for(int i = 0; i < n; ++i) {
             int xi = offlineQueries[i].second.first;
             int mi = offlineQueries[i].first;
