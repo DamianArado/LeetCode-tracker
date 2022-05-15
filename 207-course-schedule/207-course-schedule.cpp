@@ -20,7 +20,7 @@ public:
         vector<int> adjList[numCourses];  // array of vectors
         
         for(auto it : prerequisites) {
-            adjList[it[1]].push_back(it[0]);
+            adjList[it[0]].push_back(it[1]);
         }
         for(int i = 0; i < numCourses; ++i) {
             if(!visited[i] && checkCycle(i, adjList, visited, dfsCurrentVisit))
