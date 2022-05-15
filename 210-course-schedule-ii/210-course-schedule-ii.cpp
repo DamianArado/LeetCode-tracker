@@ -10,7 +10,6 @@ private:
                 return true;
         }
         ans.push_back(start);
-        
         dfsCurrentVisit[start] = false;
         return false;
     }
@@ -20,7 +19,7 @@ private:
         vector<int> adjList[numCourses];  // array of vectors
         
         for(auto it : prerequisites) {
-            adjList[it[1]].push_back(it[0]);
+            adjList[it[0]].push_back(it[1]);
         }
         for(int i = 0; i < numCourses; ++i) {
             if(!visited[i] && checkCycle(i, adjList, visited, dfsCurrentVisit, ans))
@@ -34,7 +33,6 @@ public:
         if(numCourses == 1) return {0};
         
         if(canFinish(numCourses, prerequisites, ans)) {
-            reverse(ans.begin(), ans.end());
             return ans;
         }    
         return {};
