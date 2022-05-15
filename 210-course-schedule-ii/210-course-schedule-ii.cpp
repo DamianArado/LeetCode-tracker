@@ -9,9 +9,9 @@ private:
             else if(dfsCurrentVisit[it])
                 return true;
         }
+        ans.push_back(start);
         
         dfsCurrentVisit[start] = false;
-        ans.push_back(start);
         return false;
     }
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites, vector<int> &ans) {
