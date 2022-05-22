@@ -1,67 +1,46 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
-    //number of valid cells (cells with some orange)
-    int ct = 0;
-    //result
-    int res = -1;
-    //actually queue of pairs of coord i and j
-    queue<vector<int>> q;
-    
-    //ways to move
-    vector<vector<int>> dir = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-    
-    //create staring nodes to queue to do bfs
-    for(int i = 0; i < grid.size(); i++) {
-        for(int j = 0; j < grid[0].size(); j++) {
-            //increasing number of valid cells
-            if(grid[i][j] > 0) 
-                ct++;
-            
-            //only rotten oranges must be on initial step of queue
-            if(grid[i][j] == 2) 
-                q.push({i, j});
-        }
-    }
-    
-    //bfs
-    while(!q.empty()) {
+        int m = grid.size(), n = grid[0].size();
+        int oranges = 0;  // no. of valid cells (cells with orange)
+        int result = -1;  // no. of minutes to rot all the oranges
+        queue<pair<int,int>> q; // to store rotten oranges
+        vector<vector<int>> directions = {{-1,0},{1,0},{0,-1},{0,1}};
         
-        //we do one step from rotten
-        res++;
-        
-        //see next comment
-        int size = q.size();
-        
-        //need to start from all rotten nodes at one moment 
-        for(int k = 0; k < size; k++) {
-            
-            //take node from head
-            vector<int> cur = q.front();
-            q.pop();
-            
-            //number of valid decreasing
-            ct--;
-            
-            //need to look through all four directions
-            for(int i = 0; i < 4; i++) {
-                //taking coords
-                int x = cur[0] + dir[i][0];
-                int y = cur[1] + dir[i][1];
-                
-                //if we go out of border or find non-fresh orange, we skip this iteration
-                if(x >= grid.size() || x < 0 || y >= grid[0].size() || y < 0 || grid[x][y] != 1) 
-                    continue;
-                
-                //orange becomes rotten
-                grid[x][y] = 2;
-                
-                //this orange will make neighbor orange rotten
-                q.push({x, y});
+        for(int i = 0; i < m; ++i) {
+            for(int j = 0; j < n; ++j) {
+                // increase the count of oranges
+                if(grid[i][j] > 0) 
+                    oranges++;
+                // add only the cells having rotten oranges
+                if(grid[i][j] == 2)
+                    q.push({i,j});
             }
         }
+        
+        // start BFS
+        while(!q.empty()) {
+            result++;  // increase the no. of minutes for rotting oranges
+            int qSize = q.size();
+            for(int k = 0; k < qSize; ++k) {
+                auto it = q.front();
+                q.pop();
+                oranges--;  // decrease the no. of orange as it is rotten
+
+                // check for rotten oranges in all the 4 directions
+                for(int i = 0; i < 4; ++i) {
+                    int x = it.first + directions[i][0];
+                    int y = it.second + directions[i][1];
+                    // skip if both go beyond the current limits
+                    if(x == m || y == n || x < 0 || y < 0 || grid[x][y] != 1)
+                        continue;
+                    grid[x][y] = 2;
+                    q.push({x,y});  // add this rotten one to queue
+                }
+            }
+        }
+        
+        // since all oranges have been rotten now, return the result
+        return (oranges == 0) ? max(0, result) : -1;
     }
-    //if we looked through all oranges, return result, else -1
-    return (ct == 0) ? max(0, res) : -1;
-}
 };
