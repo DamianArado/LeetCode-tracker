@@ -1,5 +1,5 @@
 class Solution {
-// TC and SC: O(V+E)
+// TC and SC: O(E)
 private:
     bool dfs(vector<vector<int>>& graph, vector<bool>& visited, int current, int end) {
         if(current == end) return true;
