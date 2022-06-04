@@ -11,7 +11,7 @@ bool isCycleBFS(int current, vector<int> adjList[], vector<bool> &visited) {
         int curr = q.front().first;
         int prev = q.front().second;
         q.pop();
-        for(auto adj : current) {
+        for(auto adj : adjList[current]) {
             if(!visited[adj]) {
                 q.push({adj, current});
                 visited[adj] = true;

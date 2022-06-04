@@ -3,7 +3,7 @@
 
 bool isCycleDFS(int current, int previous, vector<int> adjList[], vector<bool> &visited) {
 	visited[current] = true;
-	for(auto adj : current) {
+	for(auto adj : adjList[current]) {
 		if(!visited[adj] && dfs(adj, current, adjList, visited))
 			return true;
 		else if(adj != previous)
