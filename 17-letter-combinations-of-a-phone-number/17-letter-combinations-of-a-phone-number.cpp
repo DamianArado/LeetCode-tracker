@@ -1,19 +1,19 @@
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
-        vector<string> res;
-        if(digits.size() == 0) return res;
-        string charmap[10] = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        res.push_back("");
-        for (int i = 0; i < digits.size(); i++)
-        {
-            vector<string> tempres;
-            string chars = charmap[digits[i] - '0'];
-            for (int c = 0; c < chars.size();c++)
-                for (int j = 0; j < res.size();j++)
-                    tempres.push_back(res[j]+chars[c]);
-            res = tempres;
+        vector<string> result;
+        if(digits.size() == 0)
+            return result;
+        result.push_back("");
+        string charMap[10] = {"0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        for(int i = 0; i < digits.size(); ++i) {
+            string chars = charMap[digits[i] - '0'];
+            vector<string> temp;
+            for(int c = 0; c < chars.size(); ++c)
+                for(int j = 0; j < result.size(); ++j)
+                    temp.push_back(result[j] + chars[c]);
+            result = temp;
         }
-        return res;
+        return result;
     }
 };
