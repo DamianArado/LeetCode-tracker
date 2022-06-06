@@ -1,3 +1,4 @@
+// TC - O(V+E), SC - O(V)
 class Solution {
 public:
     // Using class variables instead of supplying members in every dfs call in order to have a lighter call stack
