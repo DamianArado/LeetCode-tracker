@@ -1,30 +1,27 @@
 class Solution {
-public:
-    string decodeString(const string& s, int& i) {
+private:
+    string decodeString(const string &s, int &index) {
         string result;
-        
-        while (i < s.length() && s[i] != ']') {
-            if (!isdigit(s[i]))
-                result += s[i++];
-            else {
-                int n = 0;
-                while (i < s.length() && isdigit(s[i]))
-                    n = n * 10 + s[i++] - '0';
-                    
-                i++; // '['
-                string t = decodeString(s, i);
-                i++; // ']'
-                
-                while (n-- > 0)
-                    result += t;
+        while(index < s.size() && s[index] != ']') {
+            if(!isdigit(s[index])) {
+                result += s[index++];
+            } else {
+                int n = 0; 
+                // number of times chars will be repeated
+                while(index < s.size() && isdigit(s[index]))
+                    n = 10 * n + s[index++] - '0';
+                index++;  // '['
+                string chars = decodeString(s, index);
+                index++;  // ']'
+                while(n--)
+                    result += chars;
             }
         }
-        
         return result;
     }
-
+public:
     string decodeString(string s) {
-        int i = 0;
-        return decodeString(s, i);
+        int index = 0;
+        return decodeString(s, index);
     }
 };
