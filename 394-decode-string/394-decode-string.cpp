@@ -1,3 +1,4 @@
+// TC : O(s.length * n), SC : O(1)
 class Solution {
 private:
     string decodeString(const string &s, int &index) {
