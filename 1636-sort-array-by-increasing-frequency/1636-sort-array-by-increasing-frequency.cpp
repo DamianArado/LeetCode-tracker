@@ -1,3 +1,4 @@
+// TC - O(nlog(freq)), SC - O(freq)
 class Solution {
 public:
     vector<int> frequencySort(vector<int>& nums) {
