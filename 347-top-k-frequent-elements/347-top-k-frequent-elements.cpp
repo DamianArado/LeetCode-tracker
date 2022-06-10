@@ -1,23 +1,24 @@
-// TC: O(nlog(n-k))
+// TC - O(nlogk), SC - O(n)
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map<int, int> map;
-        for(int num : nums){
-            map[num]++;
+        // Step 1: covert the array into frequency mappings
+        unordered_map<int,int> freq;
+        for(int i = 0; i < nums.size(); ++i)  
+            freq[nums[i]] += 1;
+        // Step 2: maintain a min heap using frequency mappings
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> minHeap;
+        for(auto it : freq) {
+            minHeap.push({it.second, it.first});
+            if(minHeap.size() > k)
+                minHeap.pop();
         }
-        
-        vector<int> res;
-        // pair<first, second>: first is frequency,  second is number 
-        
-        priority_queue<pair<int, int>> pq; 
-        for(auto it = map.begin(); it != map.end(); ++it){
-            pq.push(make_pair(it->second, it->first));
-            if(pq.size() > (int)map.size() - k){
-                res.push_back(pq.top().second);
-                pq.pop();
-            }
+        // Step 3: return the elements present in the min heap
+        vector<int> ans;
+        while(minHeap.size()) {
+            ans.emplace_back(minHeap.top().second);
+            minHeap.pop();
         }
-        return res;
+        return ans;
     }
 };
