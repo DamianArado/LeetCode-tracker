@@ -1,4 +1,4 @@
-// TC - O(nlogk), SC - O(n)
+// TC - O(nlogk), SC - O(k)
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
