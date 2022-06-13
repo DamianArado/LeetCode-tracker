@@ -7,6 +7,8 @@ class Solution
 {
     public:
     
+    // TC - O(nlogn), SC - O(n)
+    
     struct meeting { int start, end, position; };
     
     static bool comparator(struct meeting m1, meeting m2) {
