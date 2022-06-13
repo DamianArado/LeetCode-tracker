@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // tc - O(n) sc - O(1)
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
         int startIdx = 0, gasLeft = 0, costSum = 0, gasSum = 0;
         for(int i = 0; i < gas.size(); ++i)
