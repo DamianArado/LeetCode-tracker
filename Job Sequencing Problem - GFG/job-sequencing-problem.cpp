@@ -25,6 +25,7 @@ struct Job
 
 class Solution 
 {
+    // tc: O(n*maxP) sc: O(maxP)
     public:
     static bool comparator(Job a, Job b) {
         return a.profit > b.profit;
