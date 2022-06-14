@@ -21,6 +21,7 @@ struct Item{
 class Solution
 {
     public:
+    // tc: O(nlogn), sc: O(1)
     static bool comparator(Item a, Item b) {
         return ((double)a.value / (double)a.weight) > ((double)b.value / (double)b.weight);
     }
