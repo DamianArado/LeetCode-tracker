@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // tc - O(n), sc - O(1)
     int minCost(string colors, vector<int>& neededTime) {
         int minTime = 0, recurringMax = 0;
         for(int i = 0; i < colors.size(); ++i) {
