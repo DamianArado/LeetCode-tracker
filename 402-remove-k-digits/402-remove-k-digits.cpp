@@ -1,6 +1,7 @@
 class Solution {
 public:
     string removeKdigits(string num, int k) {
+        // tc and sc: O(n)
         if(num.size() == k) return "0";
         string ans = "";
         for(char &c : num) {
