@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // tc - O(nlogn), sc - O(n)
     int maxEvents(vector<vector<int>>& events) {
         // events[0,1] -> events[i][0] = startTime[i], events[i][1] = endTime[i]
         // Step 1: Sort events act their startTime
