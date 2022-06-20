@@ -47,7 +47,6 @@ public:
     int rob(vector<int>& nums) {
         // this is a problem that can be solved efficiently using 1d DP
         int n = nums.size();
-        if(n == 1) return nums[0];
         // I'll be using space optimization over the tabulation approach
         // for negative index we didn't return anything earlier too
         int prev2 = 0, prev = nums[0];
