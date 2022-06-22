@@ -88,7 +88,7 @@ Approach 3 - Using space optimization
 
 class Solution {
 public:
-    // TC - O(m) using combinatorics
+    // TC - O(min(m,n)) using combinatorics
     int uniquePaths(int m, int n) {
         int N = m + n - 2;
         int r = min(m - 1, n - 1);
