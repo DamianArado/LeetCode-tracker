@@ -62,6 +62,7 @@ Approach 3 - Using space optimization
 
 class Solution {
 public:
+    // TC - O(mn) SC - O(n)
     int uniquePaths(int m, int n) {
         // to store the previous states
         vector<int> dp(n, 0);
