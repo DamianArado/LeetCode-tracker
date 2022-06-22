@@ -58,11 +58,7 @@ TC and SC - O(mn)
 
 Approach 3 - Using space optimization
 
-*/
-
-class Solution {
-public:
-    // TC - O(mn) SC - O(n)
+// TC - O(mn) SC - O(n)
     int uniquePaths(int m, int n) {
         // to store the previous states
         vector<int> dp(n, 0);
@@ -86,5 +82,19 @@ public:
         }
         // return the last entry of the last column we are standing at
         return dp[n - 1];
+    }
+
+*/
+
+class Solution {
+public:
+    // TC - O(m) using combinatorics
+    int uniquePaths(int m, int n) {
+        int N = m + n - 2;
+        int r = m - 1;
+        double result = 1;
+        for(int i = 1; i <= r; ++i)
+            result = result * (N - r + i) / i;
+        return (int)result;
     }
 };
