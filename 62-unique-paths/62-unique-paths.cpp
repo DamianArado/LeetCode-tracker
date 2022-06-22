@@ -33,13 +33,11 @@ public:
 };
 
 TC - O(mn) as we can have mn calls at max 
-SC - O(mn) + (m + n)
+SC - O(mn) + (m + n)  
 
-*/
+Solution 2 - Using Tabulation based approach
 
-class Solution {
-public:
-    int uniquePaths(int m, int n) {
+int uniquePaths(int m, int n) {
         vector<vector<int>> dp(m, vector<int> (n, 0));
         for(int i = 0; i < m; ++i) {
             for(int j = 0; j < n; ++j) {
@@ -54,5 +52,38 @@ public:
             }
         }
         return dp[m - 1][n - 1];
+}
+
+TC and SC - O(mn)
+
+Approach 3 - Using space optimization
+
+*/
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        // to store the previous states
+        vector<int> dp(n, 0);
+        // iterate row-by-row
+        for(int row = 0; row < m; ++row) {
+            // to store the current states
+            vector<int> temp(n, 0);
+            for(int col = 0; col < n; ++col) {
+                if(row == 0 and col == 0) {
+                    temp[col] = 1;
+                    continue;
+                }
+                // store the value taken from the left and top of grid [row,col]
+                int left = 0, up = 0;
+                if(col > 0) left = temp[col - 1];
+                if(row > 0) up = dp[col];
+                temp[col] = left + up;
+            }
+            // float to the next row (helpful in calculation)
+            dp = temp;
+        }
+        // return the last entry of the last column we are standing at
+        return dp[n - 1];
     }
 };
