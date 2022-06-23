@@ -47,10 +47,13 @@ Approach 3: Using space optimization
 
 class Solution {
 public:
+    // tc - O(mn) sc - O(n)
     int minPathSum(vector<vector<int>>& grid) {
         int m = grid.size(), n = grid[0].size();
+        // will act as the previous state for temp
         vector<int> dp(n, 0);
         for(int i = 0; i < m; ++i) {
+            // current state while doing down row by row
             vector<int> temp(n, 0);
             for(int j = 0; j < n; ++j) {
                 if(i == 0 and j == 0) temp[j] = grid[0][0];
