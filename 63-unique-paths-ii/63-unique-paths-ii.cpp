@@ -46,6 +46,7 @@ Solution 3: Using space optimization over tabulation -
 
 class Solution {
 public:
+    // tc - O(mn) sc - O(n)
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         int m = obstacleGrid.size(), n = obstacleGrid[0].size();
         vector<int> dp(n, 0);
