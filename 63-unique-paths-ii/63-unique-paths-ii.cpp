@@ -21,18 +21,12 @@ public:
     
 Solution 2: Using tabulation - O(mn) tc and sc (w/o Recursion Stack Space of O(m + n))
 
-
-
-
-*/
-
-class Solution {
-public:
-    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         int m = obstacleGrid.size(), n = obstacleGrid[0].size();
         vector<vector<int>> dp(m, vector<int>(n, 0));
         for(int i = 0; i < m; ++i) {
             for(int j = 0; j < n; ++j) {
+                // check for obstacles first otherwise you'll get wrong answer
                 if(obstacleGrid[i][j] == 1) dp[i][j] = 0;
                 else if(i == 0 and j == 0) dp[i][j] = 1;
                 else {
@@ -44,5 +38,31 @@ public:
             }
         }
         return dp[m - 1][n - 1];
+    }
+    
+
+Solution 3: Using space optimization over tabulation - 
+*/
+
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+        vector<int> dp(n, 0);
+        for(int i = 0; i < m; ++i) {
+            vector<int> temp(n, 0);
+            for(int j = 0; j < n; ++j) {
+                if(obstacleGrid[i][j] == 1) temp[j] = 0;
+                else if(i == 0 and j == 0) temp[j] = 1;
+                else {
+                    int left = 0, up = 0;
+                    if(j > 0) left = temp[j - 1];
+                    if(i > 0) up = dp[j];
+                    temp[j] = left + up;
+                }
+            }
+            dp = temp;
+        }
+        return dp[n - 1];
     }
 };
