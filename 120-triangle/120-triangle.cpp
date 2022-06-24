@@ -31,13 +31,7 @@ SC: O(n^2 + n)
 
 Approach 3: Tabulation
 
-
-
-*/
-
-class Solution {
-public:
-    int minimumTotal(vector<vector<int>>& triangle) {
+int minimumTotal(vector<vector<int>>& triangle) {
         int n = triangle.size();
         vector<vector<int>> dp(n, vector<int>(n, 0));
         // base cases
@@ -54,5 +48,33 @@ public:
         }
         // answer is waiting here
         return dp[0][0];
+    }
+
+TC: O(n^2), SC: O(n^2)
+
+*/
+
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        int n = triangle.size();
+        // store the previous states
+        vector<int> dp(n, 0);
+        // 1st mandatory filling
+        for(int j = 0; j < n; ++j)
+            dp[j] = triangle[n - 1][j];
+        for(int i = n - 2; i >= 0; --i) {
+            // store the current state
+            vector<int> temp(n, 0);
+            for(int j = i; j >= 0; --j) {
+                int down = triangle[i][j] + dp[j];
+                int diagonalRight = triangle[i][j] + dp[j + 1];
+                temp[j] = min(down, diagonalRight);
+            }
+            // update the previous state to be the current state 
+            dp = temp;
+        }
+        // answer is waiting here
+        return dp[0];
     }
 };
