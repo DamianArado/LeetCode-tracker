@@ -52,6 +52,10 @@ int minimumTotal(vector<vector<int>>& triangle) {
 
 TC: O(n^2), SC: O(n^2)
 
+Approach 4: Space optimized tabulation
+
+TC: O(n^2), SC: O(n)
+
 */
 
 class Solution {
