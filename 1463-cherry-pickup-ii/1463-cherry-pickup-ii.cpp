@@ -38,15 +38,10 @@ public:
         return f(grid, 0, 0, n - 1, m, n);
     }
     
-TC: O(9^m), SC: O(m)           [TLE]
+TC: O(9^m), SC: O(m)  [TLE]
 
+Approach 2: Applying Memoization using a 3D DP 
 
-
-
-*/
-
-class Solution {
-private:
     int f(vector<vector<int>> &grid, int i, int j1, int j2, int m, int n, vector<vector<vector<int>>> &dp) {
         // out of bound base case
         if(j1 < 0 or j1 > n - 1 or j2 < 0 or j2 > n - 1)
@@ -83,5 +78,53 @@ public:
         int m = grid.size(), n = grid[0].size();
         vector<vector<vector<int>>> dp(m, vector<vector<int>> (n, vector<int> (n, -1)));
         return f(grid, 0, 0, n - 1, m, n, dp);
+    }
+    
+TC: O(9 * m*n*n), SC: O(m*n*n + n)
+
+
+*/
+
+class Solution {
+public:
+    int cherryPickup(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        vector<vector<vector<int>>> dp(m, vector<vector<int>> (n, vector<int> (n, 0)));
+        // base cases
+        for(int j1 = 0; j1 < n; ++j1) {
+            for(int j2 = 0; j2 < n; ++j2) {
+                if(j1 == j2) dp[m - 1][j1][j2] = grid[m - 1][j1];
+                else dp[m - 1][j1][j2] = grid[m - 1][j1] + grid[m - 1][j2];
+            }
+        }
+        // moving bottom-up
+        for(int i = m - 2; i >= 0; --i) {
+            for(int j1 = 0; j1 < n; ++j1) {
+                for(int j2 = 0; j2 < n; ++j2) {
+                    int cherry = 0, maxCherries = 0;
+                    // dj is change in j for alice and bob
+                    // it will 9 possible movements of Alice and Bob combined
+                    for(int djAlice = -1; djAlice <= 1; ++djAlice) {
+                        for(int djBob = -1; djBob <= 1; ++djBob) {
+                            // if they take the same cell, consider only one of them
+                            if(j1 == j2) cherry = grid[i][j1];
+                            // else consider both of them
+                            else cherry = grid[i][j1] + grid[i][j2];
+                            // only if the value is within bounds, add it
+                            if(j1 + djAlice >= 0 and j1 + djAlice < n and j2 + djBob >= 0 and j2 + djBob < n)
+                                cherry += dp[i + 1][j1 + djAlice][j2 + djBob];
+                            // else add a very negative no. which will not be considered
+                            else cherry += -1e8;
+                            // take the max of the cherries picked
+                            maxCherries = max(maxCherries, cherry);
+                        }
+                    }
+                    // add max cherries for this cell
+                    dp[i][j1][j2] = maxCherries;
+                }
+            }
+        }
+        // return the cherries generated at this cell as this will be the max that were picked up
+        return dp[0][0][n - 1];
     }
 };
