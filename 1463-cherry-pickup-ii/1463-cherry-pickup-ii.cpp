@@ -127,7 +127,7 @@ int cherryPickup(vector<vector<int>>& grid) {
 
 Approach 4: Improving SC over tabulation
 
-TC: O(9*m*n*n), SC: O(m*n*n)
+TC: O(9*m*n*n), SC: O(n*n)
 
 */
 
