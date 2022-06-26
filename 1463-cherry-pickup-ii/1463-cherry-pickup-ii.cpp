@@ -82,12 +82,9 @@ public:
     
 TC: O(9 * m*n*n), SC: O(m*n*n + n)
 
+Approach 3: Using Tabulation (m - 1, j1, j2) -> (0, 0, n - 1)
 
-*/
-
-class Solution {
-public:
-    int cherryPickup(vector<vector<int>>& grid) {
+int cherryPickup(vector<vector<int>>& grid) {
         int m = grid.size(), n = grid[0].size();
         vector<vector<vector<int>>> dp(m, vector<vector<int>> (n, vector<int> (n, 0)));
         // base cases
@@ -126,5 +123,59 @@ public:
         }
         // return the cherries generated at this cell as this will be the max that were picked up
         return dp[0][0][n - 1];
+    }
+
+
+*/
+
+class Solution {
+public:
+    int cherryPickup(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        // we just need a dp of size = n x n to store the previous states of Bob and Alice
+        // and this will help us in calculating their next states
+        vector<vector<int>> dp(n, vector<int> (n, 0));
+        // position of columns of alice and bob: dp[alice][bob]
+        // base cases
+        for(int j1 = 0; j1 < n; ++j1) {
+            for(int j2 = 0; j2 < n; ++j2) {
+                if(j1 == j2)
+                    dp[j1][j2] = grid[m - 1][j1];
+                else 
+                    dp[j1][j2] = grid[m - 1][j1] + grid[m - 1][j2];
+            }
+        }
+        
+        // moving in a bottom-up fashion
+        for(int i = m - 2; i >= 0; --i) {
+            // to store the current states calculated using the previous states
+            vector<vector<int>> current(n, vector<int> (n, 0));
+            for(int j1 = 0; j1 < n; ++j1) {
+                for(int j2 = 0; j2 < n; ++j2) {
+                    int maxCherries = -1e8;
+                    // since both can move in a total of 9 combinations
+                    // dj is delta j: -1, 0, +1
+                    for(int djAlice = -1; djAlice <= 1; ++djAlice) {
+                        for(int djBob = -1; djBob <= 1; ++djBob) {
+                            int cherries = 0;
+                            if(j1 == j2)
+                                cherries = grid[i][j1];
+                            else 
+                                cherries = grid[i][j1] + grid[i][j2];
+                            // just making sure we don't go out of bounds
+                            if(j1 + djAlice >= 0 and j1 + djAlice < n and j2 + djBob >= 0 and j2 + djBob < n)
+                                cherries += dp[j1 + djAlice][j2 + djBob];
+                            else 
+                                cherries += -1e8;
+                            maxCherries = max(maxCherries, cherries);
+                        }
+                    }
+                    current[j1][j2] = maxCherries;
+                }
+            }
+            // move row-by-row
+            dp = current;
+        }
+        return dp[0][n - 1];
     }
 };
