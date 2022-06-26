@@ -160,8 +160,9 @@ public:
                     // dj is delta j: -1, 0, +1
                     for(int djAlice = -1; djAlice <= 1; ++djAlice) {
                         for(int djBob = -1; djBob <= 1; ++djBob) {
-                            int cherries = 0;
-                            if(j1 == j2)
+                            // cherries should be initialized and added during each of the 9 movements
+                            int cherries = 0; 
+                            if(j1 == j2) 
                                 cherries = grid[i][j1];
                             else 
                                 cherries = grid[i][j1] + grid[i][j2];
