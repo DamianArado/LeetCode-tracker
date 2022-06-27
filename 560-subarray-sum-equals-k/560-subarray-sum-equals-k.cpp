@@ -27,18 +27,18 @@ TC and SC: O(n)
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        int ans = 0, cumSum = 0;
+        int ans = 0, prefixSum = 0;
         unordered_map<int,int> sumFreq;
         sumFreq[0] = 1;
         for(int num : nums) {
-            cumSum += num;
-            int target = cumSum - k;
+            prefixSum += num;
+            int target = prefixSum - k;
             // check if we already have target inside the map or not
             if(sumFreq.find(target) != sumFreq.end())
                 // add the frequency of its occurrence to the answer
                 ans += sumFreq[target];
             // add frequency of this new cumulative sum inside the map
-            sumFreq[cumSum]++;
+            sumFreq[prefixSum]++;
         }
         return ans;
     }
