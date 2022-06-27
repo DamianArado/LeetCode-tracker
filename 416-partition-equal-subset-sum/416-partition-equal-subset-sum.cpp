@@ -22,7 +22,7 @@ public:
     // If it has even sum, use subset sum equal to k logic for k = totalSum / 2
     // TC: O(n*k), SC: O(n)
     bool canPartition(vector<int>& nums) {
-        int n = nums.size(), totalSum = 0;
+        int totalSum = 0;
         for(int num : nums) 
             totalSum += num;
         if(totalSum % 2 == 1) return false;
