@@ -1,6 +1,6 @@
 class Solution {
 private:
-    bool subsetSumEqualsK(int index, int k, vector<int> &nums) {
+    bool subsetSumEqualsK(vector<int> &nums, int k) {
         vector<bool> dp(k + 1, false), current(k + 1, false);
         dp[0] = current[0] = true;
         if(nums[0] <= k) 
@@ -27,6 +27,6 @@ public:
             totalSum += num;
         if(totalSum % 2 == 1) return false;
         int k = totalSum / 2;
-        return subsetSumEqualsK(n - 1, k, nums);
+        return subsetSumEqualsK(nums, k);
     }
 };
