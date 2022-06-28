@@ -51,11 +51,11 @@ private:
 public:
     int findTargetSumWays(vector<int>& nums, int target) {
         int totalSum = 0, n = nums.size();
-        if(n == 1 and target == -nums[0]) return 1;
-        if(n == 1 and target != nums[0]) return 0;
+        //if(n == 1 and target == -nums[0]) return 1;
+        //if(n == 1 and target != nums[0]) return 0;
         for(int num : nums)
             totalSum += num;
-        //Checking for edge cases
+        // Checking for edge cases
         if(totalSum - target < 0) return 0;
         if((totalSum - target) % 2 == 1) return 0;
         int k = (totalSum - target) / 2;
