@@ -44,8 +44,7 @@ public:
 
 TC: O(n * target), SC: O(n * target + n)
 
-
-*/
+Approach 2: Using Tabulation
 
 class Solution {
 public:
@@ -73,5 +72,76 @@ public:
         }
         
         return dp[n][k];
+    }
+};
+
+TC & SC: O(nk)
+
+Approach 3: Space-optimized bottom up tabulated DP
+
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int totalSum = 0, n = nums.size();
+        for(int num : nums)
+            totalSum += num;
+        
+        // Checking for edge cases
+        if(totalSum - target < 0 | (totalSum - target) % 2 == 1) 
+            return 0;
+        
+        int k = (totalSum - target) / 2;
+        vector<int> dp(k + 1, 0);
+        vector<int> current(k + 1, 0);
+        dp[0] = 1;
+        
+        for(int index = 1; index <= n; ++index) {
+            for(int target = 0; target <= k; ++target) {
+                int notTake = dp[target];
+                int take = 0;
+                if(nums[index - 1] <= target)
+                    take = dp[target - nums[index - 1]];
+                current[target] = take + notTake;
+            }
+            dp = current;
+        }
+        
+        return dp[k];
+    }
+};
+
+TC: O(nk), SC: O(k)
+
+
+*/
+
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int totalSum = 0, n = nums.size();
+        for(int num : nums)
+            totalSum += num;
+        
+        // Checking for edge cases
+        if(totalSum - target < 0 | (totalSum - target) % 2 == 1) 
+            return 0;
+        
+        int k = (totalSum - target) / 2;
+        vector<int> dp(k + 1, 0);
+        vector<int> current(k + 1, 0);
+        dp[0] = 1;
+        
+        for(int index = 1; index <= n; ++index) {
+            for(int target = 0; target <= k; ++target) {
+                int notTake = dp[target];
+                int take = 0;
+                if(nums[index - 1] <= target)
+                    take = dp[target - nums[index - 1]];
+                current[target] = take + notTake;
+            }
+            dp = current;
+        }
+        
+        return dp[k];
     }
 };
