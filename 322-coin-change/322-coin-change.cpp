@@ -72,6 +72,7 @@ TC & SC: O(n*amount)
 
 class Solution {
 public:
+    // TC: O(n*amount), SC: O(amount)
     int coinChange(vector<int>& coins, int amount) {
         int n = coins.size();
         vector<int> dp(amount + 1, 0);
