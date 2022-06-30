@@ -45,10 +45,6 @@ TC: O(n*amount), SC: O(n*amount + amount)
 
 Approach 3: Using tabulation
 
-
-
-*/
-
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
@@ -67,5 +63,33 @@ public:
             }
         }
         return (dp[n - 1][amount] == 1e9 ? -1 : dp[n - 1][amount]);
+    }
+};
+
+TC & SC: O(n*amount)
+
+*/
+
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        int n = coins.size();
+        vector<int> dp(amount + 1, 0);
+        for(int i = 0; i <= amount; ++i)
+            if(i % coins[0] == 0) dp[i] = i / coins[0];
+            else dp[i] = 1e9;
+        for(int index = 1; index < n; ++index) {
+            vector<int> current(amount + 1, 0);
+            for(int target = 0; target <= amount; ++target) {
+                int take = 1e9;
+                int notTake = dp[target];
+                if(coins[index] <= target)
+                    // VERY IMPORTANT: since you don't move to the previous index, use current
+                    take = 1 + current[target - coins[index]];
+                current[target] = min(take, notTake);
+            }
+            dp = current;
+        }
+        return (dp[amount] == 1e9 ? -1 : dp[amount]);
     }
 };
