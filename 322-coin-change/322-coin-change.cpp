@@ -18,8 +18,6 @@ TC: exponential, SC: O(target)
 
 Approach 2: Using memoization (avoid repeated computation of the same problem) over recursion
 
-*/
-
 class Solution {
 private:
     int f(int index, int amount, vector<int>& coins, vector<vector<int>> &dp) {
@@ -40,5 +38,34 @@ public:
         vector<vector<int>> dp(n, vector<int>(amount + 1, -1));
         int ans = f(n - 1, amount, coins, dp);
         return ans < 1e9 ? ans : -1;
+    }
+};
+
+TC: O(n*amount), SC: O(n*amount + amount)
+
+Approach 3: Using tabulation
+
+
+
+*/
+
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        int n = coins.size();
+        vector<vector<int>> dp(n, vector<int>(amount + 1, 0));
+        for(int i = 0; i <= amount; ++i)
+            if(i % coins[0] == 0) dp[0][i] = i / coins[0];
+            else dp[0][i] = 1e9;
+        for(int index = 1; index < n; ++index) {
+            for(int target = 0; target <= amount; ++target) {
+                int take = 1e9;
+                int notTake = dp[index - 1][target];
+                if(coins[index] <= target)
+                    take = 1 + dp[index][target - coins[index]];
+                dp[index][target] = min(take, notTake);
+            }
+        }
+        return (dp[n - 1][amount] == 1e9 ? -1 : dp[n - 1][amount]);
     }
 };
