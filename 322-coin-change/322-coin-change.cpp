@@ -39,6 +39,6 @@ public:
         int n = coins.size();
         vector<vector<int>> dp(n, vector<int>(amount + 1, -1));
         int ans = f(n - 1, amount, coins, dp);
-        return ans < 1e8 ? ans : -1;
+        return ans < 1e9 ? ans : -1;
     }
 };
