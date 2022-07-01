@@ -16,24 +16,22 @@ public:
     ///////////////////////////////////////////////////////////////////////
     // Time: O(N), Space: O(1)                                          ///
     ///////////////////////////////////////////////////////////////////////
-    long int integerBreak(int n) {
+    int integerBreak(int n) {
         // edge cases
-        if(n == 2 || n == 3) return n - 1;
-        long int ans = 1;
+        if(n == 2 | n == 3) return n - 1;
+        int ans = 1;
         if(n % 3 == 0) {
             for(int i = 0; i < n / 3; ++i)
                 ans *= 3;
-            return ans;
-        } 
-        else if(n % 3 == 2) {
-            for(int i = 0; i < n / 3; ++i)
-                ans *= 3;
-            return ans * 2;
-        } 
-        else {
+        } else if(n % 3 == 1) {
             for(int i = 0; i < n / 3 - 1; ++i)
                 ans *= 3;
-            return ans * 4; 
+            ans *= 4;
+        } else {
+             for(int i = 0; i < n / 3; ++i)
+                ans *= 3;
+            ans *= 2;
         }
+        return ans;
     }
 };
