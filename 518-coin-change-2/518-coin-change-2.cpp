@@ -48,7 +48,6 @@ public:
 
 Approach 2: Tabulation - O(n*amount) TC & SC
 
-*/
 class Solution {
 public:
     int change(int amount, vector<int>& coins) {
@@ -68,5 +67,34 @@ public:
             }
         }
         return dp[n - 1][amount];
+    }
+};
+
+Approach 3: Using space optimization over tabulation - O(n*amount) TC & O(amount) SC
+
+
+
+*/
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        int n = coins.size();
+        vector<int> dp (amount + 1, 0);
+        // base case
+        for(int i = 0; i <= amount; ++i)
+            if(i % coins[0] == 0) 
+                dp[i] = 1;
+        for(int index = 1; index < n; ++index) {
+            vector<int> current (amount + 1, 0);
+            for(int target = 0; target <= amount; ++target) {
+                int take = 0;
+                int notTake = dp[target];
+                if(coins[index] <= target)
+                    take = current[target - coins[index]];
+                current[target] = take + notTake;
+            }
+            dp = current;
+        }
+        return dp[amount];
     }
 };
