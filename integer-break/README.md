@@ -1,3 +1,4 @@
+[Discussion Post (created on 2/6/2022 at 3:44)](https://leetcode.com/problems/integer-break/discuss/2224747/C%2B%2BJavaPython-Super-easy-maths-or-O(N-3)-time-and-O(1)-space)  
 <h2>343. Integer Break</h2><h3>Medium</h3><hr><div><p>Given an integer <code>n</code>, break it into the sum of <code>k</code> <strong>positive integers</strong>, where <code>k &gt;= 2</code>, and maximize the product of those integers.</p>
 
 <p>Return <em>the maximum product you can get</em>.</p>
