@@ -49,11 +49,10 @@ public:
         for(int idx1 = 1; idx1 <= n1; ++idx1) {
             for(int idx2 = 1; idx2 <= n2; ++idx2) {
                 // match
-                if(text1[idx1 - 1] == text2[idx2 - 1]) {
+                if(text1[idx1 - 1] == text2[idx2 - 1]) 
                     dp[idx1][idx2] = 1 + dp[idx1 - 1][idx2 - 1];
-                    continue;
-                }
-                dp[idx1][idx2] = max(dp[idx1 - 1][idx2], dp[idx1][idx2 - 1]);
+                else 
+                    dp[idx1][idx2] = max(dp[idx1 - 1][idx2], dp[idx1][idx2 - 1]);
             }
         }
         return dp[n1][n2];
