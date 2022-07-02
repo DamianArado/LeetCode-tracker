@@ -1,17 +1,38 @@
+/**
+
+Recurrence: 
+
+index1 and index2 both start at str1.length - 1 and str2.length - 1 respectively
+
+f(index1, index2):
+    if index1 == -1 or index2 == -1 :
+        return 0
+    if str1[index1] == str2[index2] : 
+        return 1 + f(index1 - 1, index2 - 1)
+    return max(f(index1 - 1, index2), f(index1, index2 - 1))
+    
+TC: O(2^n1 * 2^n2), SC: (n1 + n2)
+
+*/
 class Solution {
+private:
+    int f(int index1, int index2, string &text1, string &text2, vector<vector<int>> &dp) {
+        // base case
+        if(index1 == -1 or index2 == -1) return 0;
+        // check if its already computed
+        if(dp[index1][index2] != -1)
+            return dp[index1][index2];
+        // matched
+        if(text1[index1] == text2[index2])
+            return dp[index1][index2] = 1 + f(index1 - 1, index2 - 1, text1, text2, dp);
+        // not matched
+        return dp[index1][index2] = max(f(index1 - 1, index2, text1, text2, dp), 
+                                        f(index1, index2 - 1, text1, text2, dp));
+    }
 public:
     int longestCommonSubsequence(string text1, string text2) {
-        // We are considering that text1 > text2 for storing size of min(text1, text2) + 1 in columns 
-        // and size of rows as 2 only since we look upto only 1 row above
-        if(text2.size() > text1.size()) return longestCommonSubsequence(text2, text1);
-        // a table of [2][(min(text1, text2))]
-        vector<vector<int>> m (2, vector<int> (text2.size() + 1));
-        for(auto i = 1; i <= text1.size(); ++i) {
-            for(auto j = 1; j <= text2.size(); ++j) {
-                if(text1[i - 1] == text2[j - 1]) m[i % 2][j] = m[(i - 1) % 2][j - 1] + 1;
-                else m[i % 2][j] = max(m[(i - 1) % 2][j], m[i % 2][j - 1]);
-            }
-        }
-        return m[text1.size() % 2][text2.size()];
+        int n1 = text1.size(), n2 = text2.size();
+        vector<vector<int>> dp(n1, vector<int>(n2, -1));
+        return f(n1 - 1, n2 - 1, text1, text2, dp);
     }
 };
