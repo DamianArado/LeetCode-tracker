@@ -62,7 +62,7 @@ public:
 
 Approach 3: Using space optimization over tabulation
 
-TC: O(n1 * n2), SC: O(max(n1, n2))
+TC: O(n1 * n2), SC: O(n2)
 
 */
 class Solution {
