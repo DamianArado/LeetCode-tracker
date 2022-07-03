@@ -1,3 +1,4 @@
+// O(n^2) TC and O(n) SC
 class Solution {
 private:
     int findLCS(string &text1, string &text2) {
