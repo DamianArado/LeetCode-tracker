@@ -31,11 +31,12 @@ public:
     }
 };
 
+Approach 2: Space optimization over tabulation -
+
 */
 class Solution {
 public:
-    // Using the logic of Longest common substring
-    // TC & SC: O(mn)
+    // TC: O(mn), SC: O(n)
     int findLength(vector<int>& nums1, vector<int>& nums2) {
         int m = nums1.size(), n = nums2.size(), ans = 0;
         vector<int> dp (n + 1, 0);
