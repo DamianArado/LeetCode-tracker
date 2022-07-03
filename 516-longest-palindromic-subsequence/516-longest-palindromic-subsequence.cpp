@@ -2,9 +2,9 @@
 class Solution {
 private:
     int findLCS(string &s1, string &s2) {
-        int m = s1.size(), n = s2.size();
+        int n = s1.size();
         vector<int> dp(n + 1, 0);
-        for(int i = 1; i <= m; ++i) {
+        for(int i = 1; i <= n; ++i) {
             vector<int> current(n + 1, 0);
             for(int j = 1; j <= n; ++j) {
                 // match
