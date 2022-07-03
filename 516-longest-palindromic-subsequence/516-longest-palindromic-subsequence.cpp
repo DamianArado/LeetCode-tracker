@@ -1,3 +1,4 @@
+// TC: O(n^2), SC: O(n)
 class Solution {
 private:
     int findLCS(string &s1, string &s2) {
