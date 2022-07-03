@@ -3,16 +3,13 @@ class Solution(object):
         if n == 2 or n == 3:
             return n - 1
         ans = 1
-        if n % 3 == 0:
-            for i in range(n / 3):
-                ans *= 3
-        elif n % 3 == 1:
-            for i in range(n / 3 - 1):
-                ans *= 3;
-            ans *= 4
+        remainder = n % 3
+        quotient = n / 3
+        if remainder == 0:
+            ans = pow(3, quotient)
+        elif remainder == 1:
+            ans = 4 * pow(3, quotient - 1)
         else:
-            for i in range(n / 3):
-                ans *= 3;
-            ans *= 2
+            ans = 2 * pow(3, quotient)
         return ans
         
