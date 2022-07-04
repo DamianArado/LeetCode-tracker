@@ -59,6 +59,8 @@ public:
     }
 };
 
+Approach 3: Space optimization over tabulation - O(n1.n2) TC & O(n2) SC
+
 */
 class Solution {
 public:
@@ -69,6 +71,7 @@ public:
         dp[0] = 1;
         for(int idx1 = 1; idx1 <= n1; ++idx1) {
             vector<int> current (n2 + 1, 0);
+            // V IMP
             current[0] = 1;
             for(int idx2 = 1; idx2 <= n2; ++idx2) {
                 int take = dp[idx2 - 1];
