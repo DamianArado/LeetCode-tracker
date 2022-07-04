@@ -37,6 +37,28 @@ public:
 
 Approach 2: Using tabulation (bottom - up) - O(n1.n2) TC & SC
 
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int prime = 1e9 + 7;
+        int n1 = s.size(), n2 = t.size();
+        vector<vector<int>> dp(n1 + 1, vector<int> (n2 + 1, 0));
+        for(int idx1 = 0; idx1 <= n1; ++idx1)
+            dp[idx1][0] = 1;
+        for(int idx1 = 1; idx1 <= n1; ++idx1) {
+            for(int idx2 = 1; idx2 <= n2; ++idx2) {
+                int take = dp[idx1 - 1][idx2 - 1];
+                int notTake = dp[idx1 - 1][idx2];
+                if(s[idx1 - 1] == t[idx2 - 1])
+                    dp[idx1][idx2] = (take + notTake)  % prime;
+                else
+                    dp[idx1][idx2] = notTake;
+            }
+        }
+        return dp[n1][n2];
+    }
+};
+
 */
 class Solution {
 public:
@@ -46,10 +68,6 @@ public:
         vector<vector<int>> dp(n1 + 1, vector<int> (n2 + 1, 0));
         for(int idx1 = 0; idx1 <= n1; ++idx1)
             dp[idx1][0] = 1;
-        // as dp[0][0] should give you 1
-        for(int idx2 = 1; idx2 <= n2; ++idx2)
-            dp[0][idx2] = 0;
-        
         for(int idx1 = 1; idx1 <= n1; ++idx1) {
             for(int idx2 = 1; idx2 <= n2; ++idx2) {
                 int take = dp[idx1 - 1][idx2 - 1];
