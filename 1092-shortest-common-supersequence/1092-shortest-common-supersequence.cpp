@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // O(mn) TC & SC
     string shortestCommonSupersequence(string str1, string str2) {
         // we will be using LCS to find SCS
         int m = str1.size(), n = str2.size();
