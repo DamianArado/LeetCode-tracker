@@ -32,8 +32,6 @@ class Solution {
             scs += str2.charAt(col - 1);
             col--;
         }
-        
-        String ans = new StringBuilder(scs).reverse().toString();
-        return ans;
+        return new StringBuilder(scs).reverse().toString();
     }
 }
