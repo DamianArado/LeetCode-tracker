@@ -7,18 +7,18 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 
-<pre><strong>Input:</strong> s = "rabbbit", t = "rabbit"
+<pre style="position: relative;"><strong>Input:</strong> s = "rabbbit", t = "rabbit"
 <strong>Output:</strong> 3
 <strong>Explanation:</strong>
 As shown below, there are 3 ways you can generate "rabbit" from S.
 <code><strong><u>rabb</u></strong>b<strong><u>it</u></strong></code>
 <code><strong><u>ra</u></strong>b<strong><u>bbit</u></strong></code>
 <code><strong><u>rab</u></strong>b<strong><u>bit</u></strong></code>
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre><strong>Input:</strong> s = "babgbag", t = "bag"
+<pre style="position: relative;"><strong>Input:</strong> s = "babgbag", t = "bag"
 <strong>Output:</strong> 5
 <strong>Explanation:</strong>
 As shown below, there are 5 ways you can generate "bag" from S.
@@ -26,7 +26,7 @@ As shown below, there are 5 ways you can generate "bag" from S.
 <code><strong><u>ba</u></strong>bgba<strong><u>g</u></strong></code>
 <code><u><strong>b</strong></u>abgb<strong><u>ag</u></strong></code>
 <code>ba<u><strong>b</strong></u>gb<u><strong>ag</strong></u></code>
-<code>babg<strong><u>bag</u></strong></code></pre>
+<code>babg<strong><u>bag</u></strong></code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
