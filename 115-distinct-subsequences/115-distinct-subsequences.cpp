@@ -65,19 +65,21 @@ public:
     int numDistinct(string s, string t) {
         int prime = 1e9 + 7;
         int n1 = s.size(), n2 = t.size();
-        vector<vector<int>> dp(n1 + 1, vector<int> (n2 + 1, 0));
-        for(int idx1 = 0; idx1 <= n1; ++idx1)
-            dp[idx1][0] = 1;
+        vector<int> dp (n2 + 1, 0);
+        dp[0] = 1;
         for(int idx1 = 1; idx1 <= n1; ++idx1) {
+            vector<int> current (n2 + 1, 0);
+            current[0] = 1;
             for(int idx2 = 1; idx2 <= n2; ++idx2) {
-                int take = dp[idx1 - 1][idx2 - 1];
-                int notTake = dp[idx1 - 1][idx2];
+                int take = dp[idx2 - 1];
+                int notTake = dp[idx2];
                 if(s[idx1 - 1] == t[idx2 - 1])
-                    dp[idx1][idx2] = (take + notTake)  % prime;
+                    current[idx2] = (take + notTake)  % prime;
                 else
-                    dp[idx1][idx2] = notTake;
+                    current[idx2] = notTake;
             }
+            dp = current;
         }
-        return dp[n1][n2];
+        return dp[n2];
     }
 };
