@@ -69,8 +69,6 @@ public:
 
 Approach 3: Using tabulation bottom-up - O(n1.n2) TC & SC
 
-*/
-
 class Solution {
 public:
     bool isMatch(string s, string p) {
@@ -83,6 +81,7 @@ public:
         for(int idx2 = 1; idx2 <= n2; ++idx2) { // when s gets exhausted
             // there will only be a matching if we are sure that there will be only * left in p
             bool allAsterisk = true;
+            // don't start from 0 as cases like: s = "abc" & p = "*" returns false
             for(int i = 1; i <= idx2; ++i) {
                 if(p[i - 1] != '*') {
                     allAsterisk = false;
@@ -106,5 +105,48 @@ public:
             }
         }
         return dp[n1][n2];
+    }
+};
+
+Approach 4: Using space-optimization over tabulation - O(n1.n2) TC & O(n2) SC
+
+*/
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int n1 = s.size(), n2 = p.size();
+        vector<bool> dp (n2 + 1, false);
+        // base cases
+        dp[0] = true;  // when both s and p gets exhausted
+        for(int idx2 = 1; idx2 <= n2; ++idx2) { // when s gets exhausted
+            // there will only be a matching if we are sure that there will be only * left in p
+            bool allAsterisk = true;
+            // don't start from 0 as cases like: s = "abc" & p = "*" returns false
+            for(int i = 1; i <= idx2; ++i) {
+                if(p[i - 1] != '*') {
+                    allAsterisk = false;
+                    break;
+                }
+            }
+            dp[idx2] = allAsterisk;
+        }
+        for(int idx1 = 1; idx1 <= n1; ++idx1) {
+            vector<bool> current(n2 + 1, false);
+            for(int idx2 = 1; idx2 <= n2; ++idx2) {
+                // when we see a match or a '?'
+                if(s[idx1 - 1] == p[idx2 - 1] or p[idx2 - 1] == '?')
+                    current[idx2] = dp[idx2 - 1];
+                // when we see an asterisk
+                else if(p[idx2 - 1] == '*') {
+                    bool consider = dp[idx2];
+                    bool notConsider = current[idx2 - 1];
+                    current[idx2] = consider or notConsider;
+                }
+                else current[idx2] = false;
+            }
+            dp = current;
+        }
+        return dp[n2];
     }
 };
