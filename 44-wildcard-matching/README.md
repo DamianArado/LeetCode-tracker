@@ -10,24 +10,24 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> s = "aa", p = "a"
+<pre><strong>Input:</strong> s = "aa", p = "a"
 <strong>Output:</strong> false
 <strong>Explanation:</strong> "a" does not match the entire string "aa".
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> s = "aa", p = "*"
+<pre><strong>Input:</strong> s = "aa", p = "*"
 <strong>Output:</strong> true
 <strong>Explanation:</strong>&nbsp;'*' matches any sequence.
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong>Example 3:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> s = "cb", p = "?a"
+<pre><strong>Input:</strong> s = "cb", p = "?a"
 <strong>Output:</strong> false
 <strong>Explanation:</strong>&nbsp;'?' matches 'c', but the second letter is 'a', which does not match 'b'.
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
