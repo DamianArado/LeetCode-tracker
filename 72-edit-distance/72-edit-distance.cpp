@@ -101,7 +101,8 @@ public:
         // start building our dp table
         for(int idx1 = 1; idx1 <= n1; ++idx1) {
             vector<int> current (n2 + 1, 0);
-            current[0] = dp[0] + 1;
+            // (1, 0) means min steps to convert a to "" which = 1 ((0,0) + 1)
+            current[0] = idx1;
             for(int idx2 = 1; idx2 <= n2; ++idx2) {
                 if(word1[idx1 - 1] == word2[idx2 - 1])
                     current[idx2] = dp[idx2 - 1];
