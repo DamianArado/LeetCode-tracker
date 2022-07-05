@@ -55,9 +55,6 @@ public:
 
 Approach 3: Using Tabulation bottom up - O(n1.n2) TC & SC
 
-
-
-*/
 class Solution {
 public:
     int minDistance(string word1, string word2) {
@@ -65,10 +62,10 @@ public:
         // 1-based indexing
         vector<vector<int>> dp(n1 + 1, vector<int> (n2 + 1, 0));
         // base cases
-        for(int idx2 = 1; idx2 <= n2; ++idx2)
+        for(int idx2 = 0; idx2 <= n2; ++idx2)
             // min steps reqd to convert "" -> hum is 3 and not 4
             dp[0][idx2] = idx2; 
-        for(int idx1 = 1; idx1 <= n1; ++idx1)
+        for(int idx1 = 0; idx1 <= n1; ++idx1)
             // min steps reqd to convert hum -> "" is 3 and not 4
             dp[idx1][0] = idx1;
         // start building our dp table
@@ -85,5 +82,38 @@ public:
             }
         }
         return dp[n1][n2];
+    }
+};
+
+Approach 4: Space optimization over tabulation - O(n1.n2) TC & O(n2) SC
+
+*/
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int n1 = word1.size(), n2 = word2.size();
+        // 1-based indexing
+        vector<int> dp (n2 + 1, 0);
+        // base cases
+        for(int idx2 = 0; idx2 <= n2; ++idx2)
+            // min steps reqd to convert "" -> hum is 3 and not 4
+            dp[idx2] = idx2; 
+        // start building our dp table
+        for(int idx1 = 1; idx1 <= n1; ++idx1) {
+            vector<int> current (n2 + 1, 0);
+            current[0] = dp[0] + 1;
+            for(int idx2 = 1; idx2 <= n2; ++idx2) {
+                if(word1[idx1 - 1] == word2[idx2 - 1])
+                    current[idx2] = dp[idx2 - 1];
+                else {
+                    int insertion = current[idx2 - 1];
+                    int deletion = dp[idx2];
+                    int replacement = dp[idx2 - 1];
+                    current[idx2] = 1 + min(insertion, min(deletion, replacement));
+                }
+            }
+            dp = current;
+        }
+        return dp[n2];
     }
 };
