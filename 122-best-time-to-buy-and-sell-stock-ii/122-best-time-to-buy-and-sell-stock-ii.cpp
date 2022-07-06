@@ -49,17 +49,21 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n = prices.size();
-        vector<vector<int>> dp(n + 1, vector<int> (2, 0));
+        vector<int> dp (2, 0);
         for(int index = n - 1; index >= 0; --index) {
+            vector<int> current (2, 0);
             for(int canBuy = 1; canBuy >= 0; --canBuy) {
                 int profit = 0;
                 if(canBuy)
-                    profit = max(-prices[index] + dp[index + 1][0], 0 + dp[index + 1][1]);
+                    // max (buy a stock today, didn't buy a stock today)
+                    profit = max(-prices[index] + dp[0], 0 + dp[1]);
                 else
-                    profit = max(prices[index] + dp[index + 1][1], 0 + dp[index + 1][0]);
-                dp[index][canBuy] = profit;
+                    // max (sell a stock today, didn't sell a stock today)
+                    profit = max(prices[index] + dp[1], 0 + dp[0]);
+                current[canBuy] = profit;
             }
+            dp = current;
         }
-        return dp[0][1];
+        return dp[1];
     }
 };
