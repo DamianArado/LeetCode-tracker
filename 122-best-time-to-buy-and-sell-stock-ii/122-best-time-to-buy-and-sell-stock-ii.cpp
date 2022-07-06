@@ -21,10 +21,6 @@ public:
 
 Approach 2: Using memoization over recursion - O(n*2) TC & O(n*2 + n) SC
 
-
-
-*/
-
 class Solution {
 private:
     int f(int index, int canBuy, vector<int>& prices, int n, vector<vector<int>> &dp) {
@@ -32,8 +28,10 @@ private:
         if(dp[index][canBuy] != -1) return dp[index][canBuy];
         int profit = 0;
         if(canBuy) 
+            // max (buy a stock today, didn't buy a stock today)
             profit = max(-prices[index] + f(index + 1, 0, prices, n, dp), 0 + f(index + 1, 1, prices, n, dp));
         else
+            // max (sell a stock today, didn't sell a stock today)
             profit = max(0 + f(index + 1, 0, prices, n, dp), prices[index] + f(index + 1, 1, prices, n, dp));
         return dp[index][canBuy] = profit;
     }
@@ -42,5 +40,26 @@ public:
         int n = prices.size();
         vector<vector<int>> dp(n, vector<int> (2, -1));
         return f(0, 1, prices, n, dp);    
+    }
+};
+
+*/
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        vector<vector<int>> dp(n + 1, vector<int> (2, 0));
+        for(int index = n - 1; index >= 0; --index) {
+            for(int canBuy = 1; canBuy >= 0; --canBuy) {
+                int profit = 0;
+                if(canBuy)
+                    profit = max(-prices[index] + dp[index + 1][0], 0 + dp[index + 1][1]);
+                else
+                    profit = max(prices[index] + dp[index + 1][1], 0 + dp[index + 1][0]);
+                dp[index][canBuy] = profit;
+            }
+        }
+        return dp[0][1];
     }
 };
