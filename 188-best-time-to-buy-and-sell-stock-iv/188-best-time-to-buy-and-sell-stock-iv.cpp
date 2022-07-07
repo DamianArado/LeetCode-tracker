@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // TC -> O(n*2*k) = O(nk)
+    // SC -> O(2*k) = O(k)
     int maxProfit(int k, vector<int>& prices) {
         vector<vector<int>> dp(2, vector<int> (k + 1, 0));
         for(int index = prices.size() - 1; index >= 0; --index) {
