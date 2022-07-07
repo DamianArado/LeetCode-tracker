@@ -52,7 +52,8 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n = prices.size();
-        vector<vector<vector<int>>> dp(n + 1, vector<vector<int>> (2, vector<int> (3, 0)));
+        int dp[n + 1][2][3];
+        memset(dp, 0, sizeof(dp));
         for(int index = n - 1; index >= 0; --index) {
             for(int canBuy = 1; canBuy >= 0; --canBuy) {
                 // limit goes from 2 -> 1 and not 0 due to [limit - 1] index
