@@ -52,21 +52,23 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n = prices.size();
-        int dp[n + 1][2][3];
+        int dp[2][3], current[2][3];
         memset(dp, 0, sizeof(dp));
+        memset(current, 0, sizeof(current));
         for(int index = n - 1; index >= 0; --index) {
             for(int canBuy = 1; canBuy >= 0; --canBuy) {
                 // limit goes from 2 -> 1 and not 0 due to [limit - 1] index
                 for(int limit = 2; limit >= 1; --limit) {
                     int profit = 0;
                     if(canBuy)
-                        profit = max(-prices[index] + dp[index + 1][0][limit], 0 + dp[index + 1][1][limit]);
+                        profit = max(-prices[index] + dp[0][limit], 0 + dp[1][limit]);
                     else 
-                        profit = max(prices[index] + dp[index + 1][1][limit - 1], 0 + dp[index + 1][0][limit]);
-                    dp[index][canBuy][limit] = profit;
+                        profit = max(prices[index] + dp[1][limit - 1], 0 + dp[0][limit]);
+                    current[canBuy][limit] = profit;
                 }
             }
+            swap(dp, current);
         }
-        return dp[0][1][2];
+        return dp[1][2];
     }
 };
