@@ -86,10 +86,6 @@ public:
 
 Approach 4: Another approach based on tabulation - O(n^2) TC & O(n) SC
 
-
-
-*/
-
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
@@ -103,6 +99,63 @@ public:
             }
             maxLIS = max(maxLIS, dp[index]);
         }
+        return maxLIS;
+    }
+};
+
+Approach 5: Using binary search on dummy lis array
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size(), maxLIS = 1;
+        vector<int> dummy;
+        // min LIS length = 1 obviously
+        dummy.push_back(nums[0]);
+        // one pass :O
+        for(int i = 0; i < n; ++i) {
+            // if its greater than the value at the last index of dummy
+            if(nums[i] > dummy.back()) {
+                dummy.push_back(nums[i]);
+                // add this to our LIS count
+                maxLIS++;
+            } else {
+                // find where we can add it
+                // we want to find the index where nums[i] exists and if not the first element greater than 
+                // nums[i] in dummy using binary search
+                int idx = lower_bound(dummy.begin(), dummy.end(), nums[i]) - dummy.begin();
+                dummy[idx] = nums[i];
+            }
+        }
+        // printing dummy may not give you the correct LIS order but its length = maxLISLength
+        return maxLIS;
+    }
+};
+
+*/
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size(), maxLIS = 1;
+        vector<int> dummy;
+        // min LIS length = 1 obviously
+        dummy.push_back(nums[0]);
+        // one pass :O
+        for(int i = 0; i < n; ++i) {
+            // if its greater than the value at the last index of dummy
+            if(nums[i] > dummy.back()) {
+                dummy.push_back(nums[i]);
+                // add this to our LIS count
+                maxLIS++;
+            } else {
+                // find where we can add it
+                // we want to find the index where nums[i] exists and if not the first element greater than 
+                // nums[i] in dummy using binary search
+                int idx = lower_bound(dummy.begin(), dummy.end(), nums[i]) - dummy.begin();
+                dummy[idx] = nums[i];
+            }
+        }
+        // printing dummy may not give you the correct LIS order but its length = maxLISLength
         return maxLIS;
     }
 };
