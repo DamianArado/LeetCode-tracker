@@ -28,9 +28,11 @@ class Solution {
 private:
     int f(int index, int previous, int n, vector<int>& nums, vector<vector<int>> &dp) {
         if(index == n) return 0;
+        // since we explicitly cannot access array index -1
+        // previous is stored at [0...n - 1] instead of [-1...n - 2]
         if(dp[index][previous + 1] != -1) return dp[index][previous + 1];
         int take = 0, notTake = 0;
-        if(previous + 1 == 0 or nums[previous] < nums[index])
+        if(previous == -1 or nums[previous] < nums[index])
             take = 1 + f(index + 1, index, n, nums, dp);
         notTake = f(index + 1, previous, n, nums, dp);
         return dp[index][previous + 1] = max(take, notTake);
