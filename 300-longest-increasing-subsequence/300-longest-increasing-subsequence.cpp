@@ -44,8 +44,6 @@ public:
 
 Approach 3: Using tabulation - O(n^2) TC & SC
 
-*/
-
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
@@ -61,5 +59,29 @@ public:
             }
         }
         return dp[0][0];
+    }
+};
+
+Approach 3: Using space optimization over tabulation - O(n^2) TC & O(n) SC
+
+*/
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> current(n + 1, 0);
+        for(int index = n - 1; index >= 0; --index) {
+            vector<int> next(n + 1, 0);
+            for(int previous = index - 1; previous >= -1; --previous) {
+                int take = 0, notTake = 0;
+                if(previous == -1 or nums[previous] < nums[index])
+                    take = 1 + current[(index) + 1];
+                notTake = current[previous + 1];
+                next[previous + 1] = max(take, notTake);
+            }
+            current = next;
+        }
+        return current[0];
     }
 };
