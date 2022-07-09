@@ -21,9 +21,6 @@ public:
 
 Approach 2: Using memoization over recurrence - O(n^2) TC & SC of O(n^2 + n)
 
-
-*/
-
 class Solution {
 private:
     int f(int index, int previous, int n, vector<int>& nums, vector<vector<int>> &dp) {
@@ -42,5 +39,27 @@ public:
         int n = nums.size();
         vector<vector<int>> dp(n, vector<int> (n, -1));
         return f(0, -1, n, nums, dp);
+    }
+};
+
+Approach 3: Using tabulation - O(n^2) TC & SC
+
+*/
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>> dp(n + 1, vector<int> (n + 1, 0));
+        for(int index = n - 1; index >= 0; --index) {
+            for(int previous = index - 1; previous >= -1; --previous) {
+                int take = 0, notTake = 0;
+                if(previous == -1 or nums[previous] < nums[index])
+                    take = 1 + dp[index + 1][(index) + 1];
+                notTake = dp[index + 1][previous + 1];
+                dp[index][previous + 1] = max(take, notTake);
+            }
+        }
+        return dp[0][0];
     }
 };
