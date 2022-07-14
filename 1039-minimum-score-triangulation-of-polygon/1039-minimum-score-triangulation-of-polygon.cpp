@@ -25,13 +25,7 @@ public:
     }
 };
 
-Approach 2: Using memoization - O(N^3) TC & O(N^2) SC
-
-
-
-
-*/
-
+Approach 2: Using memoization - O(N^3) TC & O(N^2 + N) SC
 
 class Solution {
 private:
@@ -53,5 +47,29 @@ public:
         int n = values.size();
         vector<vector<int>> dp(n, vector<int> (n, -1));
         return f(1, n - 1, values, dp);
+    }
+};
+
+Approach 3: Using bottom-up Tabulation: O(N^3) TC & O(N^2) SC
+
+*/
+
+
+class Solution {
+public:
+    int minScoreTriangulation(vector<int>& values) {
+        int n = values.size();
+        vector<vector<int>> dp(n, vector<int> (n, 0));
+        for(int i = n - 1; i >= 1; --i) {
+            for(int j = i + 1; j < n; ++j) {
+                int minOperations = 1e9;
+                for(int k = i; k < j; ++k) {
+                    int steps = (values[i - 1] * values[k] * values[j]) + dp[i][k] + dp[k + 1][j];
+                    minOperations = min(minOperations, steps);
+                }
+                dp[i][j] = minOperations;
+            }
+        }
+        return dp[1][n - 1];
     }
 };
