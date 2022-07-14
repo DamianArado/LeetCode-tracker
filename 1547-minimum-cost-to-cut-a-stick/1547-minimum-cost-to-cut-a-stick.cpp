@@ -49,7 +49,7 @@ public:
     }
 };
 
-Approach 3: Tabulation based - O(c^2) TC & SC
+Approach 3: Tabulation based - O(c^3) TC & O(c^2) SC
 */
 
 class Solution {
