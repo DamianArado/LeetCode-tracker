@@ -31,9 +31,6 @@ public:
 
 Approach 2: Using memoization - O(n^3) TC & O(n^2 + n) SC
 
-
-*/
-
 class Solution {
 private:
     int recursion(int i, int j, vector<int> &nums, vector<vector<int>> &dp) {
@@ -60,5 +57,35 @@ public:
         // this will help us in partitioning as the subproblems will be independent of each other
         vector<vector<int>> dp(n + 1, vector<int> (n + 1, -1));
         return recursion(1, n, nums, dp);
+    }
+};
+
+Approach 3: Tabulation - O(n^3) TC & O(n^2) SC
+
+
+
+
+*/
+
+class Solution {
+public:
+    int maxCoins(vector<int>& nums) {
+        int n = nums.size();
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        vector<vector<int>> dp(n + 2, vector<int> (n + 2, 0));
+        
+        for(int i = n; i >= 1; --i) {
+            for(int j = 1; j <= n; ++j) {
+                if(i > j) continue;
+                int maxCoins = 0;
+                for(int idx = i; idx <= j; ++idx) {
+                    int coins = (nums[i - 1] * nums[idx] * nums[j + 1]) + dp[i][idx - 1] + dp[idx + 1][j];
+                    maxCoins = max(maxCoins, coins);
+                }
+                dp[i][j] = maxCoins;
+            }
+        }
+        return dp[1][n];
     }
 };
