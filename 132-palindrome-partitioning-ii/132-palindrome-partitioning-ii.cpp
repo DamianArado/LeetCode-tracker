@@ -30,9 +30,7 @@ public:
     }
 };
 
-Approach 2: Memoization - O(n^3) TC & O(n) SC
-
-*/
+Approach 2: Memoization - O(n^3) TC & O(2n) SC
 
 class Solution {
 private:
@@ -61,5 +59,36 @@ public:
         vector<int> dp(n, -1);
         // due to a partition done at index n
         return f(0, n, s, dp) - 1;
+    }
+};
+
+Approach 3: Using tabulation - O(n^3) TC & O(n) SC
+
+*/
+
+class Solution {
+private:
+    bool isPalindrome(int i, int j, string &s) {
+        while(i < j)
+            if(s[i++] != s[j--]) return false;
+        return true;
+    }
+public:
+    int minCut(string s) {
+        int n = s.size();
+        vector<int> dp(n + 1, 0);
+        
+        for(int start = n - 1; start >= 0; --start) {
+            int minCuts = INT_MAX;
+            for(int end = start; end < n; ++end) {
+                if(isPalindrome(start, end, s)) {
+                    int cuts = 1 + dp[end + 1];
+                    minCuts = min(minCuts, cuts);
+                }
+            }
+            dp[start] = minCuts;
+        }
+        // due to a partition done at index n
+        return dp[0] - 1;
     }
 };
