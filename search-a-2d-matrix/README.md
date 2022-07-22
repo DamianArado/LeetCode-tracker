@@ -1,3 +1,4 @@
+[Discussion Post (created on 22/6/2022 at 17:16)](https://leetcode.com/problems/search-a-2d-matrix/discuss/2317443/C%2B%2B-or-Java-or-Python-Very-easy-or-Intuitive-approach-or-O(m%2Bn)-to-O(log(mn)))  
 <h2>74. Search a 2D Matrix</h2><h3>Medium</h3><hr><div><p>Write an efficient algorithm that searches for a value in an <code>m x n</code> matrix. This matrix has the following properties:</p>
 
 <ul>
