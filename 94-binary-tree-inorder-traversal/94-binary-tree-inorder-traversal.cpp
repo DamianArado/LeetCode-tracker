@@ -9,45 +9,62 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-// Morris Traversal - O(n) time and O(1) space
-/*
 
-Approach - 
+/**
 
-Starting the inorder traversal, we know that we have to go to the left node first. Before moving to the
-left of the current node, check whether the left exists or not and if it does not exist that means you are 
-at the root of the current subtree, so print it and move towards the right.
+Approach 1: Using recursion - O(n) TC & O(height) SC
 
-If the left of current node exists, before going towards left mark the current node's left as `prev` and then
-go towards the rightmost node of `prev`. Then, check whether its null or not. If its null take the right 
-pointer of this and point it to the current node (so that you can return back to the root of the current node's
-subtree from the left). 
+class Solution {
+private:
+    vector<int> ans;
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        if(!root) return ans;
+        inorderTraversal(root->left);
+        ans.push_back(root->val);
+        inorderTraversal(root->right);
+        return ans;
+    }
+};
 
-If its not null, mark it to null and go to the current node and print it.Since, you came back to the root of 
-the current subtree, and you have already printed it, you can move towards the right and continue the inorder traversal.
+Approach 2: Using Morris Traversal - approx. O(n) TC & O(1) SC
 
 */
+
+
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> inorder;
         if(!root) return inorder;
-        TreeNode *current = root;
+        TreeNode* current = root;
         while(current) {
-            if(!current->left) {
-                inorder.emplace_back(current->val);
-                current = current->right;
-            } else {
-                TreeNode* prev = current->left;
-                while(prev->right && prev->right != current) prev = prev->right;
-                if(!prev->right) {
-                    prev->right = current;
+            // check if there exists a left subtree to the current node
+            if(current->left) {
+                // use a marker for this left subtree
+                TreeNode* leftSubTree = current->left;
+                // keep iterating towards the rightmost node of the left subtree
+                while(leftSubTree->right and leftSubTree->right != current)
+                    leftSubTree = leftSubTree->right;
+                // check if this node has any pre exisiting threads, if not attach one for tracking back to current node
+                if(!leftSubTree->right) {
+                    leftSubTree->right = current;
+                    // you installed the tracker so now you can move current to its left
                     current = current->left;
                 } else {
-                    prev->right = NULL;
-                    inorder.emplace_back(current->val);
+                    // there already existed a thread that means you are coming here for the second time
+                    // you are moved from left subtree to the current node using this thread so remove it now
+                    leftSubTree->right = nullptr;
+                    // since you already visited the left subtree so now you visit the current node
+                    inorder.push_back(current->val);
+                    // then you move towards the right subtree
                     current = current->right;
                 }
+            } else {
+                // its already the leftmost node of this subtree rooted at current (you're visiting the left subtree)
+                inorder.push_back(current->val);
+                // move current to its right to visit the right subtree (using the thread we created earlier)
+                current = current->right;
             }
         }
         return inorder;
