@@ -9,34 +9,54 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+
+/**
+
+Approach 1 - O(n) Tc & O(height) SC
+
+class Solution {
+private:
+    vector<int> postorder;
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        if(!root) return postorder;
+        postorderTraversal(root->left);
+        postorderTraversal(root->right);
+        postorder.push_back(root->val);
+        return postorder;
+    }
+};
+
+Approach 2 - Morris traversal
+
+*/
+
 class Solution {
 public:
-    // Using 1 stack - O(2*N) TC & O(N) SC
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> postorder;
         if(!root) return postorder;
-        stack<TreeNode*> s;
-        TreeNode *temp = root, *curr = root;
-        while(curr || !s.empty()) {
-            if(curr) {
-                s.emplace(curr);  // add all the elements to the left
-                curr = curr->left;
-            } else {
-                temp = s.top()->right;  // no left elements, temp = right one
-                if(!temp) {
-                    temp = s.top();
-                    s.pop();
-                    postorder.emplace_back(temp->val);
-                    while(!s.empty() && temp == s.top()->right) {
-                        temp = s.top();
-                        s.pop();
-                        postorder.emplace_back(temp->val);
-                    }
+        TreeNode* current = root;
+        while(current) {
+            if(current->right) {
+                TreeNode* rightSubTree = current->right;
+                while(rightSubTree->left and rightSubTree->left != current)
+                    rightSubTree = rightSubTree->left;
+                if(!rightSubTree->left) {
+                    postorder.push_back(current->val);
+                    rightSubTree->left = current;
+                    current = current->right;
                 } else {
-                    curr = temp;
+                    rightSubTree->left = nullptr;
+                    current = current->left;
                 }
+            } else {
+                postorder.push_back(current->val);
+                current = current->left;
             }
         }
+        reverse(postorder.begin(), postorder.end());
         return postorder;
     }
 };
