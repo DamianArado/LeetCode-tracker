@@ -7,25 +7,25 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 
-<pre><strong>Input:</strong> s = "ADOBECODEBANC", t = "ABC"
+<pre style="position: relative;"><strong>Input:</strong> s = "ADOBECODEBANC", t = "ABC"
 <strong>Output:</strong> "BANC"
 <strong>Explanation:</strong> The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre><strong>Input:</strong> s = "a", t = "a"
+<pre style="position: relative;"><strong>Input:</strong> s = "a", t = "a"
 <strong>Output:</strong> "a"
 <strong>Explanation:</strong> The entire string s is the minimum window.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong>Example 3:</strong></p>
 
-<pre><strong>Input:</strong> s = "a", t = "aa"
+<pre style="position: relative;"><strong>Input:</strong> s = "a", t = "aa"
 <strong>Output:</strong> ""
 <strong>Explanation:</strong> Both 'a's from t must be included in the window.
 Since the largest window of s only has one 'a', return empty string.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
