@@ -9,28 +9,26 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+// TC & SC: O(n)
 class Solution {
-// O(n) TC & SC
 public:
-    vector<vector<int>> levelOrder(TreeNode *root) {
-      vector<vector<int>> result;
-      if (!root) return result;
-
-      queue<TreeNode *> q;
-      q.emplace(root);
-      while (!q.empty()) {
-          int n = q.size();
-          vector<int> crtLevel;
-          // insert elements level by level
-          for (int i = 0; i < n; i++) {
-              TreeNode *p = q.front();
-              q.pop();
-              crtLevel.emplace_back(p->val);
-              if (p->left) q.emplace(p->left);
-              if (p->right) q.emplace(p->right);
-          }
-          result.emplace_back(crtLevel);
-      }
-      return result;
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> levelOrder;
+        if(!root) return levelOrder;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()) {
+            int n = q.size();
+            vector<int> level;
+            for(int i = 0; i < n; ++i) {
+                TreeNode* current = q.front();
+                q.pop();
+                level.push_back(current->val);
+                if(current->left) q.push(current->left);
+                if(current->right) q.push(current->right);
+            }
+            levelOrder.push_back(level);
+        }
+        return levelOrder;
     }
 };
