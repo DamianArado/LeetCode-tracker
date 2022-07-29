@@ -3,21 +3,21 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2020/09/15/inorder_1.jpg" style="width: 125px; height: 200px;">
-<pre style="position: relative;"><strong>Input:</strong> root = [1,null,2,3]
+<pre><strong>Input:</strong> root = [1,null,2,3]
 <strong>Output:</strong> [1,3,2]
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> root = []
+<pre><strong>Input:</strong> root = []
 <strong>Output:</strong> []
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong>Example 3:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> root = [1]
+<pre><strong>Input:</strong> root = [1]
 <strong>Output:</strong> [1]
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
