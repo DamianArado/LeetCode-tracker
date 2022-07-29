@@ -1,43 +1,30 @@
-/*
-Initialize a vector called remaining, which contains the needed
-matching numbers of each character in s.
-If there are still
-characters needed to be contained (increment i in this case),
-decrease the matching number of that character and check if it is
-still non-negative. If it is, then it is the character in t, so
-decrease the total required number required.
-If there is no more
-characters required (increment start in this case), record min
-and left if a smaller length is found. Recover the number of this
-character in the remaining and if it is a character in t
-increase required.
-*/
-
 class Solution {
 public:
     string minWindow(string s, string t) {
-        if (s.size() == 0 || t.size() == 0) return "";
-        vector<int> remaining(128, 0);
-        int required = t.size();
-        for (int i = 0; i < required; i++) remaining[t[i]]++;
-        // left is the start index of the min-length substring ever found
-        int min = INT_MAX, start = 0, left = 0, i = 0;
-        while(i <= s.size() && start < s.size()) {
-            if(required) {
-                if (i == s.size()) break;
-                remaining[s[i]]--;
-                if (remaining[s[i]] >= 0) required--;
-                i++;
-            } else {
-                if (i - start < min) {
-                    min = i -start;
-                    left = start;
+        int n = s.size(), i = 0, minLen = INT_MAX, start = 0;
+        unordered_map<char, int> freq;
+        for(char &c : t) freq[c]++;
+        int chars = freq.size();
+        for(int j = 0; j < n; ++j) {
+            if(freq.find(s[j]) != freq.end()) {
+                freq[s[j]]--;
+                if(freq[s[j]] == 0) chars--;
+            }
+            if(chars == 0) {
+                while(chars == 0) {
+                    int windowSize = j - i + 1;
+                    if(freq.find(s[i]) != freq.end()) {
+                        freq[s[i]]++;
+                        if(freq[s[i]] == 1) chars++;
+                        if(windowSize < minLen) {
+                            minLen = windowSize;
+                            start = i;
+                        }
+                    }
+                    i++;
                 }
-                remaining[s[start]]++;
-                if (remaining[s[start]] > 0) required++;
-                start++;
             }
         }
-        return min == INT_MAX ? "" : s.substr(left, min);
+        return minLen == INT_MAX ? "" : s.substr(start, minLen);
     }
 };
