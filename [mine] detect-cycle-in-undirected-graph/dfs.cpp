@@ -1,24 +1,27 @@
 // Time complexity: O(V+E)
 // Space complexity: O(V)
 
-bool isCycleDFS(int current, int previous, vector<int> adjList[], vector<bool> &visited) {
-	visited[current] = true;
-	for(auto adj : adjList[current]) {
-		if(!visited[adj] && dfs(adj, current, adjList, visited))
-			return true;
-		else if(adj != previous)
-			return true;
-	}
-	return false;
-}
-
-bool checkForCycle(vector<int> adjList[], int n) {
-	vector<bool> visited(n + 1, false);
-	for(int i = 1; i <= n; ++i) {
-		// tracking the parent node implicitly
-		if(!visited[i] && isCycleDFS(i, -1, adjList, visited)) {
-			return true;
-		}
-	}
-	return false;
-}
+class Solution {
+  private:
+    bool isCycleDFS(int current, int previous, vector<bool> &visited, vector<int> *adjList) {
+        visited[current] = true;
+        for(int adjNode : adjList[current]) {
+            if(!visited[adjNode]) {
+                if(isCycleDFS(adjNode, current, visited, adjList))
+                    return true;
+           } else if(adjNode != previous) 
+                return true;
+        }
+        return false;
+    }
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adjList[]) {
+        vector<bool> visited(V, false);
+        for(int i = 0; i < V; ++i) {
+            if(!visited[i] and isCycleDFS(i, -1, visited, adjList))
+                return true;
+        }
+        return false;
+    }
+};
