@@ -8,34 +8,41 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+/**
+
+Approach 1- Recursion: O(n) TC & SC
+
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        if(head == NULL) return NULL; // base-case
-        ListNode *dummy = new ListNode(-1, head);
-        ListNode *tail = dummy;
-        while(tail && tail->next) {
-            if(tail->next->val == val) {
-                ListNode *temp = tail->next;
-                tail->next = temp->next;
-                delete temp;
-            } else tail = tail->next;
-        }
-        return dummy->next;
-    }
-};
-
-// Recursive implementation : O(n) time and space
-/*
-    ListNode* removeElements(ListNode* head, int val) {
-        if(head == NULL) return NULL; // base-case
+        if(!head) return nullptr;
         head->next = removeElements(head->next, val);
         if(head->val == val) {
             ListNode *ans = head->next;
             delete head;
             return ans;
-        } else {
-            return head;
         }
+        return head;
     }
+};
+
+Approach 2- Iterative O(n) TC & O(1) SC
+
 */
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        if(!head) return nullptr;
+        ListNode* current = head;
+        ListNode *prev = new ListNode(-1, current);
+        ListNode *ans = prev;
+        while(current) {
+            if(current->val == val)
+                prev->next = current->next;
+            else 
+                prev = current;
+            current = current->next;
+        }
+        return ans->next;
+    }
+};
