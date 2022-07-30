@@ -20,23 +20,34 @@ public:
     }
 };
 
-**/
+Approach 3: Using tabulation - O(n) TC & SC
 
 class Solution {
 public:
     // tc - O(n), sc - O(1)
     int climbStairs(int n) {
-        if(n == 0 || n == 1) return 1;
+        vector<int> dp(n + 1, 0);
+        dp[0] = dp[1] = 1;
+        for(int i = 2; i <= n; ++i)
+            dp[i] = dp[i - 1] + dp[i - 2];
+        return dp[n];
+    }
+};
+
+Approach 4: Using space optimization over tabulation - O(n) TC & O(1) SC
+
+**/
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n == 0 or n == 1) return 1;
         int prev2 = 1, prev = 1;
-        // no. of ways to climb 2 stairs -> climb n stairs
-        //    prev2   prev   current
-        //      0      1        2
         for(int i = 2; i <= n; ++i) {
             int current = prev + prev2;
             prev2 = prev;
             prev = current;
         }
-        // prev is at n index now
         return prev;
     }
 };
