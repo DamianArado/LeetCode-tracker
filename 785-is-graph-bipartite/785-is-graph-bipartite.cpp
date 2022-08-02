@@ -3,16 +3,18 @@ class Solution {
 // Here we are using the fact that in a bipartite graph no 2 adjacent nodes will be colored with the same color (1 or 0 for example)
 // TC: O(V + E), SC: O(V)
 private:
-    bool checkIfBipartite(int current, vector<vector<int>> &graph, vector<int> &color) {
-        if(color[current] == -1)   // not colored yet
-            color[current] = 1;
-        for(auto it : graph[current]) {  // search the adjacent nodes
-            if(color[it] == -1) {  // not colored
-                color[it] = 1 - color[current];  // colored with the opposite color
-                if(!checkIfBipartite(it, graph, color))
-                    return false;   // if we found out in any branch the graph is not bipartite
-            } else if(color[it] == color[current])
-                return false;  // if we found the adjacent ones colored with the same color
+    bool isBipartiteDFS(int current, vector<vector<int>> &graph, vector<int> &color) {
+        // if it is not yet colored, color it with 1
+        if(color[current] == -1) color[current] = 1;
+        // check Bipartite condition among the adjacent nodes
+        for(int adjNode : graph[current]) {
+            // color the adjacent node with the opposite color if its not yet colored
+            if(color[adjNode] == -1) {
+                color[adjNode] = 1 - color[current];
+                // now check for the condition via DFS call
+                if(!isBipartiteDFS(adjNode, graph, color))
+                    return false;
+            } else if(color[adjNode] == color[current]) return false;
         }
         return true;
     }
@@ -21,7 +23,7 @@ public:
         int n = graph.size();
         vector<int> color(n, -1);
         for(int i = 0; i < n; ++i) {
-            if(!checkIfBipartite(i, graph, color))
+            if(color[i] == -1 and !isBipartiteDFS(i, graph, color))
                 return false;
         }
         return true;
