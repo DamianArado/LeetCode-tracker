@@ -14,15 +14,15 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2020/10/21/bi2.jpg" style="width: 222px; height: 222px;">
-<pre style="position: relative;"><strong>Input:</strong> graph = [[1,2,3],[0,2],[0,1,3],[0,2]]
+<pre><strong>Input:</strong> graph = [[1,2,3],[0,2],[0,1,3],[0,2]]
 <strong>Output:</strong> false
-<strong>Explanation:</strong> There is no way to partition the nodes into two independent sets such that every edge connects a node in one and a node in the other.<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+<strong>Explanation:</strong> There is no way to partition the nodes into two independent sets such that every edge connects a node in one and a node in the other.</pre>
 
 <p><strong>Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2020/10/21/bi1.jpg" style="width: 222px; height: 222px;">
-<pre style="position: relative;"><strong>Input:</strong> graph = [[1,3],[0,2],[1,3],[0,2]]
+<pre><strong>Input:</strong> graph = [[1,3],[0,2],[1,3],[0,2]]
 <strong>Output:</strong> true
-<strong>Explanation:</strong> We can partition the nodes into two sets: {0, 2} and {1, 3}.<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+<strong>Explanation:</strong> We can partition the nodes into two sets: {0, 2} and {1, 3}.</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
