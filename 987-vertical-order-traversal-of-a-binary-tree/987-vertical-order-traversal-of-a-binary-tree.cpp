@@ -9,32 +9,52 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-// TC -> O(N) [for going at each node] * O(log N) [for using multiset to keep values sorted]
-// SC -> O(N) [for using map and queue]
-// explanation: https://youtu.be/q_a6lpbKJdw?list=PLgUwDviBIf0q8Hkd7bK2Bpryj2xVJk8Vk
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        map<int, map<int, multiset<int>>> nodes; // map<vertical, map<level, multinodes>>
-        queue<pair<TreeNode*, pair<int, int>>> todo; // queue<TreeNode, pair<vertical, level>>
-        todo.push({root, {0, 0}});
-        while(!todo.empty()) {
-            auto p = todo.front();
-            todo.pop();
-            TreeNode *node = p.first;
-            int x = p.second.first, y = p.second.second;
-            nodes[x][y].insert(node->val);
-            if(node->left) todo.push({node->left, {x - 1, y + 1}}); // left child     
-            if(node->right) todo.push({node->right, {x + 1, y + 1}}); // right child
+        vector<vector<int>> verticalOrder;
+        if(!root) return verticalOrder;
+        /**
+        * We need 2 auxiliary data structures here: A Queue for doing the level order traversal 
+        * and a Map for storing the verticalNo and levelNo for each node traversed during BFS
+        
+        * Significance -
+        * Queue<Node, <Vertical, Level>>
+        * Map<Vertical, <Level, Sorted nodes in asc order in this level>>
+        
+        */
+        queue<pair<TreeNode*, pair<int, int>>> q;
+        map<int, map<int, multiset<int>>> nodes;
+        
+        // push the root node into the BFS queue - vertical = 0 & level = 0
+        q.push({root, {0, 0}});
+        
+        // BFS or Level order traversal
+        while(!q.empty()) {
+            // Add the element into our map
+            TreeNode* current = q.front().first;
+            int verticalNo = q.front().second.first;
+            int levelNo = q.front().second.second;
+            q.pop();
+            nodes[verticalNo][levelNo].insert(current->val);
+            
+            // Add elements in the queue
+            if(current->left)
+                q.push({current->left, {verticalNo - 1, levelNo + 1}});
+            if(current->right)
+                q.push({current->right, {verticalNo + 1, levelNo + 1}});
         }
-        vector<vector<int>> ans;
-        for(auto p : nodes) {
-            vector<int> col;
-            for(auto q : p.second) {
-                col.insert(col.end(), q.second.begin(), q.second.end()); // insert in sorted fashiom
-            }
-            ans.emplace_back(col);
+        
+        // Start adding the nodes into your answer: vertical-by-vertical
+        for(auto node : nodes) {
+            vector<int> vertical;
+            // Add the nodes in this vertical into the vertical order traversal
+            for(auto verticalNodes : node.second)
+                // v v imp - VERTICAL.END() 
+                vertical.insert(vertical.end(), verticalNodes.second.begin(), verticalNodes.second.end());
+            verticalOrder.push_back(vertical);
         }
-        return ans;
+        
+        return verticalOrder;
     }
 };
