@@ -13,10 +13,10 @@ private:
             else if(dfsCurrentVisit[it])
                 return true;
         }
-        // adding start vertex to answer
-        ans.push_back(start);
         // we will return from the current dfs call hence marking it as unvisited
         dfsCurrentVisit[start] = false;
+        // adding start vertex to answer
+        ans.push_back(start);
         return false;
     }
     
@@ -30,7 +30,7 @@ private:
         
         // constructing our adjacency list
         for(auto it : prerequisites) {
-            adjList[it[0]].push_back(it[1]);
+            adjList[it[1]].push_back(it[0]);
         }
         // checking all components for cycle
         for(int i = 0; i < numCourses; ++i) {
@@ -45,8 +45,10 @@ public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> ans;
         if(numCourses == 1) return {0};
-        if(canFinish(numCourses, prerequisites, ans))
+        if(canFinish(numCourses, prerequisites, ans)) {
+            reverse(ans.begin(), ans.end());
             return ans;
+        }
         return {};
     }
 };
