@@ -18,7 +18,7 @@ public:
     bool canCross(vector<int>& stones) {
         int n = stones.size();
         // dp[i][j] signifies whether you were able to reach stones[i] with a jump of size j
-        vector<vector<bool>> dp(n, vector<bool> (n + 1, false));
+        vector<vector<bool>> dp(n, vector<bool> (n));
         // since we can always reach the 1st stone with a jumpSize = 1
         dp[0][1] = true;
         
