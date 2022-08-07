@@ -4,19 +4,19 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<pre style="position: relative;"><strong>Input:</strong> nums = [3,2,3]
+<pre><strong>Input:</strong> nums = [3,2,3]
 <strong>Output:</strong> 3
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre><p><strong>Example 2:</strong></p>
-<pre style="position: relative;"><strong>Input:</strong> nums = [2,2,1,1,1,2,2]
+</pre><p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> nums = [2,2,1,1,1,2,2]
 <strong>Output:</strong> 2
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
 <ul>
 	<li><code>n == nums.length</code></li>
-	<li><code>1 &lt;= n &lt;= 5 * 10<sup style="">4</sup></code></li>
-	<li><code>-2<sup style="">31</sup> &lt;= nums[i] &lt;= 2<sup style="">31</sup> - 1</code></li>
+	<li><code>1 &lt;= n &lt;= 5 * 10<sup>4</sup></code></li>
+	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
 <p>&nbsp;</p>
