@@ -22,9 +22,9 @@
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
-<ul data-read-aloud-multi-block="true">
-	<li><code>1 &lt;= nums.length &lt;= 5 * 10<sup style="">4</sup></code></li>
-	<li><code>-10<sup style="">9</sup> &lt;= nums[i] &lt;= 10<sup style="">9</sup></code></li>
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 5 * 10<sup>4</sup></code></li>
+	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
 <p>&nbsp;</p>
