@@ -1,54 +1,40 @@
 class Solution {
 private:
-    bool checkCycle(int start, vector<int> adjList[], vector<bool> &visited, vector<bool> &dfsCurrentVisit, vector<int> &ans) {
-        // we visit the start vertex
-        visited[start] = dfsCurrentVisit[start] = true;
-        
-        // for all nodes in the adjacency list of start vertex
-        for(auto it : adjList[start]) {
-            // if its not visited and we found a cycle
-            if(!visited[it] && checkCycle(it, adjList, visited, dfsCurrentVisit, ans))
+    bool isCycleDFS(int start, vector<int> adjList[], vector<bool> &visited, 
+                    vector<bool> &dfsVisit, stack<int> &courseDFS) {
+        visited[start] = dfsVisit[start] = true;
+        for(int adjNode : adjList[start]) {
+            if(!visited[adjNode] and isCycleDFS(adjNode, adjList, visited, dfsVisit, courseDFS))
                 return true;
-            // if its visited in the current dfs call
-            else if(dfsCurrentVisit[it])
+            else if(dfsVisit[adjNode])
                 return true;
         }
-        // we will return from the current dfs call hence marking it as unvisited
-        dfsCurrentVisit[start] = false;
-        // adding start vertex to answer
-        ans.push_back(start);
+        dfsVisit[start] = false;
+        courseDFS.push(start);
         return false;
-    }
-    
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites, vector<int> &ans) {
-        // to label all vertices as visited or not
-        vector<bool> visited(numCourses, false);
-        // to label all vertices in the current dfs call as visited or not
-        vector<bool> dfsCurrentVisit(numCourses, false);
-        // array of vectors for adjacency list
-        vector<int> adjList[numCourses];
-        
-        // constructing our adjacency list
-        for(auto it : prerequisites) {
-            adjList[it[1]].push_back(it[0]);
-        }
-        // checking all components for cycle
-        for(int i = 0; i < numCourses; ++i) {
-            // if we found a cycle we can't finish all courses
-            if(!visited[i] && checkCycle(i, adjList, visited, dfsCurrentVisit, ans))
-                return false;
-        }
-        // no cycle so we have an answer
-        return true;
     }
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<int> ans;
-        if(numCourses == 1) return {0};
-        if(canFinish(numCourses, prerequisites, ans)) {
-            reverse(ans.begin(), ans.end());
-            return ans;
+        // lets first create our graph using adjacency list representation
+        vector<int> adjList[numCourses];
+        for(auto prereq : prerequisites)
+            adjList[prereq[1]].push_back(prereq[0]);
+        
+        // now we will use DFS to iterate over our graph and check if we see a cycle
+        // if we don't see a cycle we will return our answer
+        vector<int> courseOrder;
+        stack<int> courseDFS;
+        vector<bool> visited(numCourses), dfsVisit(numCourses);
+        
+        for(int i = 0; i < numCourses; ++i) {
+            if(!visited[i] and isCycleDFS(i, adjList, visited, dfsVisit, courseDFS))
+                return {};
         }
-        return {};
+        // now add the courses done from the stack into our answer
+        while(!courseDFS.empty()) {
+            courseOrder.push_back(courseDFS.top());
+            courseDFS.pop();
+        }
+        return courseOrder;
     }
 };
