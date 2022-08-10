@@ -11,24 +11,24 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> nums = [4,2,3], k = 1
+<pre><strong>Input:</strong> nums = [4,2,3], k = 1
 <strong>Output:</strong> 5
 <strong>Explanation:</strong> Choose index 1 and nums becomes [4,-2,3].
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> nums = [3,-1,0,2], k = 3
+<pre><strong>Input:</strong> nums = [3,-1,0,2], k = 3
 <strong>Output:</strong> 6
 <strong>Explanation:</strong> Choose indices (1, 2, 2) and nums becomes [3,1,0,2].
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong>Example 3:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> nums = [2,-3,-1,5,-4], k = 2
+<pre><strong>Input:</strong> nums = [2,-3,-1,5,-4], k = 2
 <strong>Output:</strong> 13
 <strong>Explanation:</strong> Choose indices (1, 4) and nums becomes [2,3,-1,5,4].
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
