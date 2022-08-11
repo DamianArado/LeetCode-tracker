@@ -1,7 +1,6 @@
 class Solution:
     def wiggleSort(self, nums: List[int]) -> None:
-        n = len(nums)
-        heap = []
+        n, heap = len(nums), []
         for num in nums: 
             heappush(heap, -1 * num)
         for i in range (1, n, 2):
