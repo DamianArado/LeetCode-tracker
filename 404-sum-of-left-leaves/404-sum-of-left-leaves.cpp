@@ -10,10 +10,15 @@
  * };
  */
 class Solution {
+private:
+    int dfs(TreeNode* root, bool isLeft) {
+        if(!root) return 0;
+        if(!root->left and !root->right) 
+            return isLeft == true ? root->val : 0;
+        return dfs(root->left, true) + dfs(root->right, false);
+    }
 public:
-    int sumOfLeftLeaves(TreeNode* root, bool isleft = false) {
-        if (!root) return 0;
-        if (!root->left && !root->right) return isleft ? root->val : 0;
-        return sumOfLeftLeaves(root->left, true) + sumOfLeftLeaves(root->right, false);
+    int sumOfLeftLeaves(TreeNode* root) {
+        return dfs(root, false);
     }
 };
