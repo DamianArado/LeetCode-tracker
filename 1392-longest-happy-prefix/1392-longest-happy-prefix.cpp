@@ -15,6 +15,7 @@ public:
                 if(i == 0) {
                     lps[j] = 0;
                     j++;
+                // the mid portion is not matching
                 } else {
                     // move i back
                     i = lps[i - 1];
