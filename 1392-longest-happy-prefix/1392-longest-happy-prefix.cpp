@@ -10,7 +10,8 @@ public:
                 lps[j] = i + 1;
                 ++i;
                 ++j;
-             } // if the start is not even matching
+             } 
+            // if the start is not even matching
              else if(i == 0) {
                 lps[j] = 0;
                 ++j;
