@@ -8,18 +8,17 @@ public:
             // both matching
             if(s[i] == s[j]) {
                 lps[j] = i + 1;
-                i++;
-                j++;
-            } else {
-                // if the start is not even matching
-                if(i == 0) {
-                    lps[j] = 0;
-                    j++;
-                // the mid portion is not matching
-                } else {
+                ++i;
+                ++j;
+             } // if the start is not even matching
+             else if(i == 0) {
+                lps[j] = 0;
+                ++j;
+             }
+             // the mid portion is not matching
+             else {
                     // move i back
                     i = lps[i - 1];
-                }
             }
         }
         int prefixLen = lps.back();
