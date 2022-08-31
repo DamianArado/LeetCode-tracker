@@ -11,26 +11,25 @@
  */
 class Solution {
 public:
-    long widthOfBinaryTree(TreeNode* root) {
-        if(!root) return 0;
-        long ans = 0;
-        queue<pair<TreeNode*, long>> q; // [Node, Index]
-        q.push({root, 0});
+    int widthOfBinaryTree(TreeNode* root) {
+        if(root == nullptr) return 0;
+        double width = 0;
+        queue<pair<TreeNode*, double>> q;
+        q.emplace(root, 0);
         while(!q.empty()) {
-            long first, last;
-            long size = q.size();
-            long curr_level_min = q.front().second; // take the minimum of each level (the leftmost index)
-            for(long i = 0; i < size; ++i) {
-                long curr_id = q.front().second - curr_level_min; // to prevent overflow in case of skewed trees
-                TreeNode* node = q.front().first;
+            double start = q.front().second, end = q.back().second, n = q.size();
+            width = max(width, end - start + 1);
+            for(int i = 0; i < n; ++i) {
+                auto current = q.front();
+                double idx = current.second - start;
                 q.pop();
-                if(i == 0) first = curr_id;
-                if(i == size - 1) last = curr_id;
-                if(node->left) q.push({node->left, 2 * curr_id + 1}); // left child's index
-                if(node->right) q.push({node->right, 2 * curr_id + 2}); // right child's index
+                // checking for children
+                if(current.first->left != nullptr)
+                    q.emplace(current.first->left, 2 * idx + 1);
+                if(current.first->right != nullptr) 
+                    q.emplace(current.first->right, 2 * idx + 2);
             }
-            ans = max(ans, last - first + 1);
         }
-        return ans;
+        return (int)width;
     }
 };
