@@ -8,76 +8,26 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
-// Iterative solution
-// TC -> O(n)
-// SC -> O(1)
 class Solution {
 public:
-    void reverse(ListNode *start, ListNode *end) {
-        ListNode *prev = NULL, *curr = start, *nxt = start->next;   
-        while(prev != end) {
-            curr->next = prev;
-            prev = curr;
-            curr = nxt;
-            if(nxt != NULL) nxt = nxt->next;
-        }
-    }
     ListNode* reverseKGroup(ListNode* head, int k) {
-        // Corner cases
-        if(head == NULL || head->next == NULL || k == 1) return head;
-        ListNode *dummy = new ListNode(-1);
-        dummy->next = head;
-        ListNode *beforeStart = dummy, *end = head;
-        int i = 0;
-        while(end != NULL) {
-            i++;
-            if(i % k == 0) {
-                ListNode *start = beforeStart->next, *temp = end->next;
-                reverse(start, end);
-                beforeStart->next = end;
-                start->next = temp;
-                beforeStart = start;
-                end = temp;
-            } else {
-                end = end->next;
-            }
+        ListNode* current = head;
+        // check if we need to reverse the groups
+        for(int i = 0; i < k; ++i) {
+            if(current == NULL) return head;
+            current = current->next;
         }
-        return dummy->next;
+        // reverse the nodes in k-group
+        current = head;
+        ListNode *prev = new ListNode(-1, NULL);
+        for(int i = 0; i < k; ++i) {
+            ListNode* next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        // after reversing head is the new tail
+        head->next = reverseKGroup(current, k);
+        return prev;
     }
 };
-
-
-
-/*
-// Recursive solution
-// TC -> O(n)
-// SC -> O(n/k) for recursion stack size
-class Solution {
-public:
-    void reverse(ListNode *start, ListNode *end) {
-        ListNode *prev = NULL, *curr = start, *nxt = start->next;   
-        while(prev != end) {
-            curr->next = prev;
-            prev = curr;
-            curr = nxt;
-            if(nxt != NULL) nxt = nxt->next;
-        }
-    }
-    
-    ListNode* reverseKGroup(ListNode* head, int k) {
-        // Corner cases
-        if(head == NULL || head->next == NULL || k == 1) return head;
-        ListNode *start = head, *end = head;
-        int incr = k - 1;
-        while(incr--) {
-            end = end->next;
-            if(end == NULL) return head;
-        }
-        ListNode *nextHead = reverseKGroup(end->next, k);
-        reverse(start, end);
-        start->next = nextHead;
-        return end;
-    }
-};
-*/
