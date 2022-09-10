@@ -1,25 +1,27 @@
 class Solution {
 public:
+    // brute force - O(m + n) time & O(m + n) space
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int m = nums1.size(), n = nums2.size(), l = 0, r = m;
-        if (m > n) {
-            return findMedianSortedArrays(nums2, nums1);
-        }
-        while (l <= r) {
-            int i = (l + r) / 2, j = (m + n + 1) / 2 - i;
-            if (i && nums1[i - 1] > nums2[j]) {
-                r = i - 1;
-            } else if (i < m && nums2[j - 1] > nums1[i]) {
-                l = i + 1;
+        int m = nums1.size(), n = nums2.size(), i = 0, j = 0;
+        vector<int> nums3;
+        while(i < m and j < n) {
+            if(nums1[i] < nums2[j]) {
+                nums3.emplace_back(nums1[i]);
+                i++;
             } else {
-                int lmax = !i ? nums2[j - 1] : (!j ? nums1[i - 1] : max(nums1[i - 1], nums2[j - 1]));
-                if ((m + n) % 2) {
-                    return lmax;
-                }
-                int rmin = i == m ? nums2[j] : (j == n ? nums1[i] : min(nums1[i], nums2[j]));
-                return 0.5 * (lmax + rmin);
+                nums3.emplace_back(nums2[j]);
+                j++;
             }
         }
-        return 0.0;
+        while(i < m) nums3.emplace_back(nums1[i++]);
+        while(j < n) nums3.emplace_back(nums2[j++]);
+        
+        int len = nums3.size();
+        double median = 0.0;
+        
+        if(len % 2 == 1) median = nums3[len / 2];
+        else median = (nums3[len / 2 - 1] + nums3[len / 2]) / 2.0;
+        
+        return median;
     }
 };
