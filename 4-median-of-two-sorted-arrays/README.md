@@ -20,7 +20,7 @@
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
-<ul data-read-aloud-multi-block="true">
+<ul>
 	<li><code>nums1.length == m</code></li>
 	<li><code>nums2.length == n</code></li>
 	<li><code>0 &lt;= m &lt;= 1000</code></li>
