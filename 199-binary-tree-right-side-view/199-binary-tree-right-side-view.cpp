@@ -10,20 +10,27 @@
  * };
  */
 class Solution {
-private:
-    void recursion(TreeNode* root, int level, vector<int> &result) {
-        if(!root) return;
-        if(level == result.size()) result.emplace_back(root->val);
-        // Reverse Preorder traversal: Root -> Right -> Left for printing the right side of binary tree
-        // To print the left side of binary tree, do Preorder
-        recursion(root->right, level + 1, result);
-        recursion(root->left, level + 1, result);
-    }
 public:
-    // TC -> O(n) SC -> O(height)
     vector<int> rightSideView(TreeNode* root) {
-        vector<int> result;
-        recursion(root, 0, result);
-        return result;
+        vector<int> rightView;
+        if(!root) return rightView;
+        
+        queue<TreeNode*> q;
+        q.emplace(root);
+        
+        while(!q.empty()) {
+            int n = q.size();
+            int value = 0;
+            for(int i = 0; i < n; ++i) {
+                TreeNode *current = q.front();
+                q.pop();
+                if(current->left) q.emplace(current->left);
+                if(current->right) q.emplace(current->right);
+                if(i == n - 1) value = current->val;
+            }
+            rightView.emplace_back(value);
+        }
+        
+        return rightView;
     }
 };
