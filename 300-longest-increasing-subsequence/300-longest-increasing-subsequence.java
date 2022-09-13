@@ -1,16 +1,14 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
-        int n = nums.length;
-        int[][] dp = new int[n + 1][n + 1];
-        for(int idx = n - 1; idx >= 0; --idx) {
-            for(int prev = idx - 1; prev >= -1; --prev) {
-                int take = 0, notTake = 0;
-                if(prev == -1 || nums[idx] > nums[prev])
-                    take = 1 + dp[idx + 1][idx + 1];
-                notTake = dp[idx + 1][prev + 1];
-                dp[idx][prev + 1] = Math.max(take, notTake);
-            }
+        int n = nums.length, maxLIS = 1;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        for(int idx = 1; idx < n; ++idx) {
+            for(int prev = 0; prev < idx; ++prev)
+                if(nums[prev] < nums[idx])
+                    dp[idx] = Math.max(dp[idx], 1 + dp[prev]);
+            maxLIS = Math.max(maxLIS, dp[idx]);
         }
-        return dp[0][0];
+        return maxLIS;
     }
 }
