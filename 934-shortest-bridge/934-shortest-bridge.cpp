@@ -15,8 +15,8 @@ Step 3: While moving outside as soon as you see a cell marked as '1' return the 
 I call this approach as the shortest distance between 2 independent set of contiguous cells using 
 multi-source BFS.
 
-TC: 
-SC:
+TC: O(n^2)
+SC: O(n^2)
 
 */
 
