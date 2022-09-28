@@ -1,17 +1,12 @@
-// Dutch National Flag problem using 3 pointers
-// We will have zeroes here: [0 : low - 1]
-// Twos here: [high + 1 : n]
-// Ones here: [low : mid - 1]
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        int low = 0, mid = 0;
-        int high = nums.size() - 1;
-        // We'll have 3 checks here
+        // this is a standard implementation of dutch national flag algo
+        int low = 0, mid = 0, high = nums.size() - 1;
         while(mid <= high) {
             switch(nums[mid]) {
                 case 0:
-                    swap(nums[low++], nums[mid++]);
+                    swap(nums[mid++], nums[low++]);
                     break;
                 case 1:
                     ++mid;
