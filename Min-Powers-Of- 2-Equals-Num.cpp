@@ -6,7 +6,7 @@
  */
 
 // Approach 1 : tc - O(log2n), sc - 2 * O(log2n)
-int minPowersOf2EqualsNum(int number) {
+vector<int> minPowersOf2EqualsNum(int number) {
     vector<int> remainders, minPowersOf2;
     while(number > 0) {
         int remainder = number % 2;
@@ -22,7 +22,7 @@ int minPowersOf2EqualsNum(int number) {
 }
 
 // Approach 2: tc & sc - O(log2n)
-int minPowersOf2EqualsNum(int number) {
+vector<int> minPowersOf2EqualsNum(int number) {
     vector<int> minPowersOf2;
     int power = 0;
     while(number > 0) {
@@ -31,5 +31,14 @@ int minPowersOf2EqualsNum(int number) {
         ++power;
         number = number / 2;
     }
+    return minPowersOf2;
+}
+
+// Best one
+vector<int> minPowersOf2EqualsNum(int number) {
+    vector<int> minPowersOf2;
+    for(int i = 0; i < 32; ++i)
+        if(number & (1 << i))
+            minPowersOf2.emplace_back(1 << i);
     return minPowersOf2;
 }
