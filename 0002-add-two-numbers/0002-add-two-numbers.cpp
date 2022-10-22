@@ -26,9 +26,7 @@ public:
             if(carry > 0) {
                 if(head1->next) head1->next->val += 1;
                 else if(head2->next) head2->next->val += 1;
-                else {
-                    newNode->next = new ListNode(1, NULL);
-                }
+                else newNode->next = new ListNode(1, NULL);
             }
             dummy->next = newNode;
             dummy = newNode;
