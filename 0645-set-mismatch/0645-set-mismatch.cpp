@@ -21,6 +21,7 @@ public:
 
 */
 
+// O(n) time & O(1) space
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
