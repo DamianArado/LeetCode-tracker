@@ -15,7 +15,9 @@ class Solution {
         if(n == 1) return {-1};
         vector<int> ans(n);
         stack<pair<int, int>> s;
+        // a stack to calculate next smaller element for each element
         s.push(make_pair(arr[0], 0));
+        // to track the possible candidates for next smaller element
         int x = arr[1];
         for(int i = 1; i < n; ++i) {
             x = arr[i];
