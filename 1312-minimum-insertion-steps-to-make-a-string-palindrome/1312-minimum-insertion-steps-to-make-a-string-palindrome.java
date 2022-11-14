@@ -1,5 +1,5 @@
 class Solution {
-    private int findLCS(String s, String reverse) {
+    private static int findLCS(String s, String reverse) {
         int n = s.length();
         int[] dp = new int[n + 1];
         for(int i = 1; i <= n; ++i) {
