@@ -8,7 +8,7 @@ of size k where the elements nearest to x will lie.
 
 Therefore, we start by discarding one part of the array completely by comparing the distance of it
 from x, 
-for e.x., if x - arr[mid] < arr[mid] + k - x: we discard the right side else the left side
+for e.x., if x - arr[mid] < arr[mid+ k] - x: we discard the right side else the left side
 
 */
 class Solution {
