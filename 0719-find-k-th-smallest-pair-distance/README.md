@@ -5,26 +5,26 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> nums = [1,3,1], k = 1
+<pre><strong>Input:</strong> nums = [1,3,1], k = 1
 <strong>Output:</strong> 0
 <strong>Explanation:</strong> Here are all the pairs:
 (1,3) -&gt; 2
 (1,1) -&gt; 0
 (3,1) -&gt; 2
 Then the 1<sup>st</sup> smallest distance pair is (1,1), and its distance is 0.
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> nums = [1,1,1], k = 2
+<pre><strong>Input:</strong> nums = [1,1,1], k = 2
 <strong>Output:</strong> 0
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong class="example">Example 3:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> nums = [1,6,1], k = 3
+<pre><strong>Input:</strong> nums = [1,6,1], k = 3
 <strong>Output:</strong> 5
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
