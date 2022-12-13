@@ -8,7 +8,6 @@ class Solution {
             pprev = prev;
             prev = current;
         }
-        long res = (prev * prev) % (mod);
-        return (int) res;
+        return (int) ((prev * prev) % (mod));
     }
 }
