@@ -9,6 +9,46 @@ else transfer everything from input to output and then output.pop()
 empty - input is empty?
 
 */
+// class MyQueue {
+// private:
+//     stack<int> input, output;
+// public:
+//     MyQueue() {}
+    
+//     void push(int x) {
+//         input.emplace(x);
+//     }
+    
+//     int pop() {
+//         int top = -1;
+//         if(!output.empty()) {
+//             top = output.top();
+//             output.pop();
+//             return top;
+//         }
+//         while(!input.empty()) {
+//             output.emplace(input.top());
+//             input.pop();
+//         }
+//         top = output.top();
+//         output.pop();
+//         return top;
+//     }
+    
+//     int peek() {
+//         if(!output.empty()) return output.top();
+//         while(!input.empty()) {
+//             output.emplace(input.top());
+//             input.pop();
+//         }
+//         return output.top();
+//     }
+    
+//     bool empty() {
+//         return input.empty() and output.empty();
+//     }
+// };
+
 class MyQueue {
 private:
     stack<int> input, output;
@@ -16,38 +56,37 @@ public:
     MyQueue() {}
     
     void push(int x) {
+        while(!output.empty()) {
+            input.emplace(output.top());
+            output.pop();
+        }
         input.emplace(x);
     }
     
     int pop() {
-        int top = -1;
-        if(!output.empty()) {
-            top = output.top();
-            output.pop();
-            return top;
-        }
         while(!input.empty()) {
             output.emplace(input.top());
             input.pop();
         }
-        top = output.top();
+        int x = output.top();
         output.pop();
-        return top;
+        return x;
     }
     
     int peek() {
-        if(!output.empty()) return output.top();
         while(!input.empty()) {
             output.emplace(input.top());
             input.pop();
         }
-        return output.top();
+        int x = output.top();
+        return x;
     }
     
     bool empty() {
         return input.empty() and output.empty();
     }
 };
+
 /**
 
 O(n) time & space
