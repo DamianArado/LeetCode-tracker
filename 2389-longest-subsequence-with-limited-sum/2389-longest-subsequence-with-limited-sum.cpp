@@ -23,7 +23,7 @@ public:
             sum += num;
             prefixSum.emplace_back(sum);
         }
-        // Step 2: For each query[i], find the last element in prefixSum such that prefixSum[j] <= query[i]
+        // Step 2: For each query, find the last element in prefixSum such that prefixSum[j] <= query[i]
         // using binary search
         vector<int> ans;
         for(int &query : queries) {
