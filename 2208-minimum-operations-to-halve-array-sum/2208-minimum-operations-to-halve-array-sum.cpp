@@ -5,7 +5,7 @@ public:
         double operations = 0;
         double sum = 0;
         for(int &i : nums) sum += i;
-        if(size(nums) == sum) return sum;
+        //if(size(nums) == sum) return sum;
         double half = sum;
         while(half > sum / 2) {
             double max = maxHeap.top();
