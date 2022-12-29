@@ -12,8 +12,10 @@ public:
         long idx = 0, endTime = 0;
         vector<int> order;
         while(idx < n or !minHeap.empty()) {
+            // if nothing in the heap start adding from the next enqueue time
             if(minHeap.empty())
                 endTime = max(endTime, (long) tasks[idx][0]);
+            // if some tasks start before or at the end time, add them to the available queue
             while(idx < n and endTime >= tasks[idx][0]) {
                 minHeap.emplace(tasks[idx][1], tasks[idx][2]);
                 idx++;
