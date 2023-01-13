@@ -1,29 +1,25 @@
 class Solution {
-public:
-    vector<int> ans;
-    vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels) {
-        vector<int> adj[n];
-        for(auto &i:edges){
-            int u=i[0],v=i[1];
-            adj[u].push_back(v);
-            adj[v].push_back(u);
-        }
-        ans.resize(n,0);
-        vector<int> count(26,0);
-        dfs(0,-1,count,adj,labels);
-        return ans;
-    }
-    void dfs(int node,int parent,vector<int>& count,vector<int> adj[],string &labels){
-        for(auto &i:adj[node]){
-            if(i!=parent){
-                vector<int> counting(26,0);
-                dfs(i,node,counting,adj,labels);
-                for(int i=0;i<26;i++){
-                    count[i]=count[i]+counting[i];
-                }
+private:
+    void dfs(int current, int parent, vector<vector<int>> &g, string &labels, vector<int> &ans, vector<int> &count) {
+        for(int &adjNode : g[current]) {
+            if(adjNode != parent) {
+                vector<int> counting(26);
+                dfs(adjNode, current, g, labels, ans, counting);
+                for(int i = 0; i < 26; ++i) 
+                    count[i] += counting[i];
             }
         }
-        count[labels[node]-'a']++;
-        ans[node]=count[labels[node]-'a'];
+        ans[current] = ++count[labels[current] - 'a'];
+    }
+public:
+    vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels) {
+        vector<vector<int>> g(n);
+        for(auto &edge : edges) {
+            g[edge[0]].emplace_back(edge[1]);
+            g[edge[1]].emplace_back(edge[0]);
+        }
+        vector<int> ans(n), count(26);
+        dfs(0, -1, g, labels, ans, count);
+        return ans;
     }
 };
