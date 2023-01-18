@@ -15,13 +15,6 @@ public:
     bool remove(int val) {
         bool result = (m.find(val) != m.end());
         if(!result) return result;
-        // if val exists at the end
-        if(val == v.back()) {
-            v.pop_back();
-            m.erase(val);
-            return result;
-        }
-        // if not then copy the val to the last element
         int last = v.back();
         m[last] = m[val];
         v[m[val]] = last;
