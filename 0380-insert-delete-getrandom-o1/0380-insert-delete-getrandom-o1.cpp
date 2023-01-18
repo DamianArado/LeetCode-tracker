@@ -6,19 +6,20 @@ public:
     RandomizedSet() {}
     
     bool insert(int val) {
-        if(m.count(val)) return false;
+        bool result = (m.find(val) == m.end());
         v.emplace_back(val);
         m[val] = v.size() - 1;
-        return true;
+        return result;
     }
     
     bool remove(int val) {
-        if(!m.count(val)) return false;
+        bool result = (m.find(val) != m.end());
+        if(!result) return result;
         // if val exists at the end
         if(val == v.back()) {
             v.pop_back();
             m.erase(val);
-            return true;
+            return result;
         }
         // if not then copy the val to the last element
         int last = v.back();
@@ -26,7 +27,7 @@ public:
         v[m[val]] = last;
         v.pop_back();
         m.erase(val);
-        return true;
+        return result;
     }
     
     int getRandom() {
