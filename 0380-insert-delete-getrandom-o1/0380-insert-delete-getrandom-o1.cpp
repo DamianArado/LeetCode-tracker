@@ -20,7 +20,7 @@ public:
             m.erase(val);
             return true;
         }
-        // if not then swap the val with the last element
+        // if not then copy the val to the last element
         int last = v.back();
         m[last] = m[val];
         v[m[val]] = last;
