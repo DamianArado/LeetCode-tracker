@@ -1,5 +1,6 @@
 class Solution {
 private:
+    // Using BFS to calculate the shortest distance
     vector<int> findShortestDistance(vector<vector<int>> &graph, int node) {
         int n = size(graph);
         vector<int> distances(n, INT_MAX);
@@ -29,9 +30,10 @@ public:
         for(int i = 0; i < size(edges); ++i)
             if(edges[i] != -1) 
                 graph[i].emplace_back(edges[i]);
-        // Step 2: Find shortest distance from node1 to all other nodes in the graph
+        // Step 2: Find shortest distance from node1 & node2 to all other nodes in the graph
         vector<int> shortestDist1 = findShortestDistance(graph, node1);
         vector<int> shortestDist2 = findShortestDistance(graph, node2);
+        // Step 3: Minimize the max distance
         int minDist = INT_MAX, minNode = -1;
         for(int i = 0; i < n; ++i) {
             if(shortestDist1[i] != INT_MAX and shortestDist2[i] != INT_MAX) {
