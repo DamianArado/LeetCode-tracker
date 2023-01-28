@@ -25,6 +25,7 @@
 //     }
 // };
 
+// TC: O(log n) insert & O(n) retrieval, SC: O(n)
 class SummaryRanges {
 private:
     map<int, int> mp;
