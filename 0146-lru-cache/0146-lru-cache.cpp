@@ -1,4 +1,4 @@
-// Hardcoded node - maybe a better thing during interviews!
+// Hardcoded node - maybe a better thing during interviews! It's also faster
 
 // class LRUCache {
 // private:
