@@ -38,8 +38,8 @@ private:
         }
     };
     int maxSizeCache, minFreq, currentSize;
-    map<int, Node*> keyNode;
-    map<int, List*> freqListMap;
+    unordered_map<int, Node*> keyNode;
+    unordered_map<int, List*> freqListMap;
 public:
     LFUCache(int capacity) {
         this->maxSizeCache = capacity;
