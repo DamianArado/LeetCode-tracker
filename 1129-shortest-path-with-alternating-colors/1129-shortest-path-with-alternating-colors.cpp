@@ -12,7 +12,7 @@ public:
         vector<vector<bool>> visited(n, vector<bool> (2));  // <node, edgeColor>
         visited[0][0] = visited[0][1] = true;
         queue<tuple<int, int, int>> q;
-        q.emplace(0, 0, -1);  // <node, distance, color
+        q.emplace(0, 0, -1);  // <node, distance, color>
         
         while(!q.empty()) {
             auto [currNode, currDist, currColor] = q.front();
