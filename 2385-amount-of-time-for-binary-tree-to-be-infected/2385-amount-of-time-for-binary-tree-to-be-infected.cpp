@@ -10,46 +10,44 @@
  * };
  */
 class Solution {
-public:
-    unordered_map<int,vector<int>> v;  //adjacency list
-
-//create undirected graph for every parent-child  -> BFS
-void createGraph(TreeNode* root){
-    queue<pair<TreeNode*,int>> q;
-    q.push({root,-1});
-    while(q.size()){
-        auto [node,parent]= q.front(); q.pop();
-        if(parent!=-1){
-            v[parent].push_back(node->val);
-            v[node->val].push_back(parent);
-        }
-        if(node->left)  q.push({node->left,node->val});
-        if(node->right) q.push({node->right,node->val});
-    }   
-}
-
-int amountOfTime(TreeNode* root, int start) {
-    //create graph of given tree
-    createGraph(root);
-
-    //start bfs
-    queue<int> q;
-    unordered_map<int,bool> seen;
-    q.push(start);
-    seen[start]=true;
-    int time=0;
-    for(;q.size();time++){
-        int n= q.size();
-        while(n--){
-            auto node= q.front();  q.pop();
-            for(auto i:v[node]){
-                if(!seen[i]){
-                    q.push(i);
-                    seen[i]=true;
-                }
+private:
+    unordered_map<int, vector<int>> graph; // adjacency list 
+    void createGraph(TreeNode *root) {
+        queue<pair<TreeNode*, int>> q;
+        q.emplace(root, -1);
+        while(!q.empty()) {
+            const auto [current, prev] = q.front();
+            q.pop();
+            if(prev != -1) {
+                graph[prev].emplace_back(current->val);
+                graph[current->val].emplace_back(prev);
             }
+            if(current->left) q.emplace(current->left, current->val);
+            if(current->right) q.emplace(current->right, current->val);
         }
     }
-    return time-1;
-}
+public:
+    int amountOfTime(TreeNode* root, int start) {
+        createGraph(root);
+        int time = 0;
+        queue<int> q;
+        q.emplace(start);
+        unordered_map<int, bool> visited;
+        visited[start] = true;
+        while(!q.empty()) {
+            int n = size(q);
+            for(int i = 0; i < n; ++i) {
+                int current = q.front(); 
+                q.pop();
+                for(const int &adjNode : graph[current]) {
+                    if(!visited[adjNode]) {
+                        q.emplace(adjNode);
+                        visited[adjNode] = true;
+                    }
+                }
+            }
+            time++;
+        }
+        return time - 1;
+    }
 };
