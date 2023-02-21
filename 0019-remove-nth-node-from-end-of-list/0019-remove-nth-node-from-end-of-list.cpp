@@ -12,7 +12,7 @@ class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         ListNode *fast = head, *slow = head;
-        while(n--) fast = fast->next;
+        while(n--) fast = fast->next;  // maintaining a gap of n b/w slow & fast pointers
         if(fast == NULL) return head->next;
         while(fast->next != NULL) 
             fast = fast->next, slow = slow->next;
