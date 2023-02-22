@@ -3,7 +3,7 @@ class Solution {
 public:
     bool canShip(vector<int>& weights, int days, int maxCapacity) {
         int currentDays = 1, currentCapacity = 0;
-        for(int weight : weights) {
+        for(const int &weight : weights) {
             // we can't even use a single ship with max capacity for this weight
             if(weight > maxCapacity) return false;
             // we need more days to ship
@@ -21,7 +21,7 @@ public:
     }
     int shipWithinDays(vector<int>& weights, int days) {
         int capacity = 0, maxWeight = 0, sumWeights = 0;
-        for(int weight : weights) {
+        for(const int &weight : weights) {
             maxWeight = max(maxWeight, weight);
             sumWeights += weight;
         }
