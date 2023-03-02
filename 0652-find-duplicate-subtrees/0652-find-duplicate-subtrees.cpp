@@ -11,19 +11,20 @@
  */
 class Solution {
 private:
-    string serialize(TreeNode* node, unordered_map<string, vector<TreeNode*>>& map) {
-        if (!node) return "";
-        string s = "(" + serialize(node->left, map) + to_string(node->val) + serialize(node->right, map) + ")";
-        map[s].push_back(node);
+    string serialize(TreeNode *root, unordered_map<string, vector<TreeNode*>> &map) {
+        if(root == NULL) return "x";
+        string s = to_string(root->val) + "," + serialize(root->left, map) + "," + serialize(root->right, map);
+        map[s].emplace_back(root);
         return s;
     }
 public:
     vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        vector<TreeNode*> duplicates;
         unordered_map<string, vector<TreeNode*>> map;
-        vector<TreeNode*> dups;
         serialize(root, map);
-        for (auto it = map.begin(); it != map.end(); it++)
-            if (it->second.size() > 1) dups.push_back(it->second[0]);
-        return dups;
+        for(const auto &it : map) 
+            if(it.second.size() > 1)
+                duplicates.emplace_back(it.second[0]);
+        return duplicates;
     }
 };
