@@ -15,6 +15,7 @@ public:
         if(root == NULL) return "";
         string s = to_string(root->val);
         if(root->left) s += "(" + tree2str(root->left) + ")";
+        // skewed towards right
         else if(root->right) s += "()";
         if(root->right) s += "(" + tree2str(root->right) + ")";
         return s;
