@@ -33,7 +33,7 @@ private:
         return lps;
     }
 public:
-    // KMP - O(n1 + n2) TC & O() SC
+    // KMP - O(n1 + n2) TC & O(n2) SC
     int strStr(string haystack, string needle) {
         int n1 = size(haystack), n2 = size(needle);
         vector<int> lps = constructLPS(needle);
