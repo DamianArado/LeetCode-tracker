@@ -43,7 +43,7 @@ public:
             if(j == n2) 
                 return i - j;
             if(haystack[i] != needle[j])
-                j ? j = lps[j - 1] : ++i;
+                j > 0 ? j = lps[j - 1] : ++i;
         }
         return -1;
     }
