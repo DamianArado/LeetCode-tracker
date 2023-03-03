@@ -1,27 +1,17 @@
-#include <bits/stdc++.h>
-using namespace std;
 /*
 
 Naive method - O(mn) time and O(1) space
 
-bool isEquals(string &pattern, string &text, int l, int r) {
-    for(int i = l; i <= r; ++i) {
-        if(pattern[i - l] != text[i])
-            return false;
+int findPattern(string &text, string &pattern) {
+    int n1 = size(text), n2 = size(pattern);
+    for(int i = 0; i <= n1 - n2; ++i) {
+        int j = 0;
+        for( ; j < n2; ++j)
+            if(text[i + j] != pattern[j])
+                break;
+        if(j == n2) return i;
     }
-    return true;
-}
-
-vector<int> findPattern(string &text, string &pattern) {
-    int i = 0, j = pattern.size() - 1;
-    vector<int> ans;
-    while(j < text.size()) {
-        if(isEquals(pattern, text, i, j))
-            ans.push_back(i);
-        i++;
-        j++;
-    }
-    return ans;
+    return -1;
 }
 
 */
@@ -34,6 +24,38 @@ We'll compare text[i] with pattern[j + 1] and if they match, we move both of the
 
 Now, how do we pre-compute the LPS array?
 https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/
+
+vector<int> constructLPS(string &pattern) {
+    int n = size(pattern);
+    vector<int> lps(n);
+    int i = 0, j = 1;
+    while(j < n) {
+        if(pattern[i] == pattern[j]) {
+            lps[j] = i + 1;
+            ++i, ++j;
+        } else if(i == 0) {
+            lps[j] = 0;
+            ++j;
+        } else i = lps[i - 1];
+    }
+    return lps;
+}
+
+int findPattern(string &text, string &pattern) {
+    int n1 = size(text), n2 = size(pattern);
+    vector<int> lps = constructLPS(pattern);
+    for(int i = 0, j = 0; i < n1; ) {
+        if(text[i] == pattern[j]) {
+            ++i;
+            ++j;
+        }
+        if(j == n2) return i - j;
+        if(text[i] != pattern[j])
+            j > 0 ? j = lps[j - 1] : ++i;
+    }
+    return -1;
+}
+
 
 */
 
