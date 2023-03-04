@@ -2,9 +2,9 @@ class Solution {
 private:
     const int MOD = 1e9 + 7;
 public:
-    int power(int n) {
+    int powerOf2(int n) {
         if(n == 1) return 2;
-        long long ans= power(n / 2);
+        long long ans = powerOf2(n / 2);
         ans = (ans * ans) % MOD;
         if(n % 2 == 1) ans = (ans * 2) % MOD;
         return ans;
@@ -18,7 +18,7 @@ public:
             if(currMin > lastMax) ++count;
             lastMax = max(lastMax, ranges[i][1]);
         }
-        return power(count);
+        return powerOf2(count);
         
     }
 };
