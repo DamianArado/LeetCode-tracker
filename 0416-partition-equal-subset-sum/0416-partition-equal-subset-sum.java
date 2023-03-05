@@ -11,7 +11,7 @@ class Solution {
                 boolean take = false;
                 if(nums[index] <= target)
                     take = dp[target - nums[index]];
-                current[target] = take | notTake;
+                current[target] = take || notTake;
             }
             dp = current;
         }
