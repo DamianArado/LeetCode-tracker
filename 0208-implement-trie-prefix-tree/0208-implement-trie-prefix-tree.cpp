@@ -4,7 +4,7 @@ struct TrieNode {
     
     // returns whether our trie contains this character as one of the reference nodes or not
     bool containsKey(char ch) {
-        return (linkNext[ch - 'a'] != nullptr);
+        return linkNext[ch - 'a'] != NULL;
     }
     // add a trie reference node as a link if it was not already present
     void add(char ch, TrieNode* current) {
@@ -12,7 +12,7 @@ struct TrieNode {
     }
     // get the next reference node for the current character in trie, nullptr if we are at end of string
     TrieNode* getNext(char ch) {
-        return (linkNext[ch - 'a']);
+        return linkNext[ch - 'a'];
     }
 };
 
@@ -52,7 +52,7 @@ public:
             current = current->getNext(word[i]);
         }
         // as we should be at the end of the string
-        return (current->isEndOfString);
+        return current->isEndOfString;
     }
     // Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise
     bool startsWith(string prefix) {
