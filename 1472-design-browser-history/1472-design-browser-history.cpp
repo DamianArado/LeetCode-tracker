@@ -1,27 +1,31 @@
 class BrowserHistory {
-public:
-    list<string> historyPages;  // the pages that are present in my browser history
+private:
+    list<string> historyPages;
     list<string> :: iterator it;
+public:
     BrowserHistory(string homepage) {
         historyPages.emplace_back(homepage);
-        it = historyPages.begin();
+        it = begin(historyPages);
     }
     
     void visit(string url) {
-        auto del = it; 
-        del++;  // delete the history: (here, last]
-        historyPages.erase(del, historyPages.end()); 
-        historyPages.emplace_back(url);  // add a new page after here
-        it++;  
+        list<string> :: iterator deleted = it;
+        ++deleted;
+        historyPages.erase(deleted, end(historyPages));
+        historyPages.emplace_back(url);
+        ++it;
+        
     }
     
-    string back(int steps) {  // at most we can reach start of list
-        while(it != historyPages.begin() && steps--) it--;
-        return *it;  // return value by dereferencing the pointer/iterator
+    string back(int steps) {
+        while(it != begin(historyPages) and steps--)
+            --it;
+        return *it;
     }
     
-    string forward(int steps) {  // at most we can reach the end of list
-        while(it != (--historyPages.end()) && steps--) it++;
+    string forward(int steps) {
+        while(it != (--end(historyPages)) and steps--)
+            ++it;
         return *it;
     }
 };
