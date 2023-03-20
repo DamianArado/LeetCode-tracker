@@ -4,7 +4,7 @@ private:
     bool isEndOfString;
 public:
     WordDictionary() {
-        linkNext = vector<WordDictionary*>(26, NULL);
+        linkNext = vector<WordDictionary*>(26);
         this->isEndOfString = false;
     }
     
