@@ -1,41 +1,40 @@
-class TrieNode {
-    // an array of pointers that behave as reference trie nodes (links or references to the next node)
-    private TrieNode[] linkNext;
-    // denotes whether we reached the end of string or not
-    private boolean isEndOfString;
-    
-    public TrieNode() {
-        this.linkNext = new TrieNode[26];
-        this.isEndOfString = false;
-    }
-    
-    // add a trie reference node as a link if it was not already present
-    public void addKey(char ch, TrieNode node) {
-        this.linkNext[ch - 'a'] = node;
-    }
-    
-    // returns whether our trie contains this character as one of the reference nodes or not
-    public boolean containsKey(char ch) {
-        return (linkNext[ch - 'a'] != null);
-    }
-    
-    // get the next reference node for the current character in trie, null if we are at end of string
-    public TrieNode getNext(char ch) {
-        return linkNext[ch - 'a'];
-    }
-    
-    // we reached the end of string
-    public void setEnd() {
-        this.isEndOfString = true;
-    }
-    
-    // check whether its end of string or not
-    public boolean isEnd() {
-        return this.isEndOfString;
-    }
-}
-
 class Trie {
+    class TrieNode {
+        // an array of pointers that behave as reference trie nodes (links or references to the next node)
+        private TrieNode[] linkNext;
+        // denotes whether we reached the end of string or not
+        private boolean isEndOfString;
+
+        public TrieNode() {
+            this.linkNext = new TrieNode[26];
+            this.isEndOfString = false;
+        }
+
+        // add a trie reference node as a link if it was not already present
+        public void addKey(char ch, TrieNode node) {
+            this.linkNext[ch - 'a'] = node;
+        }
+
+        // returns whether our trie contains this character as one of the reference nodes or not
+        public boolean containsKey(char ch) {
+            return this.linkNext[ch - 'a'] != null;
+        }
+
+        // get the next reference node for the current character in trie, null if we are at end of string
+        public TrieNode getNext(char ch) {
+            return this.linkNext[ch - 'a'];
+        }
+
+        // we reached the end of string
+        public void setEnd() {
+            this.isEndOfString = true;
+        }
+
+        // check whether its end of string or not
+        public boolean isEnd() {
+            return this.isEndOfString;
+        }
+    }
     private static TrieNode root;
 
     // Initialize the trie object with the root node
