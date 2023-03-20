@@ -1,23 +1,22 @@
-struct TrieNode {
-    TrieNode* linkNext[26]; // an array of pointers that behave as reference trie nodes (links or references to the next node)
-    bool isEndOfString = false; // denotes whether we reached the end of string or not
-    
-    // returns whether our trie contains this character as one of the reference nodes or not
-    bool containsKey(char ch) {
-        return linkNext[ch - 'a'] != NULL;
-    }
-    // add a trie reference node as a link if it was not already present
-    void add(char ch, TrieNode* current) {
-        linkNext[ch - 'a'] = current;
-    }
-    // get the next reference node for the current character in trie, nullptr if we are at end of string
-    TrieNode* getNext(char ch) {
-        return linkNext[ch - 'a'];
-    }
-};
-
 class Trie {
 private:
+    struct TrieNode {
+        TrieNode* linkNext[26]; // an array of pointers that behave as reference trie nodes (links or references to the next node)
+        bool isEndOfString = false; // denotes whether we reached the end of string or not
+
+        // returns whether our trie contains this character as one of the reference nodes or not
+        bool containsKey(char ch) {
+            return linkNext[ch - 'a'] != NULL;
+        }
+        // add a trie reference node as a link if it was not already present
+        void add(char ch, TrieNode* current) {
+            linkNext[ch - 'a'] = current;
+        }
+        // get the next reference node for the current character in trie, nullptr if we are at end of string
+        TrieNode* getNext(char ch) {
+            return linkNext[ch - 'a'];
+        }
+    };
     TrieNode* root;
 public:
     // Initialize the trie object with the root node
