@@ -22,7 +22,7 @@ public:
         vector<bool> visited(n);
         for(int i = 0; i < n; ++i) {
             if(!visited[i]) {
-                // pair of nodes that are reachable
+                // count used for pair of nodes that are reachable (for each component)
                 ll count = 0;
                 dfs(i, visited, graph, count);
                 total -= (count * (count - 1) / 2);
