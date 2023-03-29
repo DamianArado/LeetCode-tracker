@@ -1,3 +1,4 @@
+// sollveeddd   a a   hardd questionn by myselffff      yayyyyyyyyyyyyyyyyy!
 // Memoization
 // class Solution {
 // private:
@@ -19,19 +20,39 @@
 // };
 
 // Tabulation
+// class Solution {
+// public:
+//     int maxSatisfaction(vector<int>& satisfaction) {
+//         int n = size(satisfaction);
+//         sort(begin(satisfaction), end(satisfaction));
+//         vector<vector<int>> dp(n + 1, vector<int> (n + 2));
+//         for(int i = n - 1; i >= 0; --i) {
+//             for(int time = n; time >= 1; --time) {
+//                 int take = satisfaction[i] * time + dp[i + 1][time + 1]; 
+//                 int notTake = dp[i + 1][time];
+//                 dp[i][time] = max(take, notTake);
+//             }
+//         }
+//         return dp[0][1];
+//     }
+// };
+
+// space optimized DP
 class Solution {
 public:
     int maxSatisfaction(vector<int>& satisfaction) {
         int n = size(satisfaction);
         sort(begin(satisfaction), end(satisfaction));
-        vector<vector<int>> dp(n + 1, vector<int> (n + 2));
+        vector<int> dp(n + 2);
         for(int i = n - 1; i >= 0; --i) {
+            vector<int> current(n + 2);
             for(int time = n; time >= 1; --time) {
-                int take = satisfaction[i] * time + dp[i + 1][time + 1]; 
-                int notTake = dp[i + 1][time];
-                dp[i][time] = max(take, notTake);
+                int take = satisfaction[i] * time + dp[time + 1]; 
+                int notTake = dp[time];
+                current[time] = max(take, notTake);
             }
+            dp = current;
         }
-        return dp[0][1];
+        return dp[1];
     }
 };
