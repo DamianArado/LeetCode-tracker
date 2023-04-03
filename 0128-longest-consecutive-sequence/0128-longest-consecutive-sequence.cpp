@@ -18,7 +18,7 @@ public:
         for(const int &num : s) {
             if(s.count(num - 1)) continue;
             int j = 1;
-            while(s.count(num + j)) j++;
+            while(s.count(num + j)) ++j;
             longest = max(longest, j);
         }
         return longest;
