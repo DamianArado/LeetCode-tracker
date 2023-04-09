@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // Topological Sort (Kahn's algorithm)
     int largestPathValue(string colors, vector<vector<int>>& edges) {
         int n = size(colors);
         vector<vector<int>> graph(n);
