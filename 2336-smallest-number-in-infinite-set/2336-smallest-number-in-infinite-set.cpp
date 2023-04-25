@@ -8,7 +8,7 @@ public:
     }
     
     int popSmallest() {
-        if(st.size()) {
+        if(!st.empty()) {
             int first = *st.begin();
             st.erase(first);
             return first;
