@@ -1,6 +1,6 @@
 class Solution {
 private:
-    bool isVowel(const char &c) {
+    static bool isVowel(const char &c) {
         return c == 'a' or c == 'e' or c == 'i' or c == 'o' or c == 'u';
     }
 public:
