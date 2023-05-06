@@ -6,16 +6,18 @@ public:
         
         vector<vector<int>> mergedIntervals;
         sort(begin(intervals), end(intervals));
-        int lastMin = intervals[0][0], lastMax = intervals[0][1];
+        int start = intervals[0][0], end = intervals[0][1];
+        
         for(int i = 1; i < n; ++i) {
-            int currMin = intervals[i][0], currMax = intervals[i][1];
-            if(currMin > lastMax) { 
-                mergedIntervals.push_back({lastMin, lastMax});
-                lastMin = currMin, lastMax = currMax;
+            int next_start = intervals[i][0], next_end = intervals[i][1];
+            if(next_start <= end) end = max(end, next_end);
+            else {
+                mergedIntervals.push_back({start, end});
+                start = intervals[i][0], end = intervals[i][1];
             }
-            else lastMax = max(lastMax, currMax);
-        } 
-        mergedIntervals.push_back({lastMin, lastMax});
+        }
+        mergedIntervals.push_back({start, end});
+        
         return mergedIntervals;
     }
 };
