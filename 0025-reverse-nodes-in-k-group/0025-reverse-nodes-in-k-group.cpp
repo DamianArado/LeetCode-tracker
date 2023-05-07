@@ -19,7 +19,7 @@ public:
         }
         // reverse the nodes in k-group
         current = head;
-        ListNode *prev = new ListNode(-1);
+        ListNode *prev = NULL;
         for(int i = 0; i < k; ++i) {
             ListNode* nextCurr = current->next;
             current->next = prev;
