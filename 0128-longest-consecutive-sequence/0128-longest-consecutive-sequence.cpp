@@ -12,7 +12,6 @@ public:
     int longestConsecutive(vector<int>& nums) {
         int n = nums.size();
         if(n == 0) return 0;
-        if(n == 1) return 1;
         unordered_set<int> s(begin(nums), end(nums));
         int longest = 0;
         for(const int &num : s) {
