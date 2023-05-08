@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    // max length between the left and right elements on any level in a binary tree
     int widthOfBinaryTree(TreeNode* root) {
         if(root == nullptr) return 0;
         double width = 0;
