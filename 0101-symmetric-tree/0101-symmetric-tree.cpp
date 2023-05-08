@@ -12,7 +12,7 @@
 class Solution {
 private:
     bool helper(TreeNode* left, TreeNode* right) {
-        if(!left or !right) return left == right;
+        if(left == NULL or right == NULL) return left == right;
         if(left->val != right->val) return false;
         return helper(left->left, right->right) and helper(left->right, right->left);
     }
