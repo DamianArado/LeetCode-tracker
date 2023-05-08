@@ -1,7 +1,6 @@
 # Fractional Knapsack
-## Medium 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given <em>weights</em> and <em>values</em> of <strong>N</strong> items, we need to put these items in a knapsack of capacity <strong>W</strong> to get the <em>maximum</em> total value in the knapsack.<br>
+## Medium
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given <em>weights</em> and <em>values</em> of <strong>N</strong> items, we need to put these items in a knapsack of capacity <strong>W</strong> to get the <em>maximum</em> total value in the knapsack.<br>
 <strong>Note:</strong> Unlike 0/1 knapsack, you are allowed to break&nbsp;the item.&nbsp;</span></p>
 
 <p>&nbsp;</p>
@@ -46,5 +45,4 @@ Complete the function&nbsp;<em><strong>fractionalKnapsack</strong>()</em> that r
 <span style="font-size:18px"><strong>Constraints:</strong><br>
 1 &lt;= N &lt;= 10<sup>5</sup><br>
 1 &lt;= W &lt;= 10<sup>5</sup></span></p>
- <p></p>
-            </div>
+</div>
