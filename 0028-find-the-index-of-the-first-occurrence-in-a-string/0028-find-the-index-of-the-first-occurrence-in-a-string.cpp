@@ -1,49 +1,35 @@
-/**
-class Solution {
-public:
-    // brute force - O(n1.n2) TC & O(1) SC
-    int strStr(string haystack, string needle) {
-        int n1 = size(haystack), n2 = size(needle);
-        for(int i = 0; i <= n1 - n2; ++i) {
-            int j = 0;
-            for(; j < n2; ++j) 
-                if(haystack[i + j] != needle[j])
-                    break;
-            if(j == n2) return i;
-        }
-        return -1;
-    }
-};
-*/
 class Solution {
 private:
-    vector<int> constructLPS(string &needle) {
-        int n = size(needle);
-        vector<int> lps(n);
+    vector<int> constructLPS(string &needle, int n2) {
+        vector<int> lps(n2);
         int i = 0, j = 1;
-        while(j < n) {
-            if(needle[i] == needle[j]) {
-                lps[j] = ++i, ++j;
-            }
-            else if(i == 0)
-                lps[j] = 0, ++j;
-            else 
-                i = lps[i - 1];
+        /***
+        a a b f g a b g a a
+        0 1 0 0 0 1 0 0 1 2
+        Longest prefix which is also a suffix
+        ***/
+        while(j < n2) {
+            // if we see a prefix which is also a suffix we add the index there
+            if(needle[i] == needle[j]) lps[j] = ++i, ++j;
+            // if its at the start
+            else if(i == 0) ++j;
+            // otherwise we move back to lps[i - 1] as we don't see a match further
+            else i = lps[i - 1];
         }
         return lps;
     }
 public:
-    // KMP - O(n1 + n2) TC & O(n2) SC
     int strStr(string haystack, string needle) {
         int n1 = size(haystack), n2 = size(needle);
-        vector<int> lps = constructLPS(needle);
+        // construct the LPS table
+        vector<int> lps = constructLPS(needle, n2);
+        // start matching 
         for(int i = 0, j = 0; i < n1; ) {
-            if(haystack[i] == needle[j])
-                ++i, ++j;
-            if(j == n2) 
-                return i - j;
-            if(haystack[i] != needle[j])
-                j > 0 ? j = lps[j - 1] : ++i;
+            // we move both fwd
+            if(haystack[i] == needle[j]) ++j, ++i;
+            // we move j backward and not i
+            else j > 0 ? j = lps[j - 1] : ++i;
+            if(j == n2) return i - j;
         }
         return -1;
     }
