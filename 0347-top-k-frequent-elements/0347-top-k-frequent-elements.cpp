@@ -5,8 +5,8 @@ public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         // Step 1: covert the array into frequency mappings
         unordered_map<int,int> freqMap;
-        for(int i = 0; i < nums.size(); ++i)  
-            freqMap[nums[i]]++;
+        for(const int &num : nums)  
+            freqMap[num]++;
         // Step 2: maintain a min heap using frequency mappings
         priority_queue<pii, vector<pii>, greater<pii>> minHeap;
         for(const auto &[element, freq] : freqMap) {
