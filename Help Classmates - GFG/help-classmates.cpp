@@ -21,14 +21,13 @@ class Solution {
         int x = arr[1];
         for(int i = 1; i < n; ++i) {
             x = arr[i];
-            if(x >= s.top().first) s.push(make_pair(x, i));
-            else {
+            if(x < s.top().first) {
                 while(!s.empty() and x < s.top().first) {
                     ans[s.top().second] = x;
                     s.pop();
                 }
-                s.push(make_pair(x, i));
             }
+            s.push(make_pair(x, i));
         }
         while(!s.empty()) {
             ans[s.top().second] = -1;
