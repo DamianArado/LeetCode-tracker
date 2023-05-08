@@ -1,17 +1,17 @@
 class StockSpanner {
 private:
-    stack<pair<int, int>> s;
+    stack<pair<int, int>> s;  // < price, numDays >: for price, online stock span = numDays
 public:
     StockSpanner() {}
     
     int next(int price) {
-        int counter = 1;
+        int numDays = 1;
         while(!s.empty() and price >= s.top().first) {
-            counter += s.top().second;
-            s.pop();
+            numDays += s.top().second;  // adding up the stock span for prev element in stack
+            s.pop();  // consecutive so we can pop
         }
-        s.emplace(price, counter);
-        return counter;
+        s.emplace(price, numDays);
+        return numDays;
     }
 };
 
