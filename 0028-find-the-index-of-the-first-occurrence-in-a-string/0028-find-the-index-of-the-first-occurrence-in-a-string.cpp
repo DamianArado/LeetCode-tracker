@@ -1,7 +1,6 @@
 class Solution {
 private:
-    vector<int> constructLPS(string &needle, int n2) {
-        vector<int> lps(n2);
+    void constructLPS(string &needle, vector<int> &lps, int n2) {
         int i = 0, j = 1;
         /***
         a a b f g a b g a a
@@ -16,13 +15,13 @@ private:
             // otherwise we move back to lps[i - 1] as we don't see a match further
             else i = lps[i - 1];
         }
-        return lps;
     }
 public:
     int strStr(string haystack, string needle) {
         int n1 = size(haystack), n2 = size(needle);
         // construct the LPS table
-        vector<int> lps = constructLPS(needle, n2);
+        vector<int> lps(n2);
+        constructLPS(needle, lps, n2);
         // start matching 
         for(int i = 0, j = 0; i < n1; ) {
             // we move both fwd
