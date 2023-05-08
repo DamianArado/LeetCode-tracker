@@ -26,9 +26,8 @@ class Solution {
                 while(!s.empty() and x < s.top().first) {
                     ans[s.top().second] = x;
                     s.pop();
-                    if(s.empty()) s.push(make_pair(x, i));
                 }
-                if(x >= s.top().first) s.push(make_pair(x, i));
+                s.push(make_pair(x, i));
             }
         }
         while(!s.empty()) {
