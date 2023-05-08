@@ -1,4 +1,5 @@
 // TC - O(nlogk), SC - O(k)
+// where n is the number of different elements
 typedef pair<int, int> pii;
 class Solution {
 public:
