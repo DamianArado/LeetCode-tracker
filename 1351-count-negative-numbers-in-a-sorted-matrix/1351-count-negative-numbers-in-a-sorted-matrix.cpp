@@ -39,7 +39,7 @@ public:
     int countNegatives(vector<vector<int>>& grid) {
         int count = 0, n = size(grid[0]), currentNegIdx = n - 1;
         for (const vector<int> &row : grid) {
-            while(currentNegIdx >= 0 and row[currentNegIdx] < 0)
+            while (currentNegIdx >= 0 and row[currentNegIdx] < 0)
                 --currentNegIdx;
             count += (n - 1 - currentNegIdx);
         }
