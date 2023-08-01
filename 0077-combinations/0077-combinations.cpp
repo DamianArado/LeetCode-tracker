@@ -12,6 +12,7 @@ private:
         }
     }
 public:
+    // TC: O(n^2)
     vector<vector<int>> combine(int n, int k) {
         vector<vector<int>> ans;
         vector<int> current;
