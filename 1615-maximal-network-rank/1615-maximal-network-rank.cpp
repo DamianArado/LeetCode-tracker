@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // brute forced :()
     int maximalNetworkRank(int n, vector<vector<int>>& roads) {
         vector<int> inDegrees(n);
         vector<vector<bool>> connected(n, vector<bool> (n));
