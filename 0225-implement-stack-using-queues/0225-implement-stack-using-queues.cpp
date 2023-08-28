@@ -1,29 +1,62 @@
 class MyStack {
-private:
-    queue<int> stk;
+private: 
+    queue<int> q1, q2;
 public:
-    MyStack() {}
+    // solution 1 will use 2 queues
+    // TC: will be defined on each operation separately
+    MyStack() {
+        
+    }
     
     void push(int x) {
-        stk.emplace(x);
-        for(int i = 0; i < stk.size() - 1; ++i) {
-            stk.emplace(stk.front());
-            stk.pop();
-        }
+        if (!q1.empty() and q2.empty()) q1.push(x);
+        q2.push(x);
     }
     
     int pop() {
-        int top = stk.front();
-        stk.pop();
-        return top;
+        int result = -1;
+        if (q2.empty()) {
+            while (size(q1) > 1) {
+                q2.push(q1.front());
+                q1.pop();
+            }
+            result = q1.front();
+            q1.pop();
+        } else {
+            while (size(q2) > 1) {
+                q1.push(q2.front());
+                q2.pop();
+            }
+            result = q2.front();
+            q2.pop();
+        }
+        return result;
     }
     
     int top() {
-        return stk.front();
+        int result = -1;
+        if (q2.empty()) {
+            while (size(q1) > 1) {
+                q2.push(q1.front());
+                q1.pop();
+            }
+            result = q1.front();
+            q2.push(q1.front());
+            q1.pop();
+        } else {
+            while (size(q2) > 1) {
+                q1.push(q2.front());
+                q2.pop();
+            }
+            result = q2.front();
+            q1.push(q2.front());
+            q2.pop();
+        }
+        return result;
     }
     
     bool empty() {
-        return stk.empty();
+        return q1.empty() and q2.empty();
     }
 };
 
