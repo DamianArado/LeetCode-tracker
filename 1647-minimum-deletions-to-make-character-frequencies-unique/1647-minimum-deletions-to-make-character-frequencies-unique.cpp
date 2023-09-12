@@ -10,6 +10,7 @@ public:
         for (int i = 24; i >= 0; --i) {
             if (!freq[i])
                 break;
+            // same element may exist
             if (freq[i] >= freq[i + 1]) {
                 int prevFreq = freq[i];
                 freq[i] = max(0, freq[i + 1] - 1);
