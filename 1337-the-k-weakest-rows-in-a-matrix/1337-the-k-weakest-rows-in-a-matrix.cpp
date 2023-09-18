@@ -13,13 +13,15 @@ private:
         return left;
     }
 public:
+    // O(nlogm) + O(nlogn); 
+    // m = no. of elements in row, n = no. of elements in column
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         priority_queue<pii, vector<pii>, greater<>> minHeap;
         int idx = 0, n = size(mat), hSize = n;
         vector<int> ans;
         for (const auto &row : mat) {
-            int soldiers = findSoldierCount(row);
-            minHeap.emplace(soldiers, idx++);
+            int soldiers = findSoldierCount(row); // log m
+            minHeap.emplace(soldiers, idx++);  // log n
         }
         while (hSize-- > n - k) {
             ans.emplace_back(minHeap.top().second);
