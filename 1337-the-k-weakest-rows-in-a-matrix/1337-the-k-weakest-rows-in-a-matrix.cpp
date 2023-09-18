@@ -13,7 +13,7 @@ private:
         return left;
     }
 public:
-    // O(nlogm) + O(nlogn); 
+    // O(nlogm) + O(nlogn) => O(nlogmn)
     // m = no. of elements in row, n = no. of elements in column
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         priority_queue<pii, vector<pii>, greater<>> minHeap;
