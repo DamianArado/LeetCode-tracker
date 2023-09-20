@@ -1,26 +1,17 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums, int x) {
-        // to find the minimum operations to reduce x to zero using elements in nums
-        // we can use the result of the longest subarray with sum k inside nums where k = sum of elements - x
-        int n = nums.size(), sum = 0;
-        for(int num : nums) sum += num;
-        
-        int k = sum - x, currentSum = 0, longestSubArr = 0;
-        if(k == 0) return n;
-        // the 2 pointers we will use in this variable sliding window: i <= j
-        int i = 0;
-        for(int j = 0; j < n; ++j) {
-            currentSum += nums[j];
-            if(currentSum > k)
-                while(currentSum > k and i <= j) {
-                    currentSum -= nums[i];
-                    i++;
-                }
-            if(currentSum == k)
-                longestSubArr = max(longestSubArr, j - i + 1);
+        int n = size(nums), target = accumulate(begin(nums), end(nums), 0);
+        if ((target -= x) == 0) 
+            return n;
+        int currentSum = 0, maxLength = 0, left = 0;
+        for (int right = 0; right < n; ++right) {
+            currentSum += nums[right];
+            while (left <= right and currentSum > target) 
+                currentSum -= nums[left++];
+            if (currentSum == target)
+                maxLength = max(maxLength, right - left + 1);
         }
-        // shortest subarray with sum = x is n - longest subarray with sum = sum - x
-        return longestSubArr == 0 ? -1 : n - longestSubArr;
+        return maxLength ? n - maxLength : -1;
     }
 };
