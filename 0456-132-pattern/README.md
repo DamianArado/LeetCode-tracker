@@ -5,24 +5,24 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> nums = [1,2,3,4]
+<pre style="position: relative;"><strong>Input:</strong> nums = [1,2,3,4]
 <strong>Output:</strong> false
 <strong>Explanation:</strong> There is no 132 pattern in the sequence.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> nums = [3,1,4,2]
+<pre style="position: relative;"><strong>Input:</strong> nums = [3,1,4,2]
 <strong>Output:</strong> true
 <strong>Explanation:</strong> There is a 132 pattern in the sequence: [1, 4, 2].
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong class="example">Example 3:</strong></p>
 
-<pre><strong>Input:</strong> nums = [-1,3,2,0]
+<pre style="position: relative;"><strong>Input:</strong> nums = [-1,3,2,0]
 <strong>Output:</strong> true
 <strong>Explanation:</strong> There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
