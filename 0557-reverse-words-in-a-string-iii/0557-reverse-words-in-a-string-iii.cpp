@@ -1,25 +1,15 @@
 class Solution {
-private:
-    void copyWordToString(string &ans, const string &word) {
-        for (const char &ch : word)
-            ans += ch;
-        ans += " ";
-    }
 public:
     string reverseWords(string s) {
-        string ans, word;
-        for (const char &c : s) {
-            if (c == ' ') {
-                reverse(begin(word), end(word));
-                copyWordToString(ans, word);
-                word = "";
-                continue;
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] != ' ') {   // when i is a non-space
+                int j = i;
+                for (; j < s.length() && s[j] != ' '; j++) { } // move j to the next space
+                reverse(s.begin() + i, s.begin() + j);
+                i = j - 1;
             }
-            word += c;
         }
-        reverse(begin(word), end(word));
-        copyWordToString(ans, word);
-        ans.pop_back();
-        return ans;
+        
+        return s;
     }
 };
