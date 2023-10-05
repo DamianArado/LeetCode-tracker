@@ -1,31 +1,30 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        vector<int> majElem;
-        int n = nums.size(), elem1 = -1, cnt1 = 0, elem2 = -1, cnt2 = 0;
-        for(const int &num : nums) {
-            if(num == elem1) {
-                cnt1++;
-            } else if(num == elem2) {
-                cnt2++;
-            } else if(cnt1 == 0) {
-                elem1 = num;
-                cnt1 = 1;
-            } else if(cnt2 == 0) {
-                elem2 = num;
-                cnt2 = 1;
-            } else {
-                cnt1--;
-                cnt2--;
-            }
+        int num1 = -1, num2 = -1, count1 = 0, count2 = 0;
+        for (const int &num : nums) {
+            if (num == num1)
+                ++count1;
+            else if (num == num2)
+                ++count2;
+            else if (count1 == 0) 
+                count1 = 1, num1 = num;
+            else if (count2 == 0) 
+                count2 = 1, num2 = num;
+            else 
+                --count1, --count2;
         }
-        cnt1 = 0, cnt2 = 0;
-        for(const int &num : nums) {
-            if(num == elem1) cnt1++;
-            else if(num == elem2) cnt2++;
+        vector<int> ans;
+        count1 = 0, count2 = 0;
+        int n = size(nums);
+        for (int i = 0; i < n; ++i) {
+            if (nums[i] == num1) ++count1;
+            else if (nums[i] == num2) ++count2;
         }
-        if(cnt1 > n / 3) majElem.push_back(elem1);
-        if(cnt2 > n / 3) majElem.push_back(elem2);
-        return majElem;
+        if (count1 > n / 3) 
+            ans.emplace_back(num1);
+        if (count2 > n / 3) 
+            ans.emplace_back(num2);
+        return ans;
     }
 };
