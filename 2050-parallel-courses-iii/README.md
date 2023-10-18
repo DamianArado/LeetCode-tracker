@@ -12,21 +12,21 @@
 <p><strong>Note:</strong> The test cases are generated such that it is possible to complete every course (i.e., the graph is a directed acyclic graph).</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 <strong><img alt="" src="https://assets.leetcode.com/uploads/2021/10/07/ex1.png" style="width: 392px; height: 232px;"></strong>
 
-<pre><strong>Input:</strong> n = 3, relations = [[1,3],[2,3]], time = [3,2,5]
+<pre style="position: relative;"><strong>Input:</strong> n = 3, relations = [[1,3],[2,3]], time = [3,2,5]
 <strong>Output:</strong> 8
 <strong>Explanation:</strong> The figure above represents the given graph and the time required to complete each course. 
 We start course 1 and course 2 simultaneously at month 0.
 Course 1 takes 3 months and course 2 takes 2 months to complete respectively.
 Thus, the earliest time we can start course 3 is at month 3, and the total time required is 3 + 5 = 8 months.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 <strong><img alt="" src="https://assets.leetcode.com/uploads/2021/10/07/ex2.png" style="width: 500px; height: 365px;"></strong>
 
-<pre><strong>Input:</strong> n = 5, relations = [[1,5],[2,5],[3,5],[3,4],[4,5]], time = [1,2,3,4,5]
+<pre style="position: relative;"><strong>Input:</strong> n = 5, relations = [[1,5],[2,5],[3,5],[3,4],[4,5]], time = [1,2,3,4,5]
 <strong>Output:</strong> 12
 <strong>Explanation:</strong> The figure above represents the given graph and the time required to complete each course.
 You can start courses 1, 2, and 3 at month 0.
@@ -34,7 +34,7 @@ You can complete them after 1, 2, and 3 months respectively.
 Course 4 can be taken only after course 3 is completed, i.e., after 3 months. It is completed after 3 + 4 = 7 months.
 Course 5 can be taken only after courses 1, 2, 3, and 4 have been completed, i.e., after max(1,2,3,7) = 7 months.
 Thus, the minimum time needed to complete all the courses is 7 + 5 = 12 months.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
