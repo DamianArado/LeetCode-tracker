@@ -139,12 +139,12 @@ public:
         int n = nums.size(), maxLIS = 1;
         vector<int> lis;
         // min LIS length = 1 obviously
-        lis.push_back(nums[0]);
+        lis.emplace_back(nums[0]);
         // one pass :O
         for(int i = 0; i < n; ++i) {
             // if its greater than the value at the last index of dummy
             if(nums[i] > lis.back()) {
-                lis.push_back(nums[i]);
+                lis.emplace_back(nums[i]);
                 // add this to our LIS count
                 ++maxLIS;
             } else {
