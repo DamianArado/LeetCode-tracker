@@ -11,28 +11,34 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if(head == NULL or head->next == NULL) return true;
+        if (head == NULL or head->next == NULL) 
+            return true;
         // reverse the one half and check using 2 pointers if both halves are same or not
         int n = 0;
         ListNode *current = head;
-        while(current != NULL) { current = current->next; ++n; }
+        while (current != NULL) { 
+            current = current->next; 
+            ++n; 
+        }
         ListNode *slow = head, *fast = head;
-        while(fast != NULL and fast->next != NULL) {
+        while (fast != NULL and fast->next != NULL) {
             slow = slow->next;
             fast = fast->next->next;
         }
         current = head;
         ListNode* prev = new ListNode(-1);
-        while(current != slow) {
+        while (current != slow) {
             ListNode *currNext = current->next;
             current->next = prev;
             prev = current;
             current = currNext;
         }
         head = prev;
-        if(n % 2 == 1) current = current->next;
-        while(current != NULL and head->val != -1) {
-            if(current->val != head->val) return false;
+        if (n % 2 == 1) 
+            current = current->next;
+        while (current != NULL and head->val != -1) {
+            if (current->val != head->val) 
+                return false;
             current = current->next;
             head = head->next;
         }
