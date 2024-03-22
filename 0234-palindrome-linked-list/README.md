@@ -3,15 +3,15 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" style="width: 422px; height: 62px;">
-<pre style="position: relative;"><strong>Input:</strong> head = [1,2,2,1]
+<pre><strong>Input:</strong> head = [1,2,2,1]
 <strong>Output:</strong> true
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong class="example">Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" style="width: 182px; height: 62px;">
-<pre style="position: relative;"><strong>Input:</strong> head = [1,2]
+<pre><strong>Input:</strong> head = [1,2]
 <strong>Output:</strong> false
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
