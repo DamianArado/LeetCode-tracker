@@ -14,17 +14,17 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> nums = [1,3,5,2,7,5], minK = 1, maxK = 5
+<pre style="position: relative;"><strong>Input:</strong> nums = [1,3,5,2,7,5], minK = 1, maxK = 5
 <strong>Output:</strong> 2
 <strong>Explanation:</strong> The fixed-bound subarrays are [1,3,5] and [1,3,5,2].
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> nums = [1,1,1,1], minK = 1, maxK = 1
+<pre style="position: relative;"><strong>Input:</strong> nums = [1,1,1,1], minK = 1, maxK = 1
 <strong>Output:</strong> 10
 <strong>Explanation:</strong> Every subarray of nums is a fixed-bound subarray. There are 10 possible subarrays.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
