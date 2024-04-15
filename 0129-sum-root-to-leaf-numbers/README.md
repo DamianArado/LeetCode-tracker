@@ -13,24 +13,24 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/num1tree.jpg" style="width: 212px; height: 182px;">
-<pre style="position: relative;"><strong>Input:</strong> root = [1,2,3]
+<pre><strong>Input:</strong> root = [1,2,3]
 <strong>Output:</strong> 25
 <strong>Explanation:</strong>
 The root-to-leaf path <code>1-&gt;2</code> represents the number <code>12</code>.
 The root-to-leaf path <code>1-&gt;3</code> represents the number <code>13</code>.
 Therefore, sum = 12 + 13 = <code>25</code>.
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong class="example">Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/num2tree.jpg" style="width: 292px; height: 302px;">
-<pre style="position: relative;"><strong>Input:</strong> root = [4,9,0,5,1]
+<pre><strong>Input:</strong> root = [4,9,0,5,1]
 <strong>Output:</strong> 1026
 <strong>Explanation:</strong>
 The root-to-leaf path <code>4-&gt;9-&gt;5</code> represents the number 495.
 The root-to-leaf path <code>4-&gt;9-&gt;1</code> represents the number 491.
 The root-to-leaf path <code>4-&gt;0</code> represents the number 40.
 Therefore, sum = 495 + 491 + 40 = <code>1026</code>.
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
