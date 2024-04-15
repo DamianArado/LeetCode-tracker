@@ -11,14 +11,26 @@
  */
 class Solution {
 private:
-    int sumNumbers(TreeNode *root, int sum) {
-        if(root == NULL) return 0;
-        if(root->left == NULL and root->right == NULL) 
-            return sum * 10 + root->val;
-        return sumNumbers(root->left, sum * 10 + root->val) + sumNumbers(root->right, sum * 10 + root->val);
+    void calculateSum(TreeNode *root, int &sum, int &currentSum) {
+        if (!root) return;
+        if (!root->left and !root->right) {
+            currentSum += root->val;
+            sum += currentSum;
+            return;
+        }
+        currentSum += root->val;
+        currentSum *= 10;
+        calculateSum(root->left, sum, currentSum);
+        currentSum /= 10;
+        currentSum *= 10;
+        calculateSum(root->right, sum, currentSum);
+        currentSum /= 10;
     }
 public:
     int sumNumbers(TreeNode* root) {
-        return sumNumbers(root, 0);
+        if (!root) return 0;
+        int sum = 0, currentSum = 0;
+        calculateSum(root, sum, currentSum);
+        return sum;
     }
 };
