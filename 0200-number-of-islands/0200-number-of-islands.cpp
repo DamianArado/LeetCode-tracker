@@ -3,10 +3,7 @@ class Solution {
 private:
     void removeLand(vector<vector<char>>& grid, const int &i, const int &j, const int &row, const int &column) {
         // check boundary conditions
-        if (i < 0 or i >= row or j < 0 or j >= column) 
-            return;
-        // check if we are on water already
-        if (grid[i][j] == '0')
+        if (i < 0 or i >= row or j < 0 or j >= column or grid[i][j] == '0') 
             return;
         // otherwise change this land to water (remove land)
         // alternative approach using extra space would involve marking visited
