@@ -7,18 +7,18 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> n = 4
+<pre style="position: relative;"><strong>Input:</strong> n = 4
 <strong>Output:</strong> 4
 <strong>Explanation:</strong>
 T_3 = 0 + 1 + 1 = 2
 T_4 = 1 + 1 + 2 = 4
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> n = 25
+<pre style="position: relative;"><strong>Input:</strong> n = 25
 <strong>Output:</strong> 1389537
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
