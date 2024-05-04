@@ -1,13 +1,14 @@
 class Solution {
 public:
     int numRescueBoats(vector<int>& people, int limit) {
-        int left = 0, right = size(people) - 1, boats = 0;
         sort(begin(people), end(people));
-        while(left <= right) {
-            if(people[left] + people[right] <= limit)
-                ++left, --right;
-            else --right;
-            ++boats;
+        int l = 0, r = size(people) - 1, boats = 0;
+        while (l <= r) {
+            int weight = people[l] + people[r];
+            if (weight <= limit) 
+                ++boats, ++l, --r;
+            else 
+                ++boats, --r;
         }
         return boats;
     }
