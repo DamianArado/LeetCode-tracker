@@ -11,9 +11,9 @@
 // class Solution {
 // public:
 //     ListNode* removeNodes(ListNode* head) {
-//         if(!head or !head->next) return head;
+//         if (!head or !head->next) return head;
 //         ListNode* nextNode = removeNodes(head->next);
-//         if(nextNode->val > head->val) return nextNode;
+//         if (nextNode->val > head->val) return nextNode;
 //         head->next = nextNode;
 //         return head;
 //     }
@@ -24,7 +24,7 @@
 class Solution {
 private:
     ListNode* reverse(ListNode *current, ListNode *previous) {
-        while(current->next) {
+        while (current->next != NULL) {
             ListNode* nxt = current->next;
             current->next = previous;
             previous = current;
@@ -37,10 +37,12 @@ public:
     ListNode* removeNodes(ListNode* head) {
         head = reverse(head, NULL);
         ListNode *current = head;
-        while(current->next) {
+        while (current->next != NULL) {
             ListNode *nextNode = current->next;
-            if(nextNode->val < current->val) current->next = nextNode->next;
-            else current = current->next;
+            if (nextNode->val < current->val) 
+                current->next = nextNode->next;
+            else 
+                current = current->next;
         }
         return reverse(head, NULL);
     }
