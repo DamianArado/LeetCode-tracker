@@ -22,17 +22,17 @@ public:
     */
     bool checkSubarraySum(vector<int>& nums, int k) {
         int n = size(nums);
-        if(n < 2) return false;
+        if (n < 2) return false;
         
         unordered_map<int, int> mp;  // remainder : index
         mp[0] = -1;
         int runningSum = 0;
         
-        for(int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i) {
             runningSum += nums[i];
             runningSum %= k;
-            if(mp.count(runningSum)) {
-                if(i - mp[runningSum] > 1)
+            if (mp.count(runningSum)) {
+                if (i - mp[runningSum] > 1)
                     return true;
             }
             else mp[runningSum] = i;
