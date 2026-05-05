@@ -17,4 +17,12 @@ Please feel free to open an issue if you want to request a solution from me for 
 |  |
 | ------- |
 | [0043-multiply-strings](https://github.com/DamianArado/LeetCode-tracker/tree/master/0043-multiply-strings) |
+## Linked List
+|  |
+| ------- |
+| [0061-rotate-list](https://github.com/DamianArado/LeetCode-tracker/tree/master/0061-rotate-list) |
+## Two Pointers
+|  |
+| ------- |
+| [0061-rotate-list](https://github.com/DamianArado/LeetCode-tracker/tree/master/0061-rotate-list) |
 <!---LeetCode Topics End-->
