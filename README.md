@@ -25,4 +25,12 @@ Please feel free to open an issue if you want to request a solution from me for 
 |  |
 | ------- |
 | [0061-rotate-list](https://github.com/DamianArado/LeetCode-tracker/tree/master/0061-rotate-list) |
+## Array
+|  |
+| ------- |
+| [3660-jump-game-ix](https://github.com/DamianArado/LeetCode-tracker/tree/master/3660-jump-game-ix) |
+## Dynamic Programming
+|  |
+| ------- |
+| [3660-jump-game-ix](https://github.com/DamianArado/LeetCode-tracker/tree/master/3660-jump-game-ix) |
 <!---LeetCode Topics End-->
